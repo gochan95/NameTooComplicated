@@ -1,5 +1,10 @@
 # DrawSquad
 
+## Useful sources
+```
+https://mlab.com/ -> sever hosting
+```
+
 ## Team members
 ```
 Yuxuan Hu (Kevin)
