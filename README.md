@@ -3,6 +3,7 @@
 ## Useful sources
 ```
 https://mlab.com/ -> sever hosting
+https://github.com/mobxjs/mobx-react -> router
 ```
 
 ## Team members
