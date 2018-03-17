@@ -8,9 +8,13 @@ export default class Sphere extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      x: 1,
-      y: 1,
-      z: 1
+      radius: props.radius,
+      widthSegments: props.widthSegments,
+      heightSegments: props.heightSegments,
+      phiStart: props.phiStart,
+      phiLength: props.phiLength,
+      thetaStart: props.thetaStart,
+      thetaLength: props.thetaLength
     };
   }
 
@@ -22,9 +26,17 @@ export default class Sphere extends React.Component {
     // map.anisotropy = 50;
 
     buildSceneFunctions.onWindowResize();
-    document.body.appendChild(buildSceneFunctions.renderer.domElement);
+    // document.body.appendChild(buildSceneFunctions.renderer.domElement);
 
-    var geometry = new THREE.SphereGeometry(3, 50, 50);
+    var geometry = new THREE.SphereGeometry(
+      this.state.radius,
+      this.state.widthSegments,
+      this.state.heightSegments,
+      this.state.phiStart,
+      this.state.phiLength,
+      this.state.thetaStart,
+      this.state.thetaLength
+    );
     var material = new THREE.MeshNormalMaterial({ normalMap: map });
     var sphere = new THREE.Mesh(geometry, material);
 
