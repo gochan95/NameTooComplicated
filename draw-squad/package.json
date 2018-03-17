@@ -6,6 +6,8 @@
     "express": "^4.16.2",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
+    "material-ui": "^0.20.0",
+    "material-ui-icons": "^1.0.0-beta.36",
     "mobx": "^3.6.1",
     "mongoose": "^5.0.9",
     "nodemon": "^1.17.1",
