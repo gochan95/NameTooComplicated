@@ -1,0 +1,60 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-up-google {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.g-signin2 {
+  margin-left: 10px;
+}
+
+.or-form {
+  display: flex;
+  align-items: center;
+  color: grey;
+}
+
+.seperator {
+  height: 2px;
+  width: 15vw;
+  background-color: grey;
+  margin: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type=text] {
+  border: 1px solid #999;
+  width: 30vw;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 7px;
+  font-size: 12px;
+}
+
+input[type=password] {
+  border: 1px solid #999;
+  width: 30vw;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 7px;
+  font-size: 12px;
+}
+
+.margin {
+  margin-top: 10px;
+  margin-bottom: 10px
+}
