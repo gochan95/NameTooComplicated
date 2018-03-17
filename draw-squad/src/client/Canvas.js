@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import Login from './components/Login';
 import Sphere from './components/Sphere';
 import Cone from './components/Cone';
 
 //styles
 import './styles/Landing.css';
 
-export default class Landing extends Component {
+export default class Canvas extends Component {
   render() {
     return (
       <div>

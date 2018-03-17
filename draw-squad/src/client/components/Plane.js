@@ -35,7 +35,6 @@ export default class Plane extends React.Component {
   render() {
     return (
       <div
-        style={{ width: '400px', height: '400px' }}
         ref={mount => {
           this.mount = mount;
         }}
