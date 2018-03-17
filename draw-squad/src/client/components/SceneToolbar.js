@@ -15,18 +15,17 @@ import '../styles/App.css';
 
 const toolbarStyle = {
   display: 'flex',
-  justifyContent: 'space-between',
-  margin: 20,
+  justifyContent: 'space-around',
   backgroundColor: '#0FF',
-  height: 120,
-  width: '100%'
+  padding: 10,
+  width: '60%',
 };
 
 class SceneToolbar extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <Toolbar>
+        <Toolbar style={{ backgroundColor: 'transparent' }}>
           <ToolbarGroup style={toolbarStyle} firstChild>
             <IconButton>
               <CropSquare />
