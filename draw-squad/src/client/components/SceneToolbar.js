@@ -11,8 +11,6 @@ import {
   RadioButtonUnchecked,
   TextFormat
 } from 'material-ui-icons';
-import logo from '../icons/logo.svg';
-import textIcon from '../icons/3dtext.png';
 import '../styles/App.css';
 
 const toolbarStyle = {
