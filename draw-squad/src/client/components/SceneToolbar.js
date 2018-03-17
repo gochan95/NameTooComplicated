@@ -18,7 +18,7 @@ const toolbarStyle = {
   justifyContent: 'space-around',
   backgroundColor: '#0FF',
   padding: 10,
-  width: '60%',
+  width: '60%'
 };
 
 class SceneToolbar extends Component {
@@ -27,13 +27,13 @@ class SceneToolbar extends Component {
       <MuiThemeProvider>
         <Toolbar style={{ backgroundColor: 'transparent' }}>
           <ToolbarGroup style={toolbarStyle} firstChild>
-            <IconButton>
+            <IconButton onClick={this.props.addPlane}>
               <CropSquare />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={this.props.addCone}>
               <ChangeHistory />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={this.props.addSphere}>
               <RadioButtonUnchecked />
             </IconButton>
             <IconButton>
