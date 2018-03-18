@@ -8,6 +8,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
+    "http": "0.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
     "mobx": "^3.6.1",
