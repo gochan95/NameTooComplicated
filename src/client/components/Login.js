@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
 // var axios = require('axios');
 //styles
 import axios from 'axios';
@@ -14,13 +12,13 @@ export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
-      enterPassword: "",
-      confirmPassword: "",
-      justPassword: "",
+      email: '',
+      enterPassword: '',
+      confirmPassword: '',
+      justPassword: '',
       form: true,
       signed: false
-    }
+    };
   }
 
   handleJustPassword(e) {
@@ -30,7 +28,7 @@ export default class Login extends Component {
   }
 
   handleEmailInput(e) {
-    console.log(e)
+    console.log(e);
     this.setState({
       email: e.target.value
     });
@@ -56,15 +54,15 @@ export default class Login extends Component {
       var params = new URLSearchParams();
       params.append('username', this.state.email);
       params.append('password', this.state.confirmPassword);
-      axios.post('/signup', params)
+      axios
+        .post('/signup', params)
         .then(function(response) {
-          console.log(response)
+          console.log(response);
         })
         .catch(function(err) {
           console.log(err);
         });
     }
-
   }
 
   handleSigninSubmit(e) {
@@ -74,31 +72,32 @@ export default class Login extends Component {
     var params = new URLSearchParams();
     params.append('username', this.state.email);
     params.append('password', this.state.justPassword);
-    axios.post('/signin', params)
+    axios
+      .post('/signin', params)
       .then(function(response) {
-        console.log(response)
+        console.log(response);
       })
       .catch(function(err) {
         console.log(err);
       });
   }
 
-  toggleForm(){
+  toggleForm() {
     this.setState({
       form: !this.state.form
     });
   }
 
-   renderSignup(){
+  renderSignup() {
     return (
       <div className="login-container">
         <div className="sign-up-google margin">
-          <div id="my-signin2"></div>
+          <div id="my-signin2" />
         </div>
         <div className="or-form margin">
-          <div className="seperator"/>
+          <div className="seperator" />
           or
-          <div className="seperator"/>
+          <div className="seperator" />
         </div>
         <form onSubmit={this.handleSignupSubmit.bind(this)}>
           <input
@@ -109,8 +108,8 @@ export default class Login extends Component {
             placeholder="Email"
             required
             value={this.state.email}
-            onChange={this.handleEmailInput.bind(this)}>
-          </input>
+            onChange={this.handleEmailInput.bind(this)}
+          />
           <input
             className="margin"
             name="enter-password"
@@ -119,8 +118,8 @@ export default class Login extends Component {
             required
             minLength="6"
             value={this.state.enterPassword}
-            onChange={this.handleEnterInput.bind(this)}>
-          </input>
+            onChange={this.handleEnterInput.bind(this)}
+          />
           <input
             className="margin"
             name="confirm-password"
@@ -129,16 +128,18 @@ export default class Login extends Component {
             required
             minLength="6"
             value={this.state.confirmPassword}
-            onChange={this.handleConfirmInput.bind(this)}>
-          </input>
+            onChange={this.handleConfirmInput.bind(this)}
+          />
           <button type="submit" value="submit">
             Sign-up
           </button>
         </form>
-        <div className="seperator large-margin"/>
+        <div className="seperator large-margin" />
         <div className="bottom mid-margin">
           <div>Already have a Squad Account?</div>
-          <div className="bottom-text" onClick={this.toggleForm.bind(this)}>Log in</div>
+          <div className="bottom-text" onClick={this.toggleForm.bind(this)}>
+            Log in
+          </div>
         </div>
       </div>
     );
@@ -148,12 +149,12 @@ export default class Login extends Component {
     return (
       <div className="login-container">
         <div className="sign-up-google margin">
-          <div id="my-signin2"></div>
+          <div id="my-signin2" />
         </div>
         <div className="or-form margin">
-          <div className="seperator"/>
+          <div className="seperator" />
           or
-          <div className="seperator"/>
+          <div className="seperator" />
         </div>
         <form onSubmit={this.handleSigninSubmit.bind(this)}>
           <input
@@ -162,27 +163,27 @@ export default class Login extends Component {
             name="sign-in-email"
             type="text"
             placeholder="Email"
-
             value={this.state.email}
-            onChange={this.handleEmailInput.bind(this)}>
-          </input>
+            onChange={this.handleEmailInput.bind(this)}
+          />
           <input
             className="margin"
             name="just-password"
             type="password"
             placeholder="Password"
-
             value={this.state.justPassword}
-            onChange={this.handleJustPassword.bind(this)}>
-          </input>
+            onChange={this.handleJustPassword.bind(this)}
+          />
           <button type="submit" value="submit">
             Sign-in
           </button>
         </form>
-        <div className="seperator large-margin"/>
+        <div className="seperator large-margin" />
         <div className="bottom mid-margin">
           <div>Don't have a Squad Account?</div>
-          <div className="bottom-text" onClick={this.toggleForm.bind(this)}>Sign up</div>
+          <div className="bottom-text" onClick={this.toggleForm.bind(this)}>
+            Sign up
+          </div>
         </div>
       </div>
     );
@@ -190,13 +191,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>
-        {this.state.form
-          ?
-          this.renderSignin()
-          :
-          this.renderSignup()}
-      </div>
+      <div>{this.state.form ? this.renderSignin() : this.renderSignup()}</div>
     );
   }
 }
