@@ -33,14 +33,14 @@ router.post('/signup',function(req, res) {
         if (err) console.log(err);
         passport.authenticate('local')(req, res,
           function () {
-          // res.redirect('/');
+          res.json({username: req.body.username});
         });
   });
 });
 
 router.post('/signin', passport.authenticate('local'), function(req, res) {
-  console.log('signin')
-  // res.json(res)
+  console.log('signin');
+  res.json({username: req.body.username});
 });
 
 module.exports = router;
