@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './components/Login';
+import Login2 from './components/Login2';
 import Landing from './Landing';
 // files import
  import './styles/App.css';
@@ -53,6 +54,7 @@ export default class App extends Component {
           </div>
           {this.state.loginForm ? this.renderLoginForm() : <div />}
           <Route exact path="/" component={Landing} />
+          <Route path="/login2" component={Login2} />
         </div>
       </Router>
     );
