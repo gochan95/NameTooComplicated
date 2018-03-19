@@ -35,7 +35,6 @@ class Canvas extends Component {
   render() {
     return (
       <div>
-        <Plane />
         {this.renderChildren()}
         <SceneToolbar
           addPlane={this.addPlane.bind(this)}

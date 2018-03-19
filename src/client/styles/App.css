@@ -1,0 +1,63 @@
+.main-container {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.title-bar {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+
+  background-color: #fec93e;
+  padding: 17px;
+  padding-bottom: 10px;
+}
+
+.title-bar-text {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-name {
+  align-self: center;
+  padding-right: 5px;
+}
+
+.loginForm {
+  background: rgba(0, 0, 0, 1);
+  position: absolute;
+  background-color: #fff;
+  position: absolute;
+  margin-left: 25vw;
+  margin-right: 25vw;
+  margin-top: 20vh;
+  padding: 20px;
+  border-radius: 7px;
+  left: 0;
+  right: 0;
+}
+
+#profile-icon {
+  background-image: url('../icons/boy.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 20px;
+}
+
+#close {
+  background-image: url('../icons/cancel.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
