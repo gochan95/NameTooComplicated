@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Landing from './Landing';
 // files import
-import './styles/App.css';
+ import './styles/App.css';
 
 export default class App extends Component {
   constructor(props) {

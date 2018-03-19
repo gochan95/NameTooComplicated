@@ -1,94 +1,73 @@
 import React, { Component } from 'react';
-// var axios = require('axios');
-//styles
 import axios from 'axios';
 import '../styles/Login.css';
 
 axios.defaults.baseURL = 'http://localhost:3001';
-// axios.defaults.baseURL = 'http://localhost:3000';
-// axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      enterPassword: '',
-      confirmPassword: '',
-      justPassword: '',
-      form: true,
-      signed: false
+      signinEmail: '',
+      signupEmail: '',
+      signinPw: '',
+      signupPw: '',
+      signupPwConfirm: '',
+      switchForm: true
     };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleJustPassword(e) {
+  handleInputChange(e) {
+    var target = e.target;
+    var name = target.name;
+    console.log(name);
     this.setState({
-      justPassword: e.target.value
-    });
+      [name]: target.value
+    })
   }
 
-  handleEmailInput(e) {
-    console.log(e);
-    this.setState({
-      email: e.target.value
-    });
-  }
-
-  handleEnterInput(e) {
-    this.setState({
-      enterPassword: e.target.value
-    });
-  }
-
-  handleConfirmInput(e) {
-    this.setState({
-      confirmPassword: e.target.value
-    });
-  }
-
-  handleSignupSubmit(e) {
+  handleSubmit(e) {
     e.preventDefault();
-
-    if (this.state.enterPassword === this.state.confirmPassword) {
-      console.log('signup');
-      var params = new URLSearchParams();
-      params.append('username', this.state.email);
-      params.append('password', this.state.confirmPassword);
-      axios
-        .post('/signup', params)
-        .then(function(response) {
-          console.log(response);
-        })
-        .catch(function(err) {
-          console.log(err);
-        });
-    }
-  }
-
-  handleSigninSubmit(e) {
-    e.preventDefault();
-    console.log('signin');
+    var name = e.target.name;
+    var submit = true;
 
     var params = new URLSearchParams();
-    params.append('username', this.state.email);
-    params.append('password', this.state.justPassword);
-    axios
-      .post('/signin', params)
+    params.append('username', this.state[`${name}Email`]);
+    params.append('password', this.state[`${name}Pw`]);
+    if (name === 'signup' &&
+     this.state[`${name}Pw`] !== this.state[`${name}PwConfirm`]) {
+       submit = false;
+    }
+
+    (submit && axios
+      .post(`/auth/${name}`, params)
       .then(function(response) {
         console.log(response);
       })
       .catch(function(err) {
         console.log(err);
-      });
+      }));
+
+    this.setState({
+      [`${name}Email`]: '',
+      [`${name}Pw`]: '',
+      [`${name}PwConfirm`]: ''
+    });
+
+    document.getElementById('form').reset();
+
   }
 
   toggleForm() {
     this.setState({
-      form: !this.state.form
+      switchForm: !this.state.switchForm
     });
   }
 
-  renderSignup() {
+   renderSignup(){
     return (
       <div className="login-container">
         <div className="sign-up-google margin">
@@ -99,36 +78,36 @@ export default class Login extends Component {
           or
           <div className="seperator" />
         </div>
-        <form onSubmit={this.handleSignupSubmit.bind(this)}>
+        <form id="form" onSubmit={this.handleSubmit} name="signup">
           <input
             id="email"
             className="margin"
-            name="sign-up-email"
+            name="signupEmail"
             type="text"
             placeholder="Email"
             required
-            value={this.state.email}
-            onChange={this.handleEmailInput.bind(this)}
+            value={this.state.signupEmail}
+            onChange={this.handleInputChange}
           />
           <input
             className="margin"
-            name="enter-password"
+            name="signupPw"
             type="password"
             placeholder="Enter Password"
             required
             minLength="6"
-            value={this.state.enterPassword}
-            onChange={this.handleEnterInput.bind(this)}
+            value={this.state.signupPw}
+            onChange={this.handleInputChange}
           />
           <input
             className="margin"
-            name="confirm-password"
+            name="signupPwConfirm"
             type="password"
             placeholder="Confirm Password"
             required
             minLength="6"
-            value={this.state.confirmPassword}
-            onChange={this.handleConfirmInput.bind(this)}
+            value={this.state.signupPwConfirm}
+            onChange={this.handleInputChange}
           />
           <button type="submit" value="submit">
             Sign-up
@@ -156,25 +135,27 @@ export default class Login extends Component {
           or
           <div className="seperator" />
         </div>
-        <form onSubmit={this.handleSigninSubmit.bind(this)}>
+        <form id="form" onSubmit={this.handleSubmit} name='signin'>
           <input
             id="email"
             className="margin"
-            name="sign-in-email"
+            name="signinEmail"
             type="text"
             placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleEmailInput.bind(this)}
+            required
+            value={this.state.signinEmail}
+            onChange={this.handleInputChange}
           />
           <input
             className="margin"
-            name="just-password"
+            name="signinPw"
             type="password"
             placeholder="Password"
-            value={this.state.justPassword}
-            onChange={this.handleJustPassword.bind(this)}
+            minLength="6"
+            value={this.state.signinPw}
+            onChange={this.handleInputChange}
           />
-          <button type="submit" value="submit">
+        <button type="submit" value="submit" name="action">
             Sign-in
           </button>
         </form>
@@ -191,7 +172,7 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>{this.state.form ? this.renderSignin() : this.renderSignup()}</div>
+      <div>{this.state.switchForm ? this.renderSignin() : this.renderSignup()}</div>
     );
   }
 }
