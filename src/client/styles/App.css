@@ -7,13 +7,15 @@
   grid-template-columns: 3fr 7fr;
 
   background-color: #fec93e;
-  padding: 17px;
-  padding-bottom: 10px;
+  padding: 10px;
+  padding-bottom: 5px;
 }
 
 .title-bar-text {
   font-size: 20px;
   font-weight: bold;
+  align-self: flex-end;
+  padding-bottom: 5px;
 }
 
 .buttons-container {
