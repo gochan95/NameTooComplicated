@@ -22,6 +22,7 @@ module.exports = function(passport) {
   // use named strategies
   passport.use('local-signup', new LocalStrategy(
     function(username, password, done) {
+      console.log(username, password);
       Account.findOne({'local.email' : username}, function(err, user) {
         if (err) return done(err);
         // console.log(user);
@@ -31,14 +32,21 @@ module.exports = function(passport) {
         else {
           console.log('new user')
           var newAccount = new Account();
-          newAccount.local.email = username;
-          newAccount.local.salt = generateSalt();
-          newAccount.local.hash = generateHash(password, newAccount.local.salt);
-          newAccount.save(function(err) {
-            if (err) throw err;
+          var salt = generateSalt();
+          var hash = generateHash(password, salt);
+          // newAccount.local.email = 'username';
+          // newAccount.local.salt = generateSalt();
+          // newAccount.local.hash = generateHash(password, newAccount.local.salt);
+
+          newAccount.init({'local': {'email': username, 'salt': salt, 'hash': hash}}, function(err) {
+            if (err) done(err);
             return done(null, newAccount);
           });
-          // console.log(newAccount);
+          // newAccount.save(function(err) {
+          //   if (err) done(err);
+          //   return done(null, newAccount);
+          // });
+          console.log(newAccount);
         }
       });
       // console.log(username, password)
