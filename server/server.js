@@ -5,25 +5,32 @@ var passport = require('passport')
 var mongoose = require('mongoose');
 var session = require('express-session');
 var cookie = require('cookie-parser');
+var morgan = require('morgan');
+var flash = require('connect-flash');
+
+var configDB = require('../config/database.js');
 
 var app = express();
 
 // *** mongoose *** //
-mongoose.connect('mongodb://roy:101010@ds117539.mlab.com:17539/drawsquad');
+mongoose.connect(configDB.url);
+
+require('../config/passport')(passport);
 
 // *** config middleware *** //
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, '../public/')));
+// app.use(express.static(path.join(__dirname, '../public/')));
 app.use(session({
-    secret: 'draw squad',
+    secret: 'draw squad not a squad',
     resave: true,
     saveUninitialized: true
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 
 // Add headers
 app.use(function (req, res, next) {
@@ -45,9 +52,14 @@ app.use(function (req, res, next) {
   next();
 });
 
+// app.get('/', function(req, res){
+//   console.log('auth..')
+// })
 // authentication
-var auth = require('./auth');
-app.use('/auth', auth);
+// var auth = require('./auth');
+// app.use('/auth', auth);
+
+require('./auth2')(app, passport);
 
 app.use(function(req, res, next) {
   console.log("HTTP Response", res.statusCode);
@@ -58,6 +70,6 @@ const PORT = 3001;
 
 http.createServer(app).listen(PORT, function(err) {
   if (err) console.log(err);
-  else console.log("HTTP server on http://localhost:%s", PORT);
+  else console.log("The magic happens on port: ", PORT);
   }
 );
