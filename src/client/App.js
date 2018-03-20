@@ -2,41 +2,30 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './components/Login';
-import Login2 from './components/Login2';
 import Landing from './Landing';
 // files import
- import './styles/App.css';
+import './styles/App.css';
+import { observer } from 'mobx-react';
 
+@observer
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loginForm: false
-    };
-  }
 
-  openLoginForm() {
-    this.setState({
-      loginForm: true
-    });
-  }
-
-  closeLoginForm() {
-    this.setState({
-      loginForm: false
-    });
+  toggleForm = (set) => {
+    this.props.store.toggleForm(set);
   }
 
   renderLoginForm() {
+    // const store = this.props.store;
     return (
       <div className="loginForm">
-        <div id="close" onClick={this.closeLoginForm.bind(this)} />
+        <div id="close" onClick={this.toggleForm.bind(this, false)} />
         <Login />
       </div>
     );
   }
 
   render() {
+    // const store = this.props.store;
     return (
       <Router>
         <div className="main-container">
@@ -45,16 +34,19 @@ export default class App extends Component {
             <div className="buttons-container">
               <div
                 className="profile-container"
-                onClick={this.openLoginForm.bind(this)}
+                onClick={this.toggleForm.bind(true)}
               >
-                <div className="profile-name">login</div>
+                <div className="profile-name">
+                  {
+                    this.props.store.username || 'login'
+                  }
+                </div>
                 <div id="profile-icon" />
               </div>
             </div>
           </div>
-          {this.state.loginForm ? this.renderLoginForm() : <div />}
+          {this.props.store.closeForm ? this.renderLoginForm() : <div />}
           <Route exact path="/" component={Landing} />
-          <Route path="/login2" component={Login2} />
         </div>
       </Router>
     );
