@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../styles/Login.css';
+import { observer } from 'mobx-react';
+import AuthStore from '../stores/AuthStore';
 
 axios.defaults.baseURL = 'http://localhost:3001';
 
+@observer
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +48,14 @@ export default class Login extends Component {
     (submit && axios
       .post(`/auth/${name}`, params)
       .then(function(response) {
-        console.log(response);
+        // success POST
+        // close form through global store
+        AuthStore.toggleForm(false);
+        AuthStore.setUsername(response.data);
+        console.log(response.data);
       })
       .catch(function(err) {
+        console.log('err');
         console.log(err);
       }));
 
