@@ -8,14 +8,22 @@ export default class Sphere extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      radius: props.radius,
-      widthSegments: props.widthSegments,
-      heightSegments: props.heightSegments,
-      phiStart: props.phiStart,
-      phiLength: props.phiLength,
-      thetaStart: props.thetaStart,
-      thetaLength: props.thetaLength
+      radius: 3,
+      widthSegments: 32,
+      heightSegments: 32,
+      phiStart: 0,
+      phiLength: 6.3,
+      thetaStart: 6,
+      thetaLength: 6.3
     };
+
+    if (props.radius) this.state.radius = props.radius;
+    if (props.widthSegments) this.state.height = props.widthSegments;
+    if (props.heightSegments) this.state.heightSegments = props.heightSegments;
+    if (props.phiStart) this.state.phiStart = props.phiStart;
+    if (props.phiLength) this.state.phiLength = props.phiLength;
+    if (props.thetaStart) this.state.thetaStart = props.thetaStart;
+    if (props.thetaLength) this.state.thetaLength = props.thetaLength;
   }
 
   componentDidMount() {
@@ -41,7 +49,7 @@ export default class Sphere extends React.Component {
     var sphere = new THREE.Mesh(geometry, material);
 
     buildSceneFunctions.addObject(sphere);
-
+    buildSceneFunctions.objects.push(sphere);
     this.mount.appendChild(buildSceneFunctions.renderer.domElement);
   }
 
