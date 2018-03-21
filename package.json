@@ -32,7 +32,9 @@
     "react-scripts": "1.1.1",
     "react-social-login": "^3.4.2",
     "react-three-renderer": "^3.2.4",
-    "three": "^0.86.0"
+    "three": "^0.86.0",
+    "three-dragcontrols": "^0.88.2",
+    "three-orbit-controls": "^82.1.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
