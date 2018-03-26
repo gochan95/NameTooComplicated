@@ -34,7 +34,8 @@
     "react-three-renderer": "^3.2.4",
     "three": "^0.86.0",
     "three-dragcontrols": "^0.88.2",
-    "three-orbit-controls": "^82.1.0"
+    "three-orbit-controls": "^82.1.0",
+    "three.interaction": "0.0.9"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [

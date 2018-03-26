@@ -34,11 +34,14 @@ module.exports = function(passport) {
           var newAccount = new Account();
           var salt = generateSalt();
           var hash = generateHash(password, salt);
-          // newAccount.local.email = 'username';
+          // newAccount.local.email = username;
           // newAccount.local.salt = generateSalt();
           // newAccount.local.hash = generateHash(password, newAccount.local.salt);
 
           newAccount.init({'local': {'email': username, 'salt': salt, 'hash': hash}}, function(err) {
+            if (err) done(err);
+            // return done(null, newAccount);
+          }).save(function(err, res) {
             if (err) done(err);
             return done(null, newAccount);
           });

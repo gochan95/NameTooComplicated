@@ -4,7 +4,7 @@ import Sphere from './components/Sphere';
 import Cone from './components/Cone';
 import Plane from './components/Plane';
 import SceneToolbar from './components/SceneToolbar';
-import BuildScene from './components/BuildScene';
+import ControlPanel from './components/ControlPanel';
 
 import './styles/Landing.css';
 
@@ -15,8 +15,12 @@ class Landing extends Component {
       children: []
     };
   }
-
-  addPlane = () => {
+  componentWillMount() {
+    var children = this.state.children;
+    children.push(<Sphere radius={3} />);
+    this.setState({ children: children });
+  }
+  addPlane() {
     var children = this.state.children;
     children.push(<Plane key={this.state.children.length} />);
     this.setState({ children: children });
@@ -64,23 +68,34 @@ class Landing extends Component {
     // console.log(canvas);
   };
   renderChildren() {
+    console.log(this.state.children)
     return this.state.children;
   }
 
   render() {
     return (
-      <div style={{ width: '80%', height: '80%' }}>
-        {/* <controlpanel /> */}
+      <div className="landing-container">
         {this.renderChildren()}
-        <SceneToolbar
-          addPlane={this.addPlane}
-          addSphere={this.addSphere}
-          addCone={this.addCone}
-          saveScene={this.saveScene.bind(this)}
-        />
+        <ControlPanel
+          title="Scene Objects"
+          position="top-left"
+          buttons={["1", "2"]}/>
+        <ControlPanel
+          title="Object properties"
+          position="top-right"
+          sliders={["radius", "height", "width"]}/>
       </div>
     );
   }
 }
+// <div>
+//   {this.renderChildren()}
+//   <SceneToolbar
+//     addPlane={this.addPlane.bind(this)}
+//     addSphere={this.addSphere.bind(this)}
+//     addCone={this.addCone.bind(this)}
+//   />
+// </div>
+
 
 export default Landing;
