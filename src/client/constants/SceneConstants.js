@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import DragControls from 'three-dragcontrols';
-var OrbitControls = require('three-orbit-controls')(THREE);
+// import DragControls from 'three-dragcontrols';
+// var OrbitControls = require('three-orbit-controls')(THREE);
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(50, 1000 / 400, 0.1, 1000);

@@ -21,9 +21,6 @@ export default class Plane extends React.Component {
   }
 
   componentDidMount() {
-    const width = this.mount.clientWidth;
-    const height = this.mount.clientHeight;
-
     // var map = new  THREE.TextureLoader().load('https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Crab_Nebula.jpg/1024px-Crab_Nebula.jpg');
     // map.wrapS = map.wrapT = THREE.RepeatWrapping;
 
