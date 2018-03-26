@@ -1,0 +1,116 @@
+.control-panel-container {
+  display: flex;
+  flex-direction: column;
+  /* height: 200px;
+  width: 100px; */
+  background-color: #000;
+  color: #ccc;
+  border-radius: 5px;
+  /* position: absolute;
+  right: 20px;
+  top:100px; */
+}
+
+.top-left {
+  position: absolute;
+  left: 20px;
+  top:100px;
+}
+
+.top-right {
+  position: absolute;
+  right: 20px;
+  top: 100px;
+}
+
+.control-panel-type-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.control-button-text {
+  margin: 0;
+}
+
+/* input */
+
+.control-panel-input-box {
+  padding: 0;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 27px;
+  width: 150px;
+}
+
+.control-panel-input-title {
+  padding-right: 10px;
+}
+
+/* checkbox */
+
+.control-panel-checkbox-content {
+  transform: scale(1.3);
+}
+
+.control-panel-slider {
+
+}
+
+
+.small-text {
+  font-size: 12px;
+}
+
+.medium-text {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+}
+
+.large-text {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.border {
+  border: solid #fff;
+  border-width: 0 0 0.5px 0;
+  padding: 10px 25px 10px 12px;
+  margin: 0;
+}
+
+.border-no-padding {
+  border: solid #fff;
+  border-width: 0 0 0.5px 0;
+  margin: 0;
+  padding: 0;
+  padding: 10px 25px 10px 12px;
+}
+
+.title-padding-left {
+  padding-left: 15px;
+}
+
+.title-padding-right {
+  padding-right: 15px;
+}
+
+
+.control-text-blue {
+  color: #6bf;
+}
+
+.control-text-white {
+  color: #fff;
+}
+
+#sphere-icon {
+  background-repeat: no-repeat;
+  background-image: url('../icons/sphere.svg');
+  background-size: contain;
+  padding: 20px;
+  margin-right: 10px;
+}
