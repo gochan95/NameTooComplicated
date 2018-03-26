@@ -6,13 +6,13 @@ import Landing from './Landing';
 // files import
 import './styles/App.css';
 import { observer } from 'mobx-react';
+import SceneStore from './stores/SceneStore';
 
 @observer
 export default class App extends Component {
-
-  toggleForm = (set) => {
+  toggleForm = set => {
     this.props.store.toggleForm(set);
-  }
+  };
 
   renderLoginForm() {
     // const store = this.props.store;
@@ -27,28 +27,24 @@ export default class App extends Component {
   render() {
     // const store = this.props.store;
     return (
-      <Router>
-        <div className="main-container">
-          <div className="title-bar">
-            <div className="title-bar-text">Draw.Squad</div>
-            <div className="buttons-container">
-              <div
-                className="profile-container"
-                onClick={this.toggleForm.bind(true)}
-              >
-                <div className="profile-name">
-                  {
-                    this.props.store.username || 'login'
-                  }
-                </div>
-                <div id="profile-icon" />
+      <div className="main-container">
+        <div className="title-bar">
+          <div className="title-bar-text">Draw.Squad</div>
+          <div className="buttons-container">
+            <div
+              className="profile-container"
+              onClick={this.toggleForm.bind(true)}
+            >
+              <div className="profile-name">
+                {this.props.store.username || 'login'}
               </div>
+              <div id="profile-icon" />
             </div>
           </div>
-          {this.props.store.closeForm ? this.renderLoginForm() : <div />}
-          <Route exact path="/" component={Landing} />
         </div>
-      </Router>
+        {this.props.store.closeForm ? this.renderLoginForm() : <div />}
+        <Landing store={SceneStore} />
+      </div>
     );
   }
 }

@@ -4,7 +4,6 @@ import React from 'react';
 import * as THREE from 'three';
 import ReactDOM from 'react-dom';
 import buildSceneFunctions from './BuildScene';
-import {Interaction} from 'three.interaction';
 
 export default class Sphere extends React.Component {
   constructor(props) {
@@ -25,9 +24,8 @@ export default class Sphere extends React.Component {
     if (props.phiLength) this.state.phiLength = props.phiLength;
     if (props.thetaStart) this.state.thetaStart = props.thetaStart;
     if (props.thetaLength) this.state.thetaLength = props.thetaLength;
-}
+  }
   componentDidMount() {
-
     const width = this.mount.clientWidth;
     const height = this.mount.clientHeight;
     var map = new THREE.TextureLoader().load('./textures/brickwall_normal.jpg');
@@ -36,7 +34,6 @@ export default class Sphere extends React.Component {
 
     buildSceneFunctions.onWindowResize();
     // document.body.appendChild(buildSceneFunctions.renderer.domElement);
-
 
     var geometry = new THREE.SphereGeometry(
       this.state.radius,
@@ -53,7 +50,6 @@ export default class Sphere extends React.Component {
     buildSceneFunctions.addObject(sphere);
     buildSceneFunctions.objects.push(sphere);
     this.mount.appendChild(buildSceneFunctions.renderer.domElement);
-
   }
 
   render() {
