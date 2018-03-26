@@ -33,6 +33,17 @@ var Account = new Schema({
 
 });
 
+var CanvasSchema = new Schema({
+  id: String,
+  camera: String,
+  scene: String
+})
+
+var Canvas = mongoose.model("Canvas", CanvasSchema);
+
 // Account.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('Account', Account);
+module.exports = {
+  Account: mongoose.model('Account', Account),
+  Canvas: mongoose.model("Canvas", CanvasSchema)
+};

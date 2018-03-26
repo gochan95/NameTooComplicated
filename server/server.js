@@ -60,6 +60,12 @@ app.use(function (req, res, next) {
 // app.use('/auth', auth);
 
 require('./auth2')(app, passport);
+require('./userData')(app);
+
+// app.post('/scene/:id/', function(req, res) {
+//   console.log('adding scene');
+// });
+
 
 app.use(function(req, res, next) {
   console.log("HTTP Response", res.statusCode);

@@ -9,7 +9,8 @@ import {
   CropSquare,
   ChangeHistory,
   RadioButtonUnchecked,
-  TextFormat
+  TextFormat,
+  Save
 } from 'material-ui-icons';
 import '../styles/App.css';
 
@@ -38,6 +39,9 @@ class SceneToolbar extends Component {
             </IconButton>
             <IconButton>
               <TextFormat />
+            </IconButton>
+            <IconButton onClick={this.props.saveScene}>
+              <Save />
             </IconButton>
           </ToolbarGroup>
         </Toolbar>
