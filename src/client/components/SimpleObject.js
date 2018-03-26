@@ -3,35 +3,11 @@ import * as THREE from 'three';
 import { threeRender } from '../constants/SceneConstants';
 
 export default class SimpleObject extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     geometry: null,
-  //     material: null
-  //   }
-  // }
-
-  addObject = object => {
-    this.props.store.addObject(object);
-  };
-
   componentDidMount() {
-    //setting magical width and height, haha
-    const width = this.mount.clientWidth;
-    const height = this.mount.clientHeight;
-    console.log(this.mount);
-
     const { geometry, mesh, sphere, cube } = this.props;
     var objectGeometry;
 
-    // var SphereGeometry = new THREE.SphereGeometry(
-    //     geometry.radius,
-    //     geometry.widthSegments,
-    //     geometry.phiStart,
-    //     geometry.phiLength,
-    //     geometry.thetaStart,
-    //     geometry.thetaLength
-    // ));
+    // if sphere, set sphere geometry to object var
     sphere &&
       (objectGeometry = new THREE.SphereGeometry(
         geometry.radius,
@@ -42,6 +18,7 @@ export default class SimpleObject extends Component {
         geometry.thetaLength
       ));
 
+    // if cube, set cube geometry to object var
     cube &&
       (objectGeometry = new THREE.BoxGeometry(
         geometry.width,
@@ -49,18 +26,13 @@ export default class SimpleObject extends Component {
         geometry.depth
       ));
 
-    // (cube &&
-    //   objectGeometry = new THREE.BoxGeometry(
-    //     geometry.width,
-    //     geometry.height,
-    //     geometry.depth
-    //   ));
-
+    // new object using above given geometry
     var object = new THREE.Mesh(objectGeometry, mesh);
 
-    this.addObject(object);
+    this.props.store.addObject(object);
     // buildSceneFunctions.objects.push(sphere);
     this.mount.appendChild(threeRender.domElement);
+    // this.animate();
   }
 
   render() {

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
-import Sphere from './components/Sphere';
 import SimpleObject from './components/SimpleObject';
-import Cone from './components/Cone';
-import Plane from './components/Plane';
 import SceneToolbar from './components/SceneToolbar';
 import ControlPanel from './components/ControlPanel';
 import { observer } from 'mobx-react';
@@ -44,8 +41,16 @@ class Landing extends Component {
     // create the Sphere2 component with two states { geometry, mesh }
 
     var children = this.state.children;
-    children.push(<Sphere radius={3} />);
-    // children.push(<SimpleObject cube key={this.state.children.length} store={this.props.store} geometry={geometry} mesh={mesh}/>);
+    // children.push(<Sphere radius={3} />);
+    children.push(
+      <SimpleObject
+        cube
+        key={this.state.children.length}
+        store={this.props.store}
+        geometry={geometry}
+        mesh={mesh}
+      />
+    );
     this.setState({ children: children });
   }
 
