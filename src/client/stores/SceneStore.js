@@ -16,9 +16,14 @@ class SceneStore {
   constructor() {
     console.log(this.scene);
     autorun(() => console.log('SceneStore'));
+    //use animate to animate moving the object and future rotation animation
+    //KEVIN EXPLAIN THIS FURTHER PLZ
     this.animate();
+    // allow camera and object movement for scene children
+    //===========TO DO==========================
+    // move orbit and drag controls to SceneConstants
+    // and write mobx getters to use scene and camera inside SceneConstsnts
     var orbitControls = new OrbitControls(this.camera);
-    console.log(orbitControls);
     const dragControls = new DragControls(
       this.scene.children,
       this.camera,
@@ -33,35 +38,30 @@ class SceneStore {
       orbitControls.enabled = true;
     });
   }
-
+  // mobx function to add object to scene
   @action
   addObject = object => {
-    console.log('adding object');
-    console.log(object);
     this.scene.add(object);
     onWindowResize();
   };
-
+  // mobx function to render canvas with objects and potential animation
   @action
   renderCanvas = () => {
-    console.log('rendering canvas');
-    console.log(this.scene);
-    console.log(this.camera);
-    console.log(threeRender);
-    scene.traverse(function(object) {
-      if (object.isMesh === true) {
-        object.rotation.x += 0.01;
-        object.rotation.y += 0.01;
-        object.rotation.z += 0.01;
-        object.position.z -= 0.01;
-        object.scale.set(1, 2, 1);
-      }
-    });
+    // animation to spin object
+    // this.scene.traverse(function(object) {
+    //   if (object.isMesh === true) {
+    //     object.rotation.x += 0.01;
+    //     object.rotation.y += 0.01;
+    //     object.rotation.z += 0.01;
+    //     object.position.z -= 0.01;
+    //     object.scale.set(1, 2, 1);
+    //   }
+    // });
     threeRender.render(this.scene, this.camera);
   };
-
+  // function to animate movement and add future rotational animation
   animate = () => {
-    // requestAnimationFrame(animate);
+    requestAnimationFrame(this.animate);
     this.renderCanvas();
   };
 }
