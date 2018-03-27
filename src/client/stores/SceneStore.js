@@ -8,6 +8,8 @@ import {
 import DragControls from 'three-dragcontrols';
 import * as THREE from 'three';
 var OrbitControls = require('three-orbit-controls')(THREE);
+var raycaster = new THREE.Raycaster();
+var mouse = new THREE.Vector2();
 
 class SceneStore {
   @observable scene = scene;
@@ -37,10 +39,13 @@ class SceneStore {
       console.log('ended drag');
       orbitControls.enabled = true;
     });
+
+    document.addEventListener( 'mousedown', this.onObjectClick, false );
   }
   // mobx function to add object to scene
   @action
   addObject = object => {
+    console.log('add object')
     this.scene.add(object);
     onWindowResize();
   };
@@ -57,6 +62,8 @@ class SceneStore {
     //     object.scale.set(1, 2, 1);
     //   }
     // });
+    raycaster.setFromCamera(mouse, camera);
+
     threeRender.render(this.scene, this.camera);
   };
   // function to animate movement and add future rotational animation
@@ -64,6 +71,24 @@ class SceneStore {
     requestAnimationFrame(this.animate);
     this.renderCanvas();
   };
+
+  // clicked to return object
+  @action onObjectClick = (event) => {
+
+    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouse.y = (event.clientY / window.innerHeight) * 2 - 1;
+
+
+
+    var intersects = raycaster.intersectObjects(this.scene.children);
+
+    if (intersects.length > 0) {
+      console.log('Hit @' + toString(intersects[0].point + '\n'));
+      console.log(intersects[0]);
+      return intersects[0]
+    }
+  }
+
 }
 
 const sceneStore = new SceneStore();
