@@ -1,0 +1,44 @@
+.square-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255,255,255,0.2);
+  border: 0.5px solid;
+}
+
+.square-button-text {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.blue-text {
+  color: rgb(0, 109, 240);
+}
+
+.small-padding {
+  padding: 5px
+}
+
+.square-button-icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 7px;
+}
+
+#info-icon {
+  background-image: url('../icons/info.svg');
+}
+
+#info-blue-icon {
+  background-image: url('../icons/info-blue.svg');
+}
+
+#add-canvas {
+  background-image: url('../icons/add.svg');
+}
+
+#add-canvas-blue {
+  background-image: url('../icons/add-blue.svg');
+}
