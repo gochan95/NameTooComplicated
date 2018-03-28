@@ -23,6 +23,10 @@ export default class SimpleObjectButton extends Component {
           <div className="simple-object-icon" id='simple-pyramid-icon'>
           </div>
         }
+        {this.props.scroll &&
+          <div className="simple-object-icon" id='simple-scroll-icon'>
+          </div>
+        }
       </div>
     );
   }

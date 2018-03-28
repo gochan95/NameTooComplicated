@@ -33,6 +33,7 @@ export default class SceneGlobalControl extends Component {
             <SimpleObjectButton cube/>
             <SimpleObjectButton cone/>
             <SimpleObjectButton pyramid/>
+            <SimpleObjectButton scroll/>
           </div>
         }
       </div>

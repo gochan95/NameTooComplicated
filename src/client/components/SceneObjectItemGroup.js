@@ -15,7 +15,6 @@ export default class SceneObjectItemGroup extends Component {
   }
 
   openObjectList = () => {
-    console.log('ooo')
     this.setState({ objectDropdown: !this.state.objectDropdown });
   }
 
