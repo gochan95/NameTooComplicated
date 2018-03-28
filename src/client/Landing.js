@@ -7,6 +7,8 @@ import SceneGlobalControl from './components/SceneGlobalControl';
 import { observer } from 'mobx-react';
 import * as THREE from 'three';
 import SceneObjectItemGroup from './components/SceneObjectItemGroup';
+import ControlPanelInput from './components/ControlPanelInput';
+import ControlPanelInputGroup from './components/ControlPanelInputGroup';
 
 // import Scene2 from './components/Scene2';
 
@@ -154,9 +156,7 @@ class Landing extends Component {
         {this.renderChildren()}
         <SceneGlobalControl />
         <SceneObjectItemGroup />
-        <div>
-          <SceneToolbar saveScene={this.saveScene} />
-        </div>
+        <ControlPanelInputGroup/>
       </div>
     );
   }

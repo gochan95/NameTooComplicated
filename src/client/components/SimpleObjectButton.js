@@ -4,9 +4,14 @@ import React, {
 import '../styles/SimpleObjectButton.css';
 
 export default class SimpleObjectButton extends Component {
+
+  onClick = () => {
+    (this.props.onLayerClick && this.props.onLayerClick());
+  }
+
   render() {
     return (
-      <div className="simple-object-button-container small-padding">
+      <div className="simple-object-button-container small-padding" onClick={this.onClick}>
         {this.props.sphere &&
           <div className="simple-object-icon" id="simple-sphere-icon">
           </div>

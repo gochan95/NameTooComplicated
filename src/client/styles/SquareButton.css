@@ -54,3 +54,11 @@
 #add-canvas-blue {
   background-image: url('../icons/add-blue.svg');
 }
+
+#close-icon {
+  background-image: url('../icons/close.svg');
+}
+
+#close-icon:hover {
+  background-image: url('../icons/close-blue.svg');
+}

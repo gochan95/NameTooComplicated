@@ -17,6 +17,7 @@ export default class SquareButton extends Component{
     this.setState({on: !this.state.on});
     (this.props.addOnClick && this.props.addOnClick());
     (this.props.openObjectList && this.props.openObjectList());
+    (this.props.onPropertyClick && this.props.onPropertyClick());
   };
 
 
@@ -67,6 +68,10 @@ export default class SquareButton extends Component{
               </div>
             )
           )
+        }
+        {this.props.close &&
+          <div className="square-button-icon" id="close-icon">
+          </div>
         }
 
       </div>

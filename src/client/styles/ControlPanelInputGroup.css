@@ -1,0 +1,17 @@
+.top-right {
+  position: absolute;
+  right: 5px;
+  top: 60px;
+  display: flex;
+}
+
+.top-right-drop-down {
+  position: absolute;
+  right: 15px;
+  top: 90px;
+  display: flex;
+}
+
+.layer-scroll {
+  overflow-y: auto;
+}

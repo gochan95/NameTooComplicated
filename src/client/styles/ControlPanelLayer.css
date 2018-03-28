@@ -1,0 +1,32 @@
+.control-panel-layer-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255,255,255,0.2);
+  border: 0.5px solid;
+  border-right: 2px solid #6bf;
+}
+
+.control-panel-layer-name {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.control-panel-layer-pictures {
+  display: flex;
+  flex-direction: column;
+}
+
+.layer-image {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-size: contain;
+  height: 50px;
+  width: 120px;
+}
+
+.small-padding {
+  padding: 5px;
+}
