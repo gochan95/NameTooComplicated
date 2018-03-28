@@ -44,7 +44,7 @@ export default class SimpleObject extends Component {
     //
     // object.add(cloudMesh);
     // console.log(earthMesh)
-    this.props.store.addObject(object);
+    this.props.SceneStore.addObject(object);
     // buildSceneFunctions.objects.push(sphere);
     this.mount.appendChild(threeRender.domElement);
     // this.animate();

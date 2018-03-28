@@ -49,7 +49,7 @@ class Landing extends Component {
       <SimpleObject
         cube
         key={this.state.children.length}
-        store={this.props.store}
+        SceneStore={this.props.SceneStore}
         geometry={geometry}
         mesh={mesh}
       />
@@ -61,7 +61,7 @@ class Landing extends Component {
       radius: 10,
       widthSegments: 32,
       heightSegments: 32
-    }
+    };
     var material = new THREE.MeshBasicMaterial();
 
     // material.map = new THREE.TextureLoader().load('../images/earthmap1k.jpg');
@@ -69,7 +69,6 @@ class Landing extends Component {
     // material.bumpScale = 0.05;
     // material.specularMap = new THREE.TextureLoader('../images/earthspec1k.jpg');
     // material.specular  = new THREE.Color('grey');
-
 
     // var starmetry = new THREE.SphereGeometry(90, 32, 32);
     // var starial = new THREE.MeshBasicMaterial()
@@ -93,51 +92,58 @@ class Landing extends Component {
     //     mesh={starial}/>
     // );
 
-    children.push(
-      <SimpleObject
-        sphere
-        key={this.state.children.length}
-        store={this.props.store}
-        geometry={earthmetry}
-        mesh={material}/>
-    );
     this.setState({ children: children });
   }
 
   componentDidMount() {
-    this.props.store.renderCanvas();
+    this.props.SceneStore.renderCanvas();
   }
 
-  // saveScene = () => {
-  //   console.log('saving scene');
-  //   var uuid = BuildScene.scene.uuid + '-' + BuildScene.camera.uuid;
-  //   var params = new URLSearchParams();
-  //   params.append('id', uuid);
-  //   params.append('camera', BuildScene.camera);
-  //   params.append('scene', BuildScene.scene);
-  //   // var params = {
-  //   //   id: uuid,
-  //   //   scene: BuildScene.scene,
-  //   //   camera: BuildScene.camera
-  //   // }
-  //   console.log(uuid);
-  //   Axios.post(`/scenes/`, params)
-  //     .then(function(response) {
-  //       console.log('added scenes');
-  //       console.log(response);
-  //     })
-  //     .catch(function(err) {
-  //       console.log('caught an error for saving canvas');
-  //       console.log(err);
-  //     });
-  //   // var canvas = new Canvas({
-  //   //   uuid: BuildScene.scene.uuid + '-' + BuildScene.camera.uuid,
-  //   //   scene: BuildScene.scene,
-  //   //   camera: BuildScene.camera
-  //   // });
-  //   // console.log(canvas);
-  // };
+  saveScene = () => {
+    console.log('saving scene');
+    var cameraid = this.props.SceneStore.cameraObj.uuid;
+    var sceneid = this.props.SceneStore.sceneObj.uuid;
+    var uuid = sceneid + '-' + cameraid;
+    var params = new URLSearchParams();
+    params.append('id', uuid);
+    params.append('camera', cameraid);
+    params.append('scene', sceneid);
+    params.append('owner', 'gordon');
+    console.log(uuid);
+    Axios.post(`/scenes/`, params)
+      .then(function(response) {
+        console.log('added scenes');
+        console.log(response);
+      })
+      .catch(function(err) {
+        console.log('caught an error for saving canvas');
+        console.log(err);
+      });
+    // var canvas = new Canvas({
+    //   uuid: BuildScene.scene.uuid + '-' + BuildScene.camera.uuid,
+    //   scene: BuildScene.scene,
+    //   camera: BuildScene.camera
+    // });
+    // console.log(canvas);
+  };
+
+  getAllScenes = () => {
+    var ownername = 'gordon';
+    console.log('this is the owner on front end');
+    Axios.get(`/scenes/${ownername}`).then(
+      function(response) {
+        console.log('successful get of scenes');
+        console.log(response);
+      },
+      function(err) {
+        console.log('failed to get scenes');
+        console.log(err);
+      }
+    );
+  };
+
   renderChildren() {
+    this.getAllScenes();
     console.log(this.state.children);
     return this.state.children;
   }
@@ -146,29 +152,14 @@ class Landing extends Component {
     return (
       <div className="landing-container">
         {this.renderChildren()}
-        <SceneGlobalControl/>
+        <SceneGlobalControl />
         <SceneObjectItemGroup />
+        <div>
+          <SceneToolbar saveScene={this.saveScene} />
+        </div>
       </div>
     );
   }
 }
-// <ControlPanel
-//   title="Scene Objects"
-//   position="top-left"
-//   buttons={['1', '2']}
-// />
-// <ControlPanel
-//   title="Object properties"
-//   position="top-right"
-//   sliders={['radius', 'height', 'width']}
-// />
-// <div>
-//   {this.renderChildren()}
-//   <SceneToolbar
-//     addPlane={this.addPlane.bind(this)}
-//     addSphere={this.addSphere.bind(this)}
-//     addCone={this.addCone.bind(this)}
-//   />
-// </div>
 
 export default Landing;

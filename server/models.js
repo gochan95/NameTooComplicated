@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    passportLocalMongoose = require('passport-local-mongoose');
+    passportLocalMongoose = require('passport-local-mongoose'),
+    THREE = require('three');
 
 var Account = new Schema({
 
@@ -36,8 +37,9 @@ var Account = new Schema({
 var CanvasSchema = new Schema({
   id: String,
   camera: String,
-  scene: String
-})
+  scene: String,
+  owner: String
+});
 
 var Canvas = mongoose.model("Canvas", CanvasSchema);
 

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-// import DragControls from 'three-dragcontrols';
-// var OrbitControls = require('three-orbit-controls')(THREE);
+import DragControls from 'three-dragcontrols';
+var OrbitControls = require('three-orbit-controls')(THREE);
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(50, 1000 / 400, 0.1, 1000);
@@ -11,10 +11,24 @@ threeRender.setPixelRatio(window.devicePixelRatio);
 
 camera.position.z = 100;
 
+var orbitControls = new OrbitControls(camera);
+const dragControls = new DragControls(
+  scene.children,
+  camera,
+  threeRender.domElement
+);
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
   threeRender.setSize(window.innerWidth, window.innerHeight);
 }
 
-export { scene, camera, threeRender, onWindowResize, loader };
+export {
+  scene,
+  camera,
+  threeRender,
+  onWindowResize,
+  orbitControls,
+  dragControls
+};

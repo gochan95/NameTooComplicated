@@ -6,16 +6,16 @@ import Landing from './Landing';
 // files import
 import './styles/App.css';
 import { observer } from 'mobx-react';
-import SceneStore from './stores/SceneStore';
 
 @observer
 export default class App extends Component {
   toggleForm = set => {
-    this.props.store.toggleForm(set);
+    this.props.AuthStore.toggleForm(set);
   };
 
   renderLoginForm() {
     // const store = this.props.store;
+    this.props.SceneStore.getDragControls.enabled = false;
     return (
       <div className="loginForm">
         <div id="close" onClick={this.toggleForm.bind(this, false)} />
@@ -36,14 +36,18 @@ export default class App extends Component {
               onClick={this.toggleForm.bind(true)}
             >
               <div className="profile-name">
-                {this.props.store.username || 'login'}
+                {this.props.AuthStore.usersName || 'login'}
               </div>
               <div id="profile-icon" />
             </div>
           </div>
         </div>
-        {this.props.store.closeForm ? this.renderLoginForm() : <div />}
-        <Landing store={SceneStore} />
+        {this.props.AuthStore.closeForm ? this.renderLoginForm() : <div />}
+        {/* {console.log(this.props.AuthStore)} */}
+        <Landing
+          SceneStore={this.props.SceneStore}
+          AuthStore={this.props.AuthStore}
+        />
       </div>
     );
   }
