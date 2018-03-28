@@ -5,6 +5,10 @@ import * as THREE from 'three';
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(50, 1000 / 400, 0.1, 1000);
 var threeRender = new THREE.WebGLRenderer({ antialias: true });
+var loader = new THREE.TextureLoader();
+loader.setCrossOrigin('');
+threeRender.setPixelRatio(window.devicePixelRatio);
+
 camera.position.z = 100;
 
 function onWindowResize() {
@@ -13,4 +17,4 @@ function onWindowResize() {
   threeRender.setSize(window.innerWidth, window.innerHeight);
 }
 
-export { scene, camera, threeRender, onWindowResize };
+export { scene, camera, threeRender, onWindowResize, loader };
