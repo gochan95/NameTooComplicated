@@ -3,8 +3,11 @@ import Axios from 'axios';
 import SimpleObject from './components/SimpleObject';
 import SceneToolbar from './components/SceneToolbar';
 import ControlPanel from './components/ControlPanel';
+import SceneGlobalControl from './components/SceneGlobalControl';
 import { observer } from 'mobx-react';
 import * as THREE from 'three';
+import SceneObjectItemGroup from './components/SceneObjectItemGroup';
+
 // import Scene2 from './components/Scene2';
 
 import './styles/Landing.css';
@@ -33,7 +36,7 @@ class Landing extends Component {
 
     // mesh
     var texture = new THREE.TextureLoader().load(
-      './textures/brickwall_normal.jpg'
+      '../textures/brickwall_normal.jpg'
     );
     texture.wrapS = THREE.RepeatWrapping;
     var mesh = new THREE.MeshNormalMaterial({ normalMap: texture });
@@ -50,6 +53,53 @@ class Landing extends Component {
         geometry={geometry}
         mesh={mesh}
       />
+    );
+
+    // create an earth
+    // var earthmetry = new THREE.SphereGeometry(0.5, 32, 32);
+    var earthmetry = {
+      radius: 10,
+      widthSegments: 32,
+      heightSegments: 32
+    }
+    var material = new THREE.MeshBasicMaterial();
+
+    // material.map = new THREE.TextureLoader().load('../images/earthmap1k.jpg');
+    // material.bumpMap = new THREE.TextureLoader('../images/earthbump1k.jpg');
+    // material.bumpScale = 0.05;
+    // material.specularMap = new THREE.TextureLoader('../images/earthspec1k.jpg');
+    // material.specular  = new THREE.Color('grey');
+
+
+    // var starmetry = new THREE.SphereGeometry(90, 32, 32);
+    // var starial = new THREE.MeshBasicMaterial()
+    // starial.map = new THREE.TextureLoader().load('../images/galaxy_starfield.png');
+    // starial.side = THREE.BackSide;
+    // var starmesh = new THREE.Mesh(starmetry, starial);
+    // this.addObject(starmesh);
+
+    // var starmetry = {
+    //   radius: 90,
+    //   widthSegments: 32,
+    //   heightSegments: 32
+    // }
+    //
+    // children.push(
+    //   <SimpleObject
+    //     sphere
+    //     key={this.state.children.length}
+    //     store={this.props.store}
+    //     geometry={starmetry}
+    //     mesh={starial}/>
+    // );
+
+    children.push(
+      <SimpleObject
+        sphere
+        key={this.state.children.length}
+        store={this.props.store}
+        geometry={earthmetry}
+        mesh={material}/>
     );
     this.setState({ children: children });
   }
@@ -96,20 +146,22 @@ class Landing extends Component {
     return (
       <div className="landing-container">
         {this.renderChildren()}
-        <ControlPanel
-          title="Scene Objects"
-          position="top-left"
-          buttons={['1', '2']}
-        />
-        <ControlPanel
-          title="Object properties"
-          position="top-right"
-          sliders={['radius', 'height', 'width']}
-        />
+        <SceneGlobalControl/>
+        <SceneObjectItemGroup />
       </div>
     );
   }
 }
+// <ControlPanel
+//   title="Scene Objects"
+//   position="top-left"
+//   buttons={['1', '2']}
+// />
+// <ControlPanel
+//   title="Object properties"
+//   position="top-right"
+//   sliders={['radius', 'height', 'width']}
+// />
 // <div>
 //   {this.renderChildren()}
 //   <SceneToolbar
