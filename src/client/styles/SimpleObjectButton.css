@@ -47,3 +47,11 @@
 #simple-pyramid-icon:hover {
   background-image: url('../icons/pyramid-blue.svg');
 }
+
+#simple-scroll-icon {
+  background-image: url('../icons/scroll.svg');
+}
+
+#simple-scroll-icon:hover {
+  background-image: url('../icons/scroll-blue.svg');
+}
