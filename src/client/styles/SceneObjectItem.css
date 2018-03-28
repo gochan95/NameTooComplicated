@@ -1,0 +1,57 @@
+.scene-object-item-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgba(255,255,255,0.2);
+  border: 0.5px solid;
+  border-left: 2px solid #6bf;
+}
+
+.scene-object-item-icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 8px;
+}
+
+.scene-object-item-container:hover {
+  background-color: rgba(255,255,255,0.6);
+}
+
+.scene-object-item-name {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.small-padding {
+  padding: 5px;
+}
+
+.medium-padding {
+  padding: 8px;
+}
+
+.padding-left {
+  padding-left: 10px;
+}
+
+.padding-right {
+  padding-right: 30px;
+}
+
+#item-sphere {
+  background-image: url('../icons/sphere.svg');
+}
+
+#item-cube {
+  background-image: url('../icons/cube.svg');
+}
+
+#item-cone {
+  background-image: url('../icons/cone.svg');
+}
+
+#item-pyramid {
+  background-image: url('../icons/pyramid.svg');
+}
