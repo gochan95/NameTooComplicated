@@ -12,6 +12,7 @@ export default class SimpleObject extends Component {
       (objectGeometry = new THREE.SphereGeometry(
         geometry.radius,
         geometry.widthSegments,
+        geometry.heightSegments,
         geometry.phiStart,
         geometry.phiLength,
         geometry.thetaStart,
@@ -27,8 +28,22 @@ export default class SimpleObject extends Component {
       ));
 
     // new object using above given geometry
+    console.log(mesh);
     var object = new THREE.Mesh(objectGeometry, mesh);
 
+    //cloud mesh for earth
+    // var cloudmetry   = new THREE.SphereGeometry(0.51, 32, 32)
+    // var cloudterial  = new THREE.MeshPhongMaterial({
+    //   map         : new THREE.Texture(canvasCloud),
+    //   side        : THREE.DoubleSide,
+    //   opacity     : 0.8,
+    //   transparent : true,
+    //   depthWrite  : false,
+    // })
+    // var cloudMesh = new THREE.Mesh(cloudmetry, cloudterial)
+    //
+    // object.add(cloudMesh);
+    // console.log(earthMesh)
     this.props.store.addObject(object);
     // buildSceneFunctions.objects.push(sphere);
     this.mount.appendChild(threeRender.domElement);

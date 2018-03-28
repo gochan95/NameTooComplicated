@@ -13,7 +13,11 @@ export default class SquareButton extends Component{
     }
   }
 
-  onClick = () => this.setState({on: !this.state.on});
+  onClick = () => {
+    this.setState({on: !this.state.on});
+    (this.props.addOnClick && this.props.addOnClick());
+  };
+
 
   render() {
     return (

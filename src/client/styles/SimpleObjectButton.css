@@ -1,0 +1,49 @@
+.simple-object-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255,255,255,0.2);
+  border: 0.5px solid;
+}
+
+.simple-object-icon {
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 9px;
+}
+
+.small-padding {
+  padding: 5px;
+}
+
+#simple-sphere-icon {
+  background-image: url('../icons/sphere.svg');
+}
+
+#simple-sphere-icon:hover {
+  background-image: url('../icons/sphere-blue.svg');
+}
+
+#simple-cube-icon {
+  background-image: url('../icons/cube.svg');
+}
+
+#simple-cube-icon:hover {
+  background-image: url('../icons/cube-blue.svg');
+}
+
+#simple-cone-icon {
+  background-image: url('../icons/cone.svg');
+}
+
+#simple-cone-icon:hover {
+  background-image: url('../icons/cone-blue.svg');
+}
+
+#simple-pyramid-icon {
+  background-image: url('../icons/pyramid.svg');
+}
+
+#simple-pyramid-icon:hover {
+  background-image: url('../icons/pyramid-blue.svg');
+}

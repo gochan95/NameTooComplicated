@@ -13,6 +13,10 @@
   margin: 0;
 }
 
+.square-button-text:hover {
+  color: rgb(0, 109, 240);
+}
+
 .blue-text {
   color: rgb(0, 109, 240);
 }
@@ -31,12 +35,20 @@
   background-image: url('../icons/info.svg');
 }
 
+#info-icon:hover {
+  background-image: url('../icons/info-blue.svg');
+}
+
 #info-blue-icon {
   background-image: url('../icons/info-blue.svg');
 }
 
 #add-canvas {
   background-image: url('../icons/add.svg');
+}
+
+#add-canvas:hover {
+  background-image: url('../icons/add-blue.svg');
 }
 
 #add-canvas-blue {

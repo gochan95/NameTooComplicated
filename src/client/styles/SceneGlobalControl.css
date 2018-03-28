@@ -1,0 +1,14 @@
+.bottom-right {
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+  display: flex;
+}
+
+.mid-right {
+  position: absolute;
+  right: 50px;
+  bottom: 100px;
+  display: flex;
+  flex-direction: column;
+}
