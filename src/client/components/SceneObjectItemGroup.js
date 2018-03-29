@@ -26,11 +26,11 @@ export default class SceneObjectItemGroup extends Component {
   //   this.setState({ openControlPanel: !this.state.openControlPanel });
   // }
 
-  renderSceneObjectItem = (object, name) => {
+  renderSceneObjectItem = (object) => {
     return (
       <SceneObjectItem
+        key={object.name}
         object={object}
-        name={name}
         ControlPanelStore={this.props.ControlPanelStore} />
     )
   }
@@ -38,6 +38,16 @@ export default class SceneObjectItemGroup extends Component {
 
 
   render() {
+    const objectlist = [
+      {"name": 'The object sphere 1',
+         "shape": "sphere"},
+      {"name": 'The object cube 1',
+         "shape": "cube"},
+      {"name": 'The object cone 1',
+         "shape": "cone"},
+      {"name": 'The object pyramid 1',
+         "shape": "pyramid"}
+       ]
     return (
       <div>
         <div className="top-left">
@@ -45,7 +55,7 @@ export default class SceneObjectItemGroup extends Component {
         </div>
         {this.state.objectDropdown &&
           <div className="top-left-drop-down">
-            {this.renderSceneObjectItem("sphere", "The sphere object1")}
+            {objectlist.map(object => this.renderSceneObjectItem(object))}
           </div>
         }
         {this.props.ControlPanelStore.controlPanel &&

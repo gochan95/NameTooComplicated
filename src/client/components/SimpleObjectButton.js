@@ -16,7 +16,6 @@ export default class SimpleObjectButton extends Component {
     if (this.props.raised) {
       this.setState({ on: !this.state.on });
     }
-    (this.props.onLayerClick && this.props.onLayerClick());
   }
 
   renderShapeIcon = () => {

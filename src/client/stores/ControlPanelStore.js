@@ -1,4 +1,4 @@
-import { observable, action, autorun } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 class ControlPanelStore {
   @observable selectedObject = null;
@@ -8,18 +8,21 @@ class ControlPanelStore {
   @observable objectProperties = false;
   @observable layerProperties = false;
 
+  @computed
+  get getSelectedObject() {
+    return this.selectedObject;
+  }
+
   @action closeControlPanel = () => {
     this.selectedObject = null;
     this.controlPanel = false;
   }
 
-  @action switchSelectObject = (object) => {
-    this.selectedObject = object;
-  }
-
   @action openControlPanel = (object) => {
+    this.closeControlPanel();
     this.selectedObject = object;
     this.controlPanel = true;
+    console.log(this.selectedObject);
   }
 
   @action toggleBrowseObjects = () => {

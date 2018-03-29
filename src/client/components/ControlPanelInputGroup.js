@@ -60,12 +60,19 @@ export default class ControlPanelInputGroup extends Component {
     this.props.ControlPanelStore && this.props.ControlPanelStore.closeControlPanel();
   }
 
+  getCurrentObject = () => {
+    if (this.props.ControlPanelStore) {
+      console.log(this.props.ControlPanelStore.getSelectedObject);
+      return this.props.ControlPanelStore.getSelectedObject;
+    }
+  }
+
   render() {
     return (
       <div>
         <div className="top-right">
-          <SimpleObjectButton raised object="sphere" onLayerClick={this.layerClick}/>
-          <SquareButton text="The sphere object 1" onClick={this.propertyClick}/>
+          <SimpleObjectButton raised object={`${this.getCurrentObject().shape}`} onLayerClick={this.layerClick}/>
+          <SquareButton text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>
           <SquareButton close onClick={this.closeClick}/>
         </div>
         <div className="top-right-drop-down">
