@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 
 import '../styles/SceneInputBox.css';
+import '../styles/Animation.css';
 
 export default class SceneInputBox extends Component {
   constructor(props) {
@@ -13,7 +14,6 @@ export default class SceneInputBox extends Component {
   }
 
   handleChange = (e) => {
-    console.log(e);
     this.setState({
       value: e.target.value
     });
@@ -35,7 +35,7 @@ export default class SceneInputBox extends Component {
 
   render(){
     return (
-      <div className="scene-input-box-container small-padding">
+      <div className="scene-input-box-container small-padding fadeInRight">
         <form onSubmit={this.handleSubmit}>
           <input className="scene-input-box-inner" placeholder={this.props.placeholder}
             value={this.state.value}

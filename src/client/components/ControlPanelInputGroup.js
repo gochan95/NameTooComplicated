@@ -8,6 +8,7 @@ import ControlPanelLayer from './ControlPanelLayer';
 import { observer } from 'mobx-react';
 
 import '../styles/ControlPanelInputGroup.css';
+import '../styles/Animation.css';
 
 @observer
 export default class ControlPanelInputGroup extends Component {
@@ -19,7 +20,7 @@ export default class ControlPanelInputGroup extends Component {
     // "];
     // const pyramidprops = []
     return (
-      <div>
+      <div className="fadeInRight">
         {sphereprops.map(i => <ControlPanelInput key={`${i}`} property={`${i}`}/>)}
       </div>
     );
@@ -36,7 +37,7 @@ export default class ControlPanelInputGroup extends Component {
 
   renderLayerInput = (name) => {
     return (
-      <div className="render-layer-input">
+      <div className="render-layer-input fadeInRight">
         <div className="layer-name">
           {name}
         </div>
@@ -70,12 +71,12 @@ export default class ControlPanelInputGroup extends Component {
   render() {
     return (
       <div>
-        <div className="top-right">
+        <div className="top-right fadeInRight">
           <SimpleObjectButton raised object={`${this.getCurrentObject().shape}`} onClick={this.layerClick}/>
           <SquareButton text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>
           <SquareButton close onClick={this.closeClick}/>
         </div>
-        <div className="top-right-drop-down">
+        <div className="top-right-drop-down fadeInDown">
           {this.props.ControlPanelStore.objectProperties && this.renderSphereInput()}
           {this.props.ControlPanelStore.layerProperties && this.renderLayerInput("layer name")}
         </div>

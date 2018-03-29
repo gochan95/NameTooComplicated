@@ -6,6 +6,7 @@ import SceneInputBox from './SceneInputBox';
 import { observer } from 'mobx-react';
 
 import '../styles/SceneGlobalControl.css';
+import '../styles/Animation.css';
 
 @observer
 export default class SceneGlobalControl extends Component {
@@ -18,6 +19,7 @@ export default class SceneGlobalControl extends Component {
   addClick = () => {
     this.props.ControlPanelStore &&
       this.props.ControlPanelStore.toggleObjectaddGroup();
+    this.props.SceneStore && this.props.SceneStore.closeNameBox();
   };
 
   infoClick = () => {
@@ -59,16 +61,16 @@ export default class SceneGlobalControl extends Component {
           <SquareButton add onClick={this.addClick} />
         </div>
         {this.props.ControlPanelStore.objectaddGroup && (
-          <div className="mid-right">
+          <div className="mid-right fadeInUp">
             {shapes.map(shape => this.renderSimpleObjectButton(shape))}
             <SimpleObjectButton object="scroll"/>
           </div>
         )}
         {this.props.ControlPanelStore.browseObjects && (
-          <SceneObjectItemGroup
-            ControlPanelStore={this.props.ControlPanelStore}
-            SceneStore={this.props.SceneStore}
-          />
+            <SceneObjectItemGroup
+              ControlPanelStore={this.props.ControlPanelStore}
+              SceneStore={this.props.SceneStore}
+            />
         )}
       </div>
     );

@@ -7,6 +7,7 @@ import ControlPanelInputGroup from './ControlPanelInputGroup';
 import { observer } from 'mobx-react';
 
 import '../styles/SceneObjectItemGroup.css';
+import '../styles/Animation.css';
 
 @observer
 export default class SceneObjectItemGroup extends Component {
@@ -46,11 +47,11 @@ export default class SceneObjectItemGroup extends Component {
   render() {
     return (
       <div>
-        <div className="top-left">
+        <div className="top-left fadeInLeft">
           <SquareButton text="Browse your objects" openObjectList={this.openObjectList.bind(this)}/>
         </div>
         {this.state.objectDropdown &&
-          <div className="top-left-drop-down">
+          <div className="top-left-drop-down fadeInLeft">
             {
               (this.props.SceneStore.sceneObjects.length !== 0)
               ?
