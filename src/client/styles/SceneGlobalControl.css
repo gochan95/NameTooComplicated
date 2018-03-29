@@ -9,6 +9,6 @@
   position: absolute;
   right: 50px;
   bottom: 100px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }

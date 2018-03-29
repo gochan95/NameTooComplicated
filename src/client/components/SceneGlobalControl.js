@@ -30,11 +30,14 @@ export default class SceneGlobalControl extends Component {
         </div>
         {this.props.ControlPanelStore.objectaddGroup && (
           <div className="mid-right">
-            <SimpleObjectButton object="sphere" />
-            <SimpleObjectButton object="cube" />
-            <SimpleObjectButton object="cone" />
-            <SimpleObjectButton object="pyramid" />
-            <SimpleObjectButton object="scroll" />
+            <SimpleObjectButton object="sphere"/>
+            <SimpleObjectButton object="cube"/>
+            <SimpleObjectButton object="cone"/>
+            <SimpleObjectButton object="cylinder"/>
+            <SimpleObjectButton object="tetrahedron"/>
+            <SimpleObjectButton object="octahedron"/>
+            <SimpleObjectButton object="icosahedron"/>
+            <SimpleObjectButton object="scroll"/>
           </div>
         )}
         {this.props.ControlPanelStore.browseObjects && (

@@ -9,3 +9,8 @@
   left: 15px;
   top: 90px;
 }
+
+.flex-default {
+  display: grid;
+  grid-template-columns: 9fr auto;
+}

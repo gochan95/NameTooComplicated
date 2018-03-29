@@ -12,27 +12,27 @@ import '../styles/ControlPanelInputGroup.css';
 @observer
 export default class ControlPanelInputGroup extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      openlayer: false,
-      openproperties: false,
-    }
-  }
-
   renderSphereInput = () => {
+    var sphereprops = ["radius","widthSegments", "heightSegments", "phiStart","phiLength","thetaStart", "thetaLength"];
+    // const cubeprops = ["width","height", "depth", "widthSegments","heightSegments","depthSegments"];
+    // const coneprops = ["radius", "height", "radialSegments", "heightSegments", "openEnded", "thetaStart", "thetaLength
+    // "];
+    // const pyramidprops = []
     return (
       <div>
-        <ControlPanelInput property="raidus"/>
-        <ControlPanelInput property="widthSegments"/>
-        <ControlPanelInput property="heightSegments"/>
-        <ControlPanelInput property="phiStart"/>
-        <ControlPanelInput property="phiLength"/>
-        <ControlPanelInput property="thetaStart"/>
-        <ControlPanelInput property="thetaLength"/>
+        {sphereprops.map(i => <ControlPanelInput key={`${i}`} property={`${i}`}/>)}
       </div>
     );
   }
+
+  // renderCubeInput = () => {
+  //   const cubeprops = ["width","height", "depth", "widthSegments","heightSegments","depthSegments"];
+  //   return (
+  //     <div>
+  //       {cubeprops.map(i => return (<ControlPanelInput property={`${i}`}))}
+  //     </div>
+  //   )
+  // }
 
   renderLayerInput = (name) => {
     return (
@@ -71,7 +71,7 @@ export default class ControlPanelInputGroup extends Component {
     return (
       <div>
         <div className="top-right">
-          <SimpleObjectButton raised object={`${this.getCurrentObject().shape}`} onLayerClick={this.layerClick}/>
+          <SimpleObjectButton raised object={`${this.getCurrentObject().shape}`} onClick={this.layerClick}/>
           <SquareButton text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>
           <SquareButton close onClick={this.closeClick}/>
         </div>

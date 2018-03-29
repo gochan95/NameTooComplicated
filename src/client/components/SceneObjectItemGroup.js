@@ -28,10 +28,12 @@ export default class SceneObjectItemGroup extends Component {
 
   renderSceneObjectItem = (object) => {
     return (
-      <SceneObjectItem
-        key={object.name}
-        object={object}
-        ControlPanelStore={this.props.ControlPanelStore} />
+      <div key={object.name} className="flex-default">
+        <SceneObjectItem
+          object={object}
+          ControlPanelStore={this.props.ControlPanelStore} />
+        <SquareButton close/>
+      </div>
     )
   }
 
@@ -45,8 +47,8 @@ export default class SceneObjectItemGroup extends Component {
          "shape": "cube"},
       {"name": 'The object cone 1',
          "shape": "cone"},
-      {"name": 'The object pyramid 1',
-         "shape": "pyramid"}
+      {"name": 'The object tetrahedron 1',
+         "shape": "tetrahedron"}
        ]
     return (
       <div>

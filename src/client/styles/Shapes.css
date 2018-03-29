@@ -1,0 +1,95 @@
+#shape-sphere {
+  background-image: url('../icons/sphere.svg');
+}
+
+#shape-sphere:hover {
+  background-image: url('../icons/sphere-blue.svg');
+}
+
+#shape-sphere-active {
+  background-image: url('../icons/sphere-blue.svg');
+}
+
+#shape-cube {
+  background-image: url('../icons/cube.svg');
+}
+
+#shape-cube:hover {
+  background-image: url('../icons/cube-blue.svg');
+}
+
+#shape-cube-active {
+  background-image: url('../icons/cube-blue.svg');
+}
+
+#shape-cone {
+  background-image: url('../icons/cone.svg');
+}
+
+#shape-cone:hover {
+  background-image: url('../icons/cone-blue.svg');
+}
+
+#shape-cone-active {
+  background-image: url('../icons/cone-blue.svg');
+}
+
+#shape-icosahedron {
+  background-image: url('../icons/icosahedron.svg');
+}
+
+#shape-icosahedron:hover {
+  background-image: url('../icons/icosahedron-blue.svg');
+}
+
+#shape-icosahedron-active {
+  background-image: url('../icons/icosahedron-blue.svg');
+}
+
+#shape-octahedron {
+  background-image: url('../icons/octahedron.svg');
+}
+
+#shape-octahedron:hover {
+  background-image: url('../icons/octahedron-blue.svg');
+}
+
+#shape-octahedron-active {
+  background-image: url('../icons/octahedron-blue.svg');
+}
+
+#shape-tetrahedron {
+  background-image: url('../icons/tetrahedron.svg');
+}
+
+#shape-tetrahedron:hover {
+  background-image: url('../icons/tetrahedron-blue.svg');
+}
+
+#shape-tetrahedron-active {
+  background-image: url('../icons/tetrahedron-blue.svg');
+}
+
+#shape-cylinder {
+  background-image: url('../icons/cylinder.svg');
+}
+
+#shape-cylinder:hover {
+  background-image: url('../icons/cylinder-blue.svg');
+}
+
+#shape-cylinder-active {
+  background-image: url('../icons/cylinder-blue.svg');
+}
+
+#shape-scroll {
+  background-image: url('../icons/scroll.svg');
+}
+
+#shape-scroll:hover {
+  background-image: url('../icons/scroll-blue.svg');
+}
+
+#shape-scroll-active {
+  background-image: url('../icons/scroll-blue.svg');
+}

@@ -2,12 +2,13 @@ import React, {
   Component
 } from 'react';
 import '../styles/SimpleObjectButton.css';
+import '../styles/Shapes.css';
 
 export default class SimpleObjectButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      on: true
+      on: false
     }
   }
 
@@ -16,6 +17,7 @@ export default class SimpleObjectButton extends Component {
     if (this.props.raised) {
       this.setState({ on: !this.state.on });
     }
+    (this.props.onClick && this.props.onClick());
   }
 
   renderShapeIcon = () => {
@@ -24,10 +26,10 @@ export default class SimpleObjectButton extends Component {
 
       this.state.on
       ?
-      <div className="simple-object-icon" id={`simple-${object}-icon`}>
+      <div className="simple-object-icon" id={`shape-${object}-active`}>
       </div>
       :
-      <div className="simple-object-icon" id={`simple-${object}-icon-active`}>
+      <div className="simple-object-icon" id={`shape-${object}`}>
       </div>
     )
   }

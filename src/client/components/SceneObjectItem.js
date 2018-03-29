@@ -3,6 +3,7 @@ import React, {
 } from 'react';
 
 import '../styles/SceneObjectItem.css';
+import '../styles/Shapes.css';
 
 export default class SceneObjectItem extends Component {
   renderShapeIcon = () => {
@@ -11,7 +12,7 @@ export default class SceneObjectItem extends Component {
     return (
       <div
         className="scene-object-item-icon"
-        id={`item-${object.shape}`}>
+        id={`shape-${object.shape}`}>
       </div>
     )
   }
