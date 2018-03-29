@@ -55,7 +55,7 @@ export default class SceneGlobalControl extends Component {
           <SquareButton info onClick={this.infoClick} />
           <SquareButton text="2D/3D" />
           <SquareButton text="Animate" />
-          <SquareButton text="Save" />
+          <SquareButton unraised text="Save" />
           <SquareButton add onClick={this.addClick} />
         </div>
         {this.props.ControlPanelStore.objectaddGroup && (
