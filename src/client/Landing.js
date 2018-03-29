@@ -8,7 +8,6 @@ import { observer } from 'mobx-react';
 import * as THREE from 'three';
 import ControlPanelStore from './stores/ControlPanelStore';
 
-
 // import Scene2 from './components/Scene2';
 
 import './styles/Landing.css';
@@ -65,15 +64,16 @@ class Landing extends Component {
 
   saveScene = () => {
     console.log('saving scene');
-    var cameraid = this.props.SceneStore.cameraObj.uuid;
-    var sceneid = this.props.SceneStore.sceneObj.uuid;
+    var scene = this.props.SceneStore.getScene;
+    var camera = this.props.SceneStore.getCamera;
+    var sceneid = scene.uuid;
+    var cameraid = camera.uuid;
     var uuid = sceneid + '-' + cameraid;
     var params = new URLSearchParams();
     params.append('id', uuid);
-    params.append('camera', cameraid);
-    params.append('scene', sceneid);
+    params.append('camera', JSON.stringify(camera));
+    params.append('scene', JSON.stringify(scene));
     params.append('owner', 'gordon');
-    console.log(uuid);
     Axios.post(`/scenes/`, params)
       .then(function(response) {
         console.log('added scenes');
@@ -83,12 +83,6 @@ class Landing extends Component {
         console.log('caught an error for saving canvas');
         console.log(err);
       });
-    // var canvas = new Canvas({
-    //   uuid: BuildScene.scene.uuid + '-' + BuildScene.camera.uuid,
-    //   scene: BuildScene.scene,
-    //   camera: BuildScene.camera
-    // });
-    // console.log(canvas);
   };
 
   getAllScenes = () => {
@@ -97,7 +91,11 @@ class Landing extends Component {
     Axios.get(`/scenes/${ownername}`).then(
       function(response) {
         console.log('successful get of scenes');
-        console.log(response);
+        response.data.forEach(function(canvas) {
+          canvas.scene = JSON.parse(canvas.scene);
+          canvas.camera = JSON.parse(canvas.camera);
+          console.log(canvas);
+        });
       },
       function(err) {
         console.log('failed to get scenes');
@@ -116,7 +114,7 @@ class Landing extends Component {
     return (
       <div className="landing-container">
         {this.renderChildren()}
-        <SceneGlobalControl ControlPanelStore={ControlPanelStore}/>
+        <SceneGlobalControl ControlPanelStore={ControlPanelStore} />
       </div>
     );
   }

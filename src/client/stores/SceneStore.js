@@ -22,34 +22,23 @@ class SceneStore {
   constructor() {
     // Need to get scenes array based on ownership via username
     // Axios.get();
-    console.log(this.scene);
     autorun(() => console.log('SceneStore'));
-
-    console.log(scene);
-    console.log(camera);
-    console.log(this.orbitControls);
-    console.log(this.dragControls);
-    var testOrbit = this.orbitControls;
-    console.log(testOrbit);
     // var testOrbit = this.orbitControls;
     //use animate to animate moving the object and future rotation animation
     //KEVIN EXPLAIN THIS FURTHER PLZ
     this.animate();
-
-    this.disableOrbitControls();
-    this.enableOrbitControls();
     // allow camera and object movement for scene children
     //===========TO DO==========================
     // move orbit and drag controls to SceneConstants
     // and write mobx getters to use scene and camera inside SceneConstsnts
-    // this.dragControls.addEventListener('dragstart', function(event) {
-    //   // this.orbitControls.enabled = false;
-    //   testOrbit.enabled = false;
-    //   console.log(testOrbit);
-    // });
-    // this.dragControls.addEventListener('dragend', function(event) {
-    //   // this.orbitControls.enabled = true;
-    // });
+
+    dragControls.addEventListener('dragstart', function(event) {
+      orbitControls.enabled = false;
+    });
+
+    dragControls.addEventListener('dragend', function(event) {
+      orbitControls.enabled = true;
+    });
 
     document.addEventListener('mousedown', this.onObjectClick, false);
   }
@@ -72,25 +61,6 @@ class SceneStore {
   @computed
   get getOrbitControls() {
     return this.orbitControls;
-  }
-
-  disableOrbitControls() {
-    var testOrbit = this.orbitControls;
-    dragControls.addEventListener('dragstart', function(event) {
-      // this.orbitControls.enabled = false;
-      orbitControls.enabled = false;
-      console.log(testOrbit);
-    });
-  }
-
-  enableOrbitControls() {
-    var testOrbit = this.orbitControls;
-    dragControls.addEventListener('dragend', function(event) {
-      orbitControls.enabled = true;
-    });
-    // console.log('ended drag');
-    // console.log(this.orbitControls);
-    // this.orbitControls.enabled = true;
   }
   // mobx function to add object to scene
   @action

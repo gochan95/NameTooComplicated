@@ -15,10 +15,17 @@ export default class App extends Component {
 
   renderLoginForm() {
     // const store = this.props.store;
-    this.props.SceneStore.getDragControls.enabled = false;
+
     return (
       <div className="loginForm">
-        <div id="close" onClick={this.toggleForm.bind(this, false)} />
+        <div
+          id="close"
+          onClick={() => {
+            this.toggleForm(false);
+            this.props.SceneStore.getDragControls.enabled = true;
+            this.props.SceneStore.getOrbitControls.enabled = true;
+          }}
+        />
         <Login />
       </div>
     );
@@ -33,7 +40,16 @@ export default class App extends Component {
           <div className="buttons-container">
             <div
               className="profile-container"
-              onClick={this.toggleForm.bind(true)}
+              onClick={() => {
+                console.log('clicked profile container to open login form');
+                console.log(this.props.SceneStore.getDragControls);
+                console.log(this.props.SceneStore.getOrbitControls);
+                this.props.SceneStore.getDragControls.enabled = false;
+                this.props.SceneStore.getOrbitControls.enabled = false;
+                console.log(this.props.SceneStore.getDragControls);
+                console.log(this.props.SceneStore.getOrbitControls);
+                this.toggleForm(true);
+              }}
             >
               <div className="profile-name">
                 {this.props.AuthStore.usersName || 'login'}

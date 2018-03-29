@@ -15,8 +15,8 @@ module.exports = function (app) {
 		console.log(req.body);
 		var newCanvas = new Canvas({
 			id: req.body.id,
-			camera: JSON.stringify(req.body.camera),
-			scene: JSON.stringify(req.body.scene),
+			camera: req.body.camera,
+			scene: req.body.scene,
       owner: req.body.owner
 		});
     console.log(newCanvas);

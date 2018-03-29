@@ -30,5 +30,6 @@ export {
   threeRender,
   onWindowResize,
   orbitControls,
-  dragControls
+  dragControls,
+  loader
 };

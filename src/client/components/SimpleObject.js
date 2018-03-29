@@ -28,7 +28,6 @@ export default class SimpleObject extends Component {
       ));
 
     // new object using above given geometry
-    console.log(mesh);
     var object = new THREE.Mesh(objectGeometry, mesh);
 
     //cloud mesh for earth
