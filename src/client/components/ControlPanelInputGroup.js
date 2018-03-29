@@ -5,9 +5,11 @@ import SquareButton from './SquareButton';
 import SimpleObjectButton from './SimpleObjectButton';
 import ControlPanelInput from './ControlPanelInput';
 import ControlPanelLayer from './ControlPanelLayer';
+import { observer } from 'mobx-react';
 
 import '../styles/ControlPanelInputGroup.css';
 
+@observer
 export default class ControlPanelInputGroup extends Component {
 
   constructor(props) {
@@ -32,11 +34,11 @@ export default class ControlPanelInputGroup extends Component {
     );
   }
 
-  renderLayerInput = () => {
+  renderLayerInput = (name) => {
     return (
-      <div>
-        <div>
-          <SquareButton text="layer name"/>
+      <div className="render-layer-input">
+        <div className="layer-name">
+          {name}
         </div>
         <div className="layer-scroll">
           <ControlPanelLayer/>
@@ -46,25 +48,29 @@ export default class ControlPanelInputGroup extends Component {
     );
   }
 
-  onLayerClick = () => {
-    this.setState({ openlayer: !this.state.openlayer})
+  layerClick = () => {
+    this.props.ControlPanelStore && this.props.ControlPanelStore.toggleLayerProperties();
   }
 
-  onPropertyClick = () => {
-    this.setState({ openproperties: !this.state.openproperties})
+  propertyClick = () => {
+    this.props.ControlPanelStore && this.props.ControlPanelStore.toggleObjectProperties();
+  }
+
+  closeClick = () => {
+    this.props.ControlPanelStore && this.props.ControlPanelStore.closeControlPanel();
   }
 
   render() {
     return (
       <div>
         <div className="top-right">
-          <SimpleObjectButton sphere onLayerClick={this.onLayerClick.bind(this)}/>
-          <SquareButton text="The sphere object 1" onPropertyClick={this.onPropertyClick.bind(this)}/>
-          <SquareButton close />
+          <SimpleObjectButton raised object="sphere" onLayerClick={this.layerClick}/>
+          <SquareButton text="The sphere object 1" onClick={this.propertyClick}/>
+          <SquareButton close onClick={this.closeClick}/>
         </div>
         <div className="top-right-drop-down">
-          {this.state.openlayer && this.renderLayerInput()}
-          {this.state.openproperties && this.renderSphereInput()}
+          {this.props.ControlPanelStore.objectProperties && this.renderSphereInput()}
+          {this.props.ControlPanelStore.layerProperties && this.renderLayerInput("layer name")}
         </div>
       </div>
     )

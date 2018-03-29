@@ -6,9 +6,8 @@ import ControlPanel from './components/ControlPanel';
 import SceneGlobalControl from './components/SceneGlobalControl';
 import { observer } from 'mobx-react';
 import * as THREE from 'three';
-import SceneObjectItemGroup from './components/SceneObjectItemGroup';
-import ControlPanelInput from './components/ControlPanelInput';
-import ControlPanelInputGroup from './components/ControlPanelInputGroup';
+import ControlPanelStore from './stores/ControlPanelStore';
+
 
 // import Scene2 from './components/Scene2';
 
@@ -56,43 +55,6 @@ class Landing extends Component {
         mesh={mesh}
       />
     );
-
-    // create an earth
-    // var earthmetry = new THREE.SphereGeometry(0.5, 32, 32);
-    var earthmetry = {
-      radius: 10,
-      widthSegments: 32,
-      heightSegments: 32
-    };
-    var material = new THREE.MeshBasicMaterial();
-
-    // material.map = new THREE.TextureLoader().load('../images/earthmap1k.jpg');
-    // material.bumpMap = new THREE.TextureLoader('../images/earthbump1k.jpg');
-    // material.bumpScale = 0.05;
-    // material.specularMap = new THREE.TextureLoader('../images/earthspec1k.jpg');
-    // material.specular  = new THREE.Color('grey');
-
-    // var starmetry = new THREE.SphereGeometry(90, 32, 32);
-    // var starial = new THREE.MeshBasicMaterial()
-    // starial.map = new THREE.TextureLoader().load('../images/galaxy_starfield.png');
-    // starial.side = THREE.BackSide;
-    // var starmesh = new THREE.Mesh(starmetry, starial);
-    // this.addObject(starmesh);
-
-    // var starmetry = {
-    //   radius: 90,
-    //   widthSegments: 32,
-    //   heightSegments: 32
-    // }
-    //
-    // children.push(
-    //   <SimpleObject
-    //     sphere
-    //     key={this.state.children.length}
-    //     store={this.props.store}
-    //     geometry={starmetry}
-    //     mesh={starial}/>
-    // );
 
     this.setState({ children: children });
   }
@@ -154,9 +116,7 @@ class Landing extends Component {
     return (
       <div className="landing-container">
         {this.renderChildren()}
-        <SceneGlobalControl />
-        <SceneObjectItemGroup />
-        <ControlPanelInputGroup/>
+        <SceneGlobalControl ControlPanelStore={ControlPanelStore}/>
       </div>
     );
   }

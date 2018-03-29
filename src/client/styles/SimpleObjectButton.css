@@ -20,12 +20,20 @@
   background-image: url('../icons/sphere.svg');
 }
 
+#simple-sphere-icon-active {
+  background-image: url('../icons/sphere-blue.svg');
+}
+
 #simple-sphere-icon:hover {
   background-image: url('../icons/sphere-blue.svg');
 }
 
 #simple-cube-icon {
   background-image: url('../icons/cube.svg');
+}
+
+#simple-cube-icon-active {
+  background-image: url('../icons/cube-blue.svg');
 }
 
 #simple-cube-icon:hover {
@@ -36,6 +44,10 @@
   background-image: url('../icons/cone.svg');
 }
 
+#simple-cone-icon-active {
+  background-image: url('../icons/cone-blue.svg');
+}
+
 #simple-cone-icon:hover {
   background-image: url('../icons/cone-blue.svg');
 }
@@ -44,12 +56,20 @@
   background-image: url('../icons/pyramid.svg');
 }
 
+#simple-pyramid-icon-active {
+  background-image: url('../icons/pyramid-blue.svg');
+}
+
 #simple-pyramid-icon:hover {
   background-image: url('../icons/pyramid-blue.svg');
 }
 
 #simple-scroll-icon {
   background-image: url('../icons/scroll.svg');
+}
+
+#simple-scroll-icon-active {
+  background-image: url('../icons/scroll-blue.svg');
 }
 
 #simple-scroll-icon:hover {

@@ -5,25 +5,25 @@ import React, {
 import '../styles/SceneObjectItem.css';
 
 export default class SceneObjectItem extends Component {
+  renderShapeIcon = () => {
+    const { object } = this.props;
+    return (
+      <div
+        className="scene-object-item-icon"
+        id={`item-${object}`}>
+      </div>
+    )
+  }
+
+  onClick = () => {
+    (this.props.ControlPanelStore && this.props.ControlPanelStore.openControlPanel());
+  }
+
   render(){
     return (
-      <div className="scene-object-item-container medium-padding padding-right">
-        {this.props.sphere &&
-          <div className="scene-object-item-icon" id="item-sphere">
-          </div>
-        }
-        {this.props.cube &&
-          <div className="scene-object-item-icon" id="item-cube">
-          </div>
-        }
-        {this.props.cone &&
-          <div className="scene-object-item-icon" id="item-cone">
-          </div>
-        }
-        {this.props.pyramid &&
-          <div className="scene-object-item-icon" id="item-pyramid">
-          </div>
-        }
+      <div onClick={this.onClick}
+        className="scene-object-item-container medium-padding padding-right">
+        {this.renderShapeIcon()}
         <div className="padding-left scene-object-item-name">
           {this.props.name}
         </div>

@@ -15,9 +15,9 @@ export default class SquareButton extends Component{
 
   onClick = () => {
     this.setState({on: !this.state.on});
-    (this.props.addOnClick && this.props.addOnClick());
     (this.props.openObjectList && this.props.openObjectList());
     (this.props.onPropertyClick && this.props.onPropertyClick());
+    (this.props.onClick && this.props.onClick());
   };
 
 

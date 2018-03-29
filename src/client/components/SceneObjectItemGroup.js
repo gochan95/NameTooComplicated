@@ -3,9 +3,12 @@ import React, {
 } from 'react';
 import SceneObjectItem from './SceneObjectItem';
 import SquareButton from './SquareButton';
+import ControlPanelInputGroup from './ControlPanelInputGroup';
+import { observer } from 'mobx-react';
 
 import '../styles/SceneObjectItemGroup.css';
 
+@observer
 export default class SceneObjectItemGroup extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +21,22 @@ export default class SceneObjectItemGroup extends Component {
     this.setState({ objectDropdown: !this.state.objectDropdown });
   }
 
+
+  // openControlPanelGroup = () => {
+  //   this.setState({ openControlPanel: !this.state.openControlPanel });
+  // }
+
+  renderSceneObjectItem = (object, name) => {
+    return (
+      <SceneObjectItem
+        object={object}
+        name={name}
+        ControlPanelStore={this.props.ControlPanelStore} />
+    )
+  }
+
+
+
   render() {
     return (
       <div>
@@ -26,13 +45,12 @@ export default class SceneObjectItemGroup extends Component {
         </div>
         {this.state.objectDropdown &&
           <div className="top-left-drop-down">
-            <SceneObjectItem sphere name="The sphere object 1"/>
-            <SceneObjectItem sphere name="The sphere object 2"/>
-            <SceneObjectItem sphere name="The sphere object 3"/>
-            <SceneObjectItem cube name="The cube object 1"/>
-            <SceneObjectItem cone name="The cone object 1"/>
-            <SceneObjectItem pyramid name="The pyramid object 1"/>
+            {this.renderSceneObjectItem("sphere", "The sphere object1")}
           </div>
+        }
+        {this.props.ControlPanelStore.controlPanel &&
+          <ControlPanelInputGroup
+            ControlPanelStore={this.props.ControlPanelStore}/>
         }
       </div>
     )
