@@ -25,6 +25,10 @@
   padding: 5px
 }
 
+.padding-right {
+  padding-right: 10px;
+}
+
 .square-button-icon {
   background-repeat: no-repeat;
   background-size: contain;
@@ -61,4 +65,12 @@
 
 #close-icon:hover {
   background-image: url('../icons/close-blue.svg');
+}
+
+#rock-and-roll {
+  background-image: url('../icons/rock-and-roll.svg');
+}
+
+#rock-and-roll:hover {
+  background-image: url('../icons/rock-and-roll-blue.svg');
 }

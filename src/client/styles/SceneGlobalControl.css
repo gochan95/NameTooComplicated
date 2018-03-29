@@ -5,6 +5,12 @@
   display: flex;
 }
 
+.scene-input-box {
+  position: absolute;
+  right: 60px;
+  bottom: 80px;
+}
+
 .mid-right {
   position: absolute;
   right: 50px;

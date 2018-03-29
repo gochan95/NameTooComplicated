@@ -18,6 +18,9 @@ class SceneStore {
   @observable camera = camera;
   @observable orbitControls = orbitControls;
   @observable dragControls = dragControls;
+  @observable sceneObjects = [];
+  @observable addingObjectShape = null;
+  @observable enterNameBox = false;
 
   constructor() {
     // Need to get scenes array based on ownership via username
@@ -26,21 +29,21 @@ class SceneStore {
     // var testOrbit = this.orbitControls;
     //use animate to animate moving the object and future rotation animation
     //KEVIN EXPLAIN THIS FURTHER PLZ
-    this.animate();
+    // this.animate();
     // allow camera and object movement for scene children
     //===========TO DO==========================
     // move orbit and drag controls to SceneConstants
     // and write mobx getters to use scene and camera inside SceneConstsnts
-
-    dragControls.addEventListener('dragstart', function(event) {
-      orbitControls.enabled = false;
-    });
-
-    dragControls.addEventListener('dragend', function(event) {
-      orbitControls.enabled = true;
-    });
-
-    document.addEventListener('mousedown', this.onObjectClick, false);
+    //
+    // dragControls.addEventListener('dragstart', function(event) {
+    //   orbitControls.enabled = false;
+    // });
+    //
+    // dragControls.addEventListener('dragend', function(event) {
+    //   orbitControls.enabled = true;
+    // });
+    //
+    // document.addEventListener('mousedown', this.onObjectClick, false);
   }
 
   @computed
@@ -69,6 +72,29 @@ class SceneStore {
     this.scene.add(object);
     onWindowResize();
   };
+
+
+  @action addObjectWithName = (name) => {
+    this.sceneObjects.push({name: name, shape: this.addingObjectShape});
+    this.addingObjectShape = null;
+  }
+
+  @action deleteObject = (object) => {
+    var index = this.sceneObjects.indexOf(object);
+    this.sceneObjects.splice(index, 1);
+  }
+
+  setObjectShapeTobeAdd = (object) => {
+    this.addingObjectShape = object;
+  }
+
+  @action openNameBox = () => {
+    this.enterNameBox = true;
+  }
+
+  @action closeNameBox = () => {
+    this.enterNameBox = false;
+  }
 
   // mobx function to render canvas with objects and potential animation
   @action

@@ -22,7 +22,6 @@ class ControlPanelStore {
     this.closeControlPanel();
     this.selectedObject = object;
     this.controlPanel = true;
-    console.log(this.selectedObject);
   }
 
   @action toggleBrowseObjects = () => {

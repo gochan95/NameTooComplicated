@@ -17,6 +17,10 @@ export default class SceneObjectItemGroup extends Component {
     }
   }
 
+  deleteObject = (object) => {
+    this.props.SceneStore && this.props.SceneStore.deleteObject(object)
+  }
+
   openObjectList = () => {
     this.setState({ objectDropdown: !this.state.objectDropdown });
   }
@@ -32,7 +36,7 @@ export default class SceneObjectItemGroup extends Component {
         <SceneObjectItem
           object={object}
           ControlPanelStore={this.props.ControlPanelStore} />
-        <SquareButton close/>
+        <SquareButton close onClick={this.deleteObject.bind(this, object)}/>
       </div>
     )
   }
@@ -40,16 +44,6 @@ export default class SceneObjectItemGroup extends Component {
 
 
   render() {
-    const objectlist = [
-      {"name": 'The object sphere 1',
-         "shape": "sphere"},
-      {"name": 'The object cube 1',
-         "shape": "cube"},
-      {"name": 'The object cone 1',
-         "shape": "cone"},
-      {"name": 'The object tetrahedron 1',
-         "shape": "tetrahedron"}
-       ]
     return (
       <div>
         <div className="top-left">
@@ -57,7 +51,13 @@ export default class SceneObjectItemGroup extends Component {
         </div>
         {this.state.objectDropdown &&
           <div className="top-left-drop-down">
-            {objectlist.map(object => this.renderSceneObjectItem(object))}
+            {
+              (this.props.SceneStore.sceneObjects.length !== 0)
+              ?
+              this.props.SceneStore.sceneObjects.map(object => this.renderSceneObjectItem(object))
+              :
+              <SquareButton unraised rockandroll text="Sorry, you haven't add anything yet."/>
+            }
           </div>
         }
         {this.props.ControlPanelStore.controlPanel &&

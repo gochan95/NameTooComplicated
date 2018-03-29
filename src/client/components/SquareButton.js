@@ -14,9 +14,9 @@ export default class SquareButton extends Component{
   }
 
   onClick = () => {
-    this.setState({on: !this.state.on});
+    (!this.props.unraised && this.setState({on: !this.state.on}));
     (this.props.openObjectList && this.props.openObjectList());
-    (this.props.onPropertyClick && this.props.onPropertyClick());
+    // (this.props.onPropertyClick && this.props.onPropertyClick());
     (this.props.onClick && this.props.onClick());
   };
 
@@ -38,8 +38,22 @@ export default class SquareButton extends Component{
 
 
         )}
+        {this.props.rockandroll &&
+          (
+            this.state.on
+              ? (
+                <div className="square-button-icon padding-right" id="rock-and-roll">
+                </div>
+              )
+              : (
+                <div className="square-button-icon padding-right" id="rock-and-roll-blue">
+                </div>
+              )
+
+
+        )}
         {
-          this.state.on
+          (this.props.unraised || this.state.on)
           ?
           (
             <p className="square-button-text">
