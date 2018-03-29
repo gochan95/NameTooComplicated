@@ -21,11 +21,16 @@ export default class SceneInputBox extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.SceneStore && this.props.SceneStore.addObjectWithName(this.state.value);
-    this.props.SceneStore && this.props.SceneStore.closeNameBox();
-    this.setState({
-      value: ""
-    })
+    if (this.props.SceneStore) {
+      var checkname = this.props.SceneStore.sceneObjects.find(object => object.name == this.state.value);
+    }
+    if (!checkname && this.props.SceneStore) {
+      this.props.SceneStore.addObjectWithName(this.state.value);
+      this.props.SceneStore.closeNameBox();
+      this.setState({
+        value: ""
+      });
+    }
   }
 
   render(){
