@@ -1,10 +1,12 @@
 import React, {
   Component
 } from 'react';
+import { observer } from 'mobx-react';
 
 import '../styles/SceneInputBox.css';
 import '../styles/Animation.css';
 
+@observer
 export default class SceneInputBox extends Component {
   constructor(props) {
     super(props);
@@ -21,17 +23,35 @@ export default class SceneInputBox extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    if (this.props.SceneStore) {
-      var checkname = this.props.SceneStore.sceneObjects.find(object => object.name === this.state.value);
+    var isObject = this.props.SceneStore.isObject;
+    var checkname;
+    if (isObject) {
+      //check objects same name
+      if (this.props.SceneStore) {
+        checkname = this.props.SceneStore.sceneObjects.find(object => object.name === this.state.value);
+      }
+      if (!checkname && this.props.SceneStore) {
+        this.props.SceneStore.addObjectWithName(this.state.value);
+        this.props.SceneStore.closeNameBox();
+        this.props.ControlPanelStore.openControlPanelWithObjects();
+        this.setState({
+          value: ""
+        });
+      }
+    } else {
+      //check scenes same name
+      if (this.props.SceneStore) {
+        checkname = this.props.SceneStore.scenes.find(object => object === this.state.value);
+      }
+      if (!checkname && this.props.SceneStore) {
+        this.props.SceneStore.addScene(this.state.value);
+        this.props.SceneStore.closeNameBox();
+        this.setState({
+          value: ""
+        });
+      }
     }
-    if (!checkname && this.props.SceneStore) {
-      this.props.SceneStore.addObjectWithName(this.state.value);
-      this.props.SceneStore.closeNameBox();
-      this.props.ControlPanelStore.openControlPanelWithObjects();
-      this.setState({
-        value: ""
-      });
-    }
+
   }
 
   render(){

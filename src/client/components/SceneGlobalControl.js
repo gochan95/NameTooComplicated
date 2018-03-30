@@ -3,6 +3,7 @@ import SquareButton from './SquareButton';
 import SimpleObjectButton from './SimpleObjectButton';
 import SceneObjectItemGroup from './SceneObjectItemGroup';
 import SceneInputBox from './SceneInputBox';
+import SceneButtonGroup from './SceneButtonGroup';
 import { observer } from 'mobx-react';
 
 import '../styles/SceneGlobalControl.css';
@@ -32,11 +33,13 @@ export default class SceneGlobalControl extends Component {
     console.log(object)
     this.setState({ nameBoxPlaceholder:  `Enter ${object} object name`});
     this.props.SceneStore && this.props.SceneStore.openNameBox();
+    this.props.SceneStore && this.props.SceneStore.setIsObject(true);
     this.props.SceneStore && this.props.SceneStore.setObjectShapeTobeAdd(object);
   }
 
   addScene = () => {
     this.setState({ nameBoxPlaceholder: "Enter canvas name" });
+    this.props.SceneStore && this.props.SceneStore.setIsObject(false);
     this.props.SceneStore && this.props.SceneStore.openNameBox();
   }
 
@@ -76,6 +79,10 @@ export default class SceneGlobalControl extends Component {
               ControlPanelStore={this.props.ControlPanelStore}
               SceneStore={this.props.SceneStore}/>
         )}
+        <div className="bottom-left">
+          <SceneButtonGroup
+            SceneStore={this.props.SceneStore}/>
+        </div>
       </div>
     );
   }
