@@ -6,34 +6,21 @@ import SimpleObjectButton from './SimpleObjectButton';
 import ControlPanelInput from './ControlPanelInput';
 import ControlPanelLayer from './ControlPanelLayer';
 import { observer } from 'mobx-react';
+import Shapes from '../constants/Shapes';
 
 import '../styles/ControlPanelInputGroup.css';
 import '../styles/Animation.css';
 
 @observer
 export default class ControlPanelInputGroup extends Component {
-
-  renderSphereInput = () => {
-    var sphereprops = ["radius","widthSegments", "heightSegments", "phiStart","phiLength","thetaStart", "thetaLength"];
-    // const cubeprops = ["width","height", "depth", "widthSegments","heightSegments","depthSegments"];
-    // const coneprops = ["radius", "height", "radialSegments", "heightSegments", "openEnded", "thetaStart", "thetaLength
-    // "];
-    // const pyramidprops = []
+  renderShapeInput = () => {
+    var shape = this.props.ControlPanelStore.getSelectedObject.shape;
     return (
       <div className="fadeInRight">
-        {sphereprops.map(i => <ControlPanelInput key={`${i}`} property={`${i}`}/>)}
+        {Shapes[shape].map(i => <ControlPanelInput key={`${i}`} property={`${i}`}/>)}
       </div>
     );
   }
-
-  // renderCubeInput = () => {
-  //   const cubeprops = ["width","height", "depth", "widthSegments","heightSegments","depthSegments"];
-  //   return (
-  //     <div>
-  //       {cubeprops.map(i => return (<ControlPanelInput property={`${i}`}))}
-  //     </div>
-  //   )
-  // }
 
   renderLayerInput = (name) => {
     return (
@@ -77,7 +64,7 @@ export default class ControlPanelInputGroup extends Component {
           <SquareButton close onClick={this.closeClick}/>
         </div>
         <div className="top-right-drop-down fadeInDown">
-          {this.props.ControlPanelStore.objectProperties && this.renderSphereInput()}
+          {this.props.ControlPanelStore.objectProperties && this.renderShapeInput()}
           {this.props.ControlPanelStore.layerProperties && this.renderLayerInput("layer name")}
         </div>
       </div>
