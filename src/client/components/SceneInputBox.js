@@ -39,8 +39,7 @@ export default class SceneInputBox extends Component {
         <form onSubmit={this.handleSubmit}>
           <input className="scene-input-box-inner" placeholder={this.props.placeholder}
             value={this.state.value}
-            onChange={this.handleChange}
-            autoFocus/>
+            onChange={this.handleChange}/>
         </form>
       </div>
     );

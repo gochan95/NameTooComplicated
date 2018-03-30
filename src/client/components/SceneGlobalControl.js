@@ -37,7 +37,8 @@ export default class SceneGlobalControl extends Component {
   }
 
   addScene = () => {
-    this.setState({ nameBoxPlaceholder: "Enter canvas name" })
+    this.setState({ nameBoxPlaceholder: "Enter canvas name" });
+    this.props.SceneStore && this.props.SceneStore.openNameBox();
   }
 
   renderSimpleObjectButton = (shape) => {
@@ -63,7 +64,7 @@ export default class SceneGlobalControl extends Component {
         {this.props.ControlPanelStore.objectaddGroup && (
           <div className="mid-right fadeInUp">
             {shapes.map(shape => this.renderSimpleObjectButton(shape))}
-            <SimpleObjectButton object="scroll"/>
+            <SimpleObjectButton object="scroll" onClick={this.addScene}/>
           </div>
         )}
         {this.props.ControlPanelStore.browseObjects && (
