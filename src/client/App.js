@@ -42,12 +42,8 @@ export default class App extends Component {
               className="profile-container"
               onClick={() => {
                 console.log('clicked profile container to open login form');
-                console.log(this.props.SceneStore.getDragControls);
-                console.log(this.props.SceneStore.getOrbitControls);
                 this.props.SceneStore.getDragControls.enabled = false;
                 this.props.SceneStore.getOrbitControls.enabled = false;
-                console.log(this.props.SceneStore.getDragControls);
-                console.log(this.props.SceneStore.getOrbitControls);
                 this.toggleForm(true);
               }}
             >

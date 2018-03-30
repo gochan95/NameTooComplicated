@@ -52,7 +52,11 @@ export default class SimpleObject extends Component {
   render() {
     return (
       <div
-        className="sphere-container"
+        onMouseOver={() => {
+          this.props.SceneStore.getDragControls.enabled = true;
+          this.props.SceneStore.getOrbitControls.enabled = true;
+        }}
+        className="object-container"
         ref={mount => {
           this.mount = mount;
         }}
