@@ -7,6 +7,7 @@ import { observer } from 'mobx-react';
 
 import '../styles/SceneGlobalControl.css';
 import '../styles/Animation.css';
+import Shapes from '../constants/Shapes';
 
 @observer
 export default class SceneGlobalControl extends Component {
@@ -46,7 +47,7 @@ export default class SceneGlobalControl extends Component {
   }
 
   render() {
-    var shapes = ["sphere", "cube", "cone", "cylinder", "tetrahedron", "octahedron", "icosahedron"];
+    const { objectaddGroup, browseObjects } = this.props.ControlPanelStore;
     return (
       <div>
         <div className="bottom-right">
@@ -56,28 +57,24 @@ export default class SceneGlobalControl extends Component {
               SceneStore={this.props.SceneStore}
               ControlPanelStore={this.props.ControlPanelStore}/>
           }
-          {this.props.ControlPanelStore.browseObjects
-            ?
-            <SquareButton info on onClick={this.infoClick} />
-            :
-            <SquareButton info onClick={this.infoClick} />
-          }
+          {browseObjects && <SquareButton info on onClick={this.infoClick}/>}
+          {!browseObjects && <SquareButton info onClick={this.infoClick}/>}
+
           <SquareButton text="2D/3D" />
           <SquareButton text="Animate" />
           <SquareButton off text="Save" />
           <SquareButton add onClick={this.addClick} />
         </div>
-        {this.props.ControlPanelStore.objectaddGroup && (
+        {objectaddGroup && (
           <div className="mid-right fadeInUp">
-            {shapes.map(shape => this.renderSimpleObjectButton(shape))}
+            {Shapes.allshapes.map(shape => this.renderSimpleObjectButton(shape))}
             <SimpleObjectButton object="scroll" onClick={this.addScene}/>
           </div>
         )}
-        {this.props.ControlPanelStore.browseObjects && (
+        {browseObjects && (
             <SceneObjectItemGroup
               ControlPanelStore={this.props.ControlPanelStore}
-              SceneStore={this.props.SceneStore}
-            />
+              SceneStore={this.props.SceneStore}/>
         )}
       </div>
     );

@@ -22,7 +22,7 @@ export default class SceneInputBox extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     if (this.props.SceneStore) {
-      var checkname = this.props.SceneStore.sceneObjects.find(object => object.name == this.state.value);
+      var checkname = this.props.SceneStore.sceneObjects.find(object => object.name === this.state.value);
     }
     if (!checkname && this.props.SceneStore) {
       this.props.SceneStore.addObjectWithName(this.state.value);

@@ -50,22 +50,23 @@ export default class ControlPanelInputGroup extends Component {
 
   getCurrentObject = () => {
     if (this.props.ControlPanelStore) {
-      console.log(this.props.ControlPanelStore.getSelectedObject);
       return this.props.ControlPanelStore.getSelectedObject;
     }
   }
 
   render() {
+    const {objectProperties, layerProperties} = this.props.ControlPanelStore;
     return (
       <div>
         <div className="top-right fadeInRight">
           <SimpleObjectButton raised object={`${this.getCurrentObject().shape}`} onClick={this.layerClick}/>
-          <SquareButton text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>
+          { objectProperties && <SquareButton on text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>}
+          {!objectProperties && <SquareButton text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>}
           <SquareButton close onClick={this.closeClick}/>
         </div>
         <div className="top-right-drop-down fadeInDown">
-          {this.props.ControlPanelStore.objectProperties && this.renderShapeInput()}
-          {this.props.ControlPanelStore.layerProperties && this.renderLayerInput("layer name")}
+          {objectProperties && this.renderShapeInput()}
+          {layerProperties && this.renderLayerInput("layer name")}
         </div>
       </div>
     )

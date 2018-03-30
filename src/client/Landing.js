@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import SimpleObject from './components/SimpleObject';
-import SceneToolbar from './components/SceneToolbar';
-import ControlPanel from './components/ControlPanel';
 import SceneGlobalControl from './components/SceneGlobalControl';
 import { observer } from 'mobx-react';
 import * as THREE from 'three';

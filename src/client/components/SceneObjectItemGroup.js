@@ -33,10 +33,12 @@ export default class SceneObjectItemGroup extends Component {
   }
 
   render() {
+    const { browseObjectsDropdown, controlPanel } = this.props.ControlPanelStore;
+    const { sceneObjects } = this.props.SceneStore;
     return (
       <div>
         <div className="top-left fadeInLeft">
-          {this.props.ControlPanelStore.browseObjectsDropdown
+          {browseObjectsDropdown
             ?
             <SquareButton on text="Browse your objects" onClick={this.openObjectList.bind(this)}/>
             :
@@ -44,18 +46,18 @@ export default class SceneObjectItemGroup extends Component {
           }
 
         </div>
-        {this.props.ControlPanelStore.browseObjectsDropdown &&
+        {browseObjectsDropdown &&
           <div className="top-left-drop-down fadeInLeft">
             {
-              (this.props.SceneStore.sceneObjects.length !== 0)
+              (sceneObjects.length !== 0)
               ?
-              this.props.SceneStore.sceneObjects.map(object => this.renderSceneObjectItem(object))
+              sceneObjects.map(object => this.renderSceneObjectItem(object))
               :
               <SquareButton off rockandroll text="Sorry, you haven't add anything yet."/>
             }
           </div>
         }
-        {this.props.ControlPanelStore.controlPanel &&
+        {controlPanel &&
           <ControlPanelInputGroup
             ControlPanelStore={this.props.ControlPanelStore}/>
         }

@@ -1,7 +1,6 @@
 import React, {
   Component
 } from 'react';
-import SquareButton from './SquareButton';
 
 import '../styles/ControlPanelLayer.css';
 

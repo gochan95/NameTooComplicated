@@ -14,10 +14,6 @@ export default class SquareButton extends Component{
 
   }
 
-  componentDidMount() {
-    this.props.on && this.setState({ on: true });
-    this.props.off && this.setState({ on: false });
-  }
 
   onClick = () => {
     // active icon button
@@ -43,8 +39,8 @@ export default class SquareButton extends Component{
     )
   }
 
-  renderUnraisedText= (text) => {
-    // var btn = this.props[name];
+  renderText= (text) => {
+    // console.log(this.state.on,text)
     return (
       this.state.on
       ?
@@ -77,7 +73,7 @@ export default class SquareButton extends Component{
       <div className="square-button-container small-padding" onClick={this.onClick}>
         {this.renderIconButton('info')}
         {this.renderIconButton('rockandroll')}
-        {this.renderUnraisedText(this.props.text)}
+        {this.renderText(this.props.text)}
         {this.renderIconButton('add')}
         {this.renderStayCoolIcon('close')}
       </div>

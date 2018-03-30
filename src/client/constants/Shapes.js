@@ -5,7 +5,8 @@ const Shapes = {
   cone: ["radius", "height", "radialSegments", "heightSegments", "openEnded", "thetaStart", "thetaLength"],
   octahedron: ["radius", "detail"],
   icosahedron: ["radius", "detail"],
-  tetrahedron: ["radius", "detail"]
+  tetrahedron: ["radius", "detail"],
+  allshapes: ["sphere", "cube", "cone", "cylinder", "tetrahedron", "octahedron", "icosahedron"],
 }
 
 export default Shapes;
