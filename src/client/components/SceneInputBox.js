@@ -27,6 +27,7 @@ export default class SceneInputBox extends Component {
     if (!checkname && this.props.SceneStore) {
       this.props.SceneStore.addObjectWithName(this.state.value);
       this.props.SceneStore.closeNameBox();
+      this.props.ControlPanelStore.openControlPanelWithObjects();
       this.setState({
         value: ""
       });

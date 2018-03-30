@@ -32,8 +32,6 @@ export default class SceneGlobalControl extends Component {
     this.setState({ nameBoxPlaceholder:  `Enter ${object} object name`});
     this.props.SceneStore && this.props.SceneStore.openNameBox();
     this.props.SceneStore && this.props.SceneStore.setObjectShapeTobeAdd(object);
-
-
   }
 
   addScene = () => {
@@ -53,12 +51,20 @@ export default class SceneGlobalControl extends Component {
       <div>
         <div className="bottom-right">
           {this.props.SceneStore.enterNameBox &&
-            <SceneInputBox placeholder={this.state.nameBoxPlaceholder} SceneStore={this.props.SceneStore}/>
+            <SceneInputBox
+              placeholder={this.state.nameBoxPlaceholder}
+              SceneStore={this.props.SceneStore}
+              ControlPanelStore={this.props.ControlPanelStore}/>
           }
-          <SquareButton info onClick={this.infoClick} />
+          {this.props.ControlPanelStore.browseObjects
+            ?
+            <SquareButton info on onClick={this.infoClick} />
+            :
+            <SquareButton info onClick={this.infoClick} />
+          }
           <SquareButton text="2D/3D" />
           <SquareButton text="Animate" />
-          <SquareButton unraised text="Save" />
+          <SquareButton off text="Save" />
           <SquareButton add onClick={this.addClick} />
         </div>
         {this.props.ControlPanelStore.objectaddGroup && (

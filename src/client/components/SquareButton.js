@@ -9,85 +9,77 @@ export default class SquareButton extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      on: true
+      on: this.props.on || false
     }
+
+  }
+
+  componentDidMount() {
+    this.props.on && this.setState({ on: true });
+    this.props.off && this.setState({ on: false });
   }
 
   onClick = () => {
-    (!this.props.unraised && this.setState({on: !this.state.on}));
-    (this.props.openObjectList && this.props.openObjectList());
+    // active icon button
+    this.props.off || this.setState({ on: !this.state.on });
+
+    // (!this.props.on && !this.props.off) && this.setState({ on: !this.state.on });
+    // this.props.active && this.setState({ on: !this.props.active });
+    // (this.props.openObjectList && this.props.openObjectList());
     // (this.props.onPropertyClick && this.props.onPropertyClick());
     (this.props.onClick && this.props.onClick());
   };
+
+  renderIconButton = (iconName) => {
+    var icon = this.props[iconName];
+    return (
+      icon && (
+        this.state.on
+        ?
+        (<div className="square-button-icon" id={`${iconName}-blue-icon`}/>)
+        :
+        (<div className="square-button-icon" id={`${iconName}-icon`}/>)
+      )
+    )
+  }
+
+  renderUnraisedText= (text) => {
+    // var btn = this.props[name];
+    return (
+      this.state.on
+      ?
+      (
+        <p className="square-button-text blue-text">
+          {text}
+        </p>
+      )
+      :
+      (
+        <p className="square-button-text">
+          {text}
+        </p>
+      )
+    );
+  }
+
+  renderStayCoolIcon= (name) => {
+    var icon = this.props[name];
+    return (
+      (icon &&
+        <div className="square-button-icon" id={`${name}-icon`}/>
+      )
+    )
+  }
 
 
   render() {
     return (
       <div className="square-button-container small-padding" onClick={this.onClick}>
-        {this.props.info &&
-          (
-            this.state.on
-              ? (
-                <div className="square-button-icon" id="info-icon">
-                </div>
-              )
-              : (
-                <div className="square-button-icon" id="info-blue-icon">
-                </div>
-              )
-
-
-        )}
-        {this.props.rockandroll &&
-          (
-            this.state.on
-              ? (
-                <div className="square-button-icon padding-right" id="rock-and-roll">
-                </div>
-              )
-              : (
-                <div className="square-button-icon padding-right" id="rock-and-roll-blue">
-                </div>
-              )
-
-
-        )}
-        {
-          (this.props.unraised || this.state.on)
-          ?
-          (
-            <p className="square-button-text">
-              {this.props.text}
-            </p>
-          )
-          :
-          (
-            <p className="square-button-text blue-text">
-              {this.props.text}
-            </p>
-          )
-        }
-
-        {this.props.add &&
-          (
-            this.state.on
-            ?
-            (
-              <div className="square-button-icon" id="add-canvas">
-              </div>
-            )
-            :
-            (
-              <div className="square-button-icon" id="add-canvas-blue">
-              </div>
-            )
-          )
-        }
-        {this.props.close &&
-          <div className="square-button-icon" id="close-icon">
-          </div>
-        }
-
+        {this.renderIconButton('info')}
+        {this.renderIconButton('rockandroll')}
+        {this.renderUnraisedText(this.props.text)}
+        {this.renderIconButton('add')}
+        {this.renderStayCoolIcon('close')}
       </div>
     );
   }

@@ -8,7 +8,6 @@ import '../styles/Shapes.css';
 export default class SceneObjectItem extends Component {
   renderShapeIcon = () => {
     const { object } = this.props;
-    console.log(object);
     return (
       <div
         className="scene-object-item-icon"

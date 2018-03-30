@@ -11,25 +11,15 @@ import '../styles/Animation.css';
 
 @observer
 export default class SceneObjectItemGroup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      openObjectList: false
-    }
-  }
 
   deleteObject = (object) => {
-    this.props.SceneStore && this.props.SceneStore.deleteObject(object)
+    this.props.SceneStore && this.props.SceneStore.deleteObject(object);
+    this.props.ControlPanelStore && this.props.ControlPanelStore.closeControlPanel();
   }
 
   openObjectList = () => {
-    this.setState({ objectDropdown: !this.state.objectDropdown });
+    this.props.ControlPanelStore && this.props.ControlPanelStore.toggleBrowseObjectsDropdown();
   }
-
-
-  // openControlPanelGroup = () => {
-  //   this.setState({ openControlPanel: !this.state.openControlPanel });
-  // }
 
   renderSceneObjectItem = (object) => {
     return (
@@ -42,22 +32,26 @@ export default class SceneObjectItemGroup extends Component {
     )
   }
 
-
-
   render() {
     return (
       <div>
         <div className="top-left fadeInLeft">
-          <SquareButton text="Browse your objects" openObjectList={this.openObjectList.bind(this)}/>
+          {this.props.ControlPanelStore.browseObjectsDropdown
+            ?
+            <SquareButton on text="Browse your objects" onClick={this.openObjectList.bind(this)}/>
+            :
+            <SquareButton text="Browse your objects" onClick={this.openObjectList.bind(this)}/>
+          }
+
         </div>
-        {this.state.objectDropdown &&
+        {this.props.ControlPanelStore.browseObjectsDropdown &&
           <div className="top-left-drop-down fadeInLeft">
             {
               (this.props.SceneStore.sceneObjects.length !== 0)
               ?
               this.props.SceneStore.sceneObjects.map(object => this.renderSceneObjectItem(object))
               :
-              <SquareButton unraised rockandroll text="Sorry, you haven't add anything yet."/>
+              <SquareButton off rockandroll text="Sorry, you haven't add anything yet."/>
             }
           </div>
         }

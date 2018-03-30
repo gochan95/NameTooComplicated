@@ -47,15 +47,15 @@
   background-image: url('../icons/info-blue.svg');
 }
 
-#add-canvas {
+#add-icon {
   background-image: url('../icons/add.svg');
 }
 
-#add-canvas:hover {
+#add-icon:hover {
   background-image: url('../icons/add-blue.svg');
 }
 
-#add-canvas-blue {
+#add-blue-icon {
   background-image: url('../icons/add-blue.svg');
 }
 
@@ -67,10 +67,10 @@
   background-image: url('../icons/close-blue.svg');
 }
 
-#rock-and-roll {
+#rockandroll-icon {
   background-image: url('../icons/rock-and-roll.svg');
 }
 
-#rock-and-roll:hover {
+#rockandroll-blue-icon:hover {
   background-image: url('../icons/rock-and-roll-blue.svg');
 }
