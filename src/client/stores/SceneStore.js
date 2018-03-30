@@ -7,20 +7,23 @@ import {
   dragControls,
   orbitControls
 } from '../constants/SceneConstants';
-import DragControls from 'three-dragcontrols';
+// import DragControls from 'three-dragcontrols';
 import * as THREE from 'three';
-var OrbitControls = require('three-orbit-controls')(THREE);
+// var OrbitControls = require('three-orbit-controls')(THREE);
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
 class SceneStore {
   @observable scene = scene;
   @observable camera = camera;
-  @observable orbitControls = orbitControls;
-  @observable dragControls = dragControls;
+  // @observable orbitControls = orbitControls;
+  // @observable dragControls = dragControls;
   @observable sceneObjects = [];
   @observable addingObjectShape = null;
   @observable enterNameBox = false;
+  @observable scenes = [];
+  @observable currentScene = null;
+  @observable isObject = false;
 
   constructor() {
     // Need to get scenes array based on ownership via username
@@ -68,7 +71,6 @@ class SceneStore {
   // mobx function to add object to scene
   @action
   addObject = object => {
-    console.log('add object');
     this.scene.add(object);
     onWindowResize();
   };
@@ -94,6 +96,19 @@ class SceneStore {
 
   @action closeNameBox = () => {
     this.enterNameBox = false;
+  }
+
+  setIsObject = (bool) => {
+    this.isObject = bool;
+  }
+
+  @action addScene = (scene) => {
+    this.currentScene = scene;
+    this.scenes.push(scene);
+  }
+
+  @action switchScene = (scene) => {
+    this.currentScene = scene;
   }
 
   // mobx function to render canvas with objects and potential animation
