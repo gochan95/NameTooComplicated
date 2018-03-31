@@ -32,7 +32,7 @@ class SceneStore {
     // var testOrbit = this.orbitControls;
     //use animate to animate moving the object and future rotation animation
     //KEVIN EXPLAIN THIS FURTHER PLZ
-    // this.animate();
+    this.animate();
     // allow camera and object movement for scene children
     //===========TO DO==========================
     // move orbit and drag controls to SceneConstants
@@ -75,55 +75,88 @@ class SceneStore {
     onWindowResize();
   };
 
+  @action
+  addObjectWithName = name => {
+    this.sceneObjects.push({ name: name, shape: this.addingObjectShape });
+    var material = new THREE.MeshNormalMaterial({ color: 0xffff00 });
+    var geo, object;
+    if (this.addingObjectShape === 'sphere')
+      geo = new THREE.SphereGeometry(10, 3, 2);
+    if (this.addingObjectShape === 'cube') geo = new THREE.BoxGeometry(1, 1, 1);
+    if (this.addingObjectShape === 'cylinder')
+      geo = new THREE.CylinderGeometry(5, 5, 20, 32);
+    if (this.addingObjectShape === 'cone')
+      geo = new THREE.ConeGeometry(5, 20, 32);
+    if (this.addingObjectShape === 'octahedron')
+      geo = new THREE.OctahedronGeometry(5);
+    if (this.addingObjectShape === 'icosahedron')
+      geo = new THREE.IcosahedronGeometry(5);
+    if (this.addingObjectShape === 'octahedron')
+      geo = new THREE.OctahedronGeometry(5);
+    if (this.addingObjectShape === 'tetrahedron')
+      geo = new THREE.TetrahedronGeometry(5);
 
-  @action addObjectWithName = (name) => {
-    this.sceneObjects.push({name: name, shape: this.addingObjectShape});
+    if (geo) object = new THREE.Mesh(geo, material);
+    if (object) {
+      object.name = name;
+      object.geometry.morphTargets = true;
+      object.geometry.verticesNeedUpdate = true;
+      object.geometry.elementsNeedUpdate = true;
+      object.geometry.groupsNeedUpdate = true;
+    }
+    this.scene.add(object);
+
     this.addingObjectShape = null;
-  }
+  };
 
-  @action deleteObject = (object) => {
+  @action
+  deleteObject = object => {
     var index = this.sceneObjects.indexOf(object);
     this.sceneObjects.splice(index, 1);
-  }
+  };
 
-  setObjectShapeTobeAdd = (object) => {
+  setObjectShapeTobeAdd = object => {
     this.addingObjectShape = object;
-  }
+  };
 
-  @action openNameBox = () => {
+  @action
+  openNameBox = () => {
     this.enterNameBox = true;
-  }
+  };
 
-  @action closeNameBox = () => {
+  @action
+  closeNameBox = () => {
     this.enterNameBox = false;
-  }
+  };
 
-  setIsObject = (bool) => {
+  setIsObject = bool => {
     this.isObject = bool;
-  }
+  };
 
-  @action addScene = (scene) => {
+  @action
+  addScene = scene => {
     this.currentScene = scene;
     this.scenes.push(scene);
-  }
+  };
 
-  @action switchScene = (scene) => {
+  @action
+  switchScene = scene => {
     this.currentScene = scene;
-  }
+  };
 
   // mobx function to render canvas with objects and potential animation
   @action
   renderCanvas = () => {
     // animation to spin object
-    // this.scene.traverse(function(object) {
-    //   if (object.isMesh === true) {
-    //     object.rotation.x += 0.01;
-    //     object.rotation.y += 0.01;
-    //     object.rotation.z += 0.01;
-    //     object.position.z -= 0.01;
-    //     object.scale.set(1, 2, 1);
-    //   }
-    // });
+    this.scene.traverse(function(object) {
+      if (object.isMesh === true) {
+        object.rotation.x += 0.01;
+        object.rotation.y += 0.01;
+        object.rotation.z += 0.01;
+        object.position.z -= 0.01;
+        // object.scale.set(1, 2, 1);
+      }
+    });
     raycaster.setFromCamera(mouse, camera);
 
     threeRender.render(this.scene, this.camera);

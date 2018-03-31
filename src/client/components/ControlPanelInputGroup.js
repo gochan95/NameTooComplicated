@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
 import SquareButton from './SquareButton';
 import SimpleObjectButton from './SimpleObjectButton';
 import ControlPanelInput from './ControlPanelInput';
@@ -17,58 +15,81 @@ export default class ControlPanelInputGroup extends Component {
     var shape = this.props.ControlPanelStore.getSelectedObject.shape;
     return (
       <div className="fadeInRight">
-        {Shapes[shape].map(i => <ControlPanelInput key={`${i}`} property={`${i}`}/>)}
+        {Shapes[shape].map(i => (
+          <ControlPanelInput
+            key={`${i}`}
+            property={`${i}`}
+            SceneStore={this.props.SceneStore}
+            ControlPanelStore={this.props.ControlPanelStore}
+          />
+        ))}
       </div>
     );
-  }
+  };
 
-  renderLayerInput = (name) => {
+  renderLayerInput = name => {
     return (
       <div className="render-layer-input fadeInRight">
-        <div className="layer-name">
-          {name}
-        </div>
+        <div className="layer-name">{name}</div>
         <div className="layer-scroll">
-          <ControlPanelLayer/>
-          <ControlPanelLayer/>
+          <ControlPanelLayer />
+          <ControlPanelLayer />
         </div>
       </div>
     );
-  }
+  };
 
   layerClick = () => {
-    this.props.ControlPanelStore && this.props.ControlPanelStore.toggleLayerProperties();
-  }
+    this.props.ControlPanelStore &&
+      this.props.ControlPanelStore.toggleLayerProperties();
+  };
 
   propertyClick = () => {
-    this.props.ControlPanelStore && this.props.ControlPanelStore.toggleObjectProperties();
-  }
+    this.props.ControlPanelStore &&
+      this.props.ControlPanelStore.toggleObjectProperties();
+  };
 
   closeClick = () => {
-    this.props.ControlPanelStore && this.props.ControlPanelStore.closeControlPanel();
-  }
+    this.props.ControlPanelStore &&
+      this.props.ControlPanelStore.closeControlPanel();
+  };
 
   getCurrentObject = () => {
     if (this.props.ControlPanelStore) {
       return this.props.ControlPanelStore.getSelectedObject;
     }
-  }
+  };
 
   render() {
-    const {objectProperties, layerProperties} = this.props.ControlPanelStore;
+    const { objectProperties, layerProperties } = this.props.ControlPanelStore;
     return (
       <div>
         <div className="top-right fadeInRight">
-          <SimpleObjectButton raised object={`${this.getCurrentObject().shape}`} onClick={this.layerClick}/>
-          { objectProperties && <SquareButton on text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>}
-          {!objectProperties && <SquareButton text={`${this.getCurrentObject().name}`} onClick={this.propertyClick}/>}
-          <SquareButton close onClick={this.closeClick}/>
+          <SimpleObjectButton
+            raised
+            object={`${this.getCurrentObject().shape}`}
+            onClick={this.layerClick}
+          />
+          {objectProperties && (
+            <SquareButton
+              on
+              text={`${this.getCurrentObject().name}`}
+              onClick={this.propertyClick}
+            />
+          )}
+          {!objectProperties && (
+            <SquareButton
+              text={`${this.getCurrentObject().name}`}
+              onClick={this.propertyClick}
+            />
+          )}
+          <SquareButton close onClick={this.closeClick} />
         </div>
         <div className="top-right-drop-down fadeInDown">
           {objectProperties && this.renderShapeInput()}
-          {layerProperties && this.renderLayerInput("layer name")}
+          {layerProperties && this.renderLayerInput('layer name')}
         </div>
       </div>
-    )
+    );
   }
 }
