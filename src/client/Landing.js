@@ -4,8 +4,8 @@ import SimpleObject from './components/SimpleObject';
 import SceneGlobalControl from './components/SceneGlobalControl';
 import { observer } from 'mobx-react';
 import * as THREE from 'three';
-import ControlPanelStore from './stores/ControlPanelStore';
-import SceneStore from './stores/SceneStore';
+// import ControlPanelStore from './stores/ControlPanelStore';
+// import SceneStore from './stores/SceneStore';
 
 // import Scene2 from './components/Scene2';
 
@@ -113,7 +113,10 @@ class Landing extends Component {
     return (
       <div className="landing-container">
         {this.renderChildren()}
-        <SceneGlobalControl SceneStore={SceneStore} ControlPanelStore={ControlPanelStore} />
+        <SceneGlobalControl
+          SceneStore={this.props.SceneStore}
+          ControlPanelStore={this.props.ControlPanelStore}
+        />
       </div>
     );
   }

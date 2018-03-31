@@ -15,8 +15,8 @@ export default class SceneGlobalControl extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nameBoxPlaceholder: ""
-    }
+      nameBoxPlaceholder: ''
+    };
   }
   addClick = () => {
     this.props.ControlPanelStore &&
@@ -29,39 +29,54 @@ export default class SceneGlobalControl extends Component {
       this.props.ControlPanelStore.toggleBrowseObjects();
   };
 
-  addToScene = (object) => {
-    console.log(object)
-    this.setState({ nameBoxPlaceholder:  `Enter ${object} object name`});
+  addToScene = object => {
+    console.log(object);
+    this.setState({ nameBoxPlaceholder: `Enter ${object} object name` });
     this.props.SceneStore && this.props.SceneStore.openNameBox();
     this.props.SceneStore && this.props.SceneStore.setIsObject(true);
-    this.props.SceneStore && this.props.SceneStore.setObjectShapeTobeAdd(object);
-  }
+    this.props.SceneStore &&
+      this.props.SceneStore.setObjectShapeTobeAdd(object);
+  };
 
   addScene = () => {
-    this.setState({ nameBoxPlaceholder: "Enter canvas name" });
+    this.setState({ nameBoxPlaceholder: 'Enter canvas name' });
     this.props.SceneStore && this.props.SceneStore.setIsObject(false);
     this.props.SceneStore && this.props.SceneStore.openNameBox();
-  }
+  };
 
-  renderSimpleObjectButton = (shape) => {
+  disableUIOnMouseover = () => {
+    console.log('disabling controls');
+    this.props.SceneStore.getDragControls.enabled = false;
+    this.props.SceneStore.getOrbitControls.enabled = false;
+  };
+
+  renderSimpleObjectButton = shape => {
     return (
-      <SimpleObjectButton key={shape} object={shape} onClick={this.addToScene.bind(this, shape)}/>
+      <SimpleObjectButton
+        key={shape}
+        object={shape}
+        onClick={this.addToScene.bind(this, shape)}
+      />
     );
-  }
+  };
 
   render() {
     const { objectaddGroup, browseObjects } = this.props.ControlPanelStore;
     return (
       <div>
-        <div className="bottom-right">
-          {this.props.SceneStore.enterNameBox &&
+        <div
+          className="bottom-right"
+          onMouseOver={this.props.SceneStore.disableOrbitDragControls}
+        >
+          {this.props.SceneStore.enterNameBox && (
             <SceneInputBox
               placeholder={this.state.nameBoxPlaceholder}
               SceneStore={this.props.SceneStore}
-              ControlPanelStore={this.props.ControlPanelStore}/>
-          }
-          {browseObjects && <SquareButton info on onClick={this.infoClick}/>}
-          {!browseObjects && <SquareButton info onClick={this.infoClick}/>}
+              ControlPanelStore={this.props.ControlPanelStore}
+            />
+          )}
+          {browseObjects && <SquareButton info on onClick={this.infoClick} />}
+          {!browseObjects && <SquareButton info onClick={this.infoClick} />}
 
           <SquareButton text="2D/3D" />
           <SquareButton text="Animate" />
@@ -69,19 +84,27 @@ export default class SceneGlobalControl extends Component {
           <SquareButton add onClick={this.addClick} />
         </div>
         {objectaddGroup && (
-          <div className="mid-right fadeInUp">
-            {Shapes.allshapes.map(shape => this.renderSimpleObjectButton(shape))}
-            <SimpleObjectButton object="scroll" onClick={this.addScene}/>
+          <div
+            className="mid-right fadeInUp"
+            onMouseOver={this.props.SceneStore.disableOrbitDragControls}
+          >
+            {Shapes.allshapes.map(shape =>
+              this.renderSimpleObjectButton(shape)
+            )}
+            <SimpleObjectButton object="scroll" onClick={this.addScene} />
           </div>
         )}
         {browseObjects && (
-            <SceneObjectItemGroup
-              ControlPanelStore={this.props.ControlPanelStore}
-              SceneStore={this.props.SceneStore}/>
+          <SceneObjectItemGroup
+            ControlPanelStore={this.props.ControlPanelStore}
+            SceneStore={this.props.SceneStore}
+          />
         )}
-        <div className="bottom-left">
-          <SceneButtonGroup
-            SceneStore={this.props.SceneStore}/>
+        <div
+          className="bottom-left"
+          onMouseOver={this.props.SceneStore.disableOrbitDragControls}
+        >
+          <SceneButtonGroup SceneStore={this.props.SceneStore} />
         </div>
       </div>
     );

@@ -1,19 +1,14 @@
-import React, {
-  Component
-} from 'react';
+import React, { Component } from 'react';
 
 import '../styles/SquareButton.css';
 
-
-export default class SquareButton extends Component{
+export default class SquareButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
       on: this.props.on || false
-    }
-
+    };
   }
-
 
   onClick = () => {
     // active icon button
@@ -23,54 +18,41 @@ export default class SquareButton extends Component{
     // this.props.active && this.setState({ on: !this.props.active });
     // (this.props.openObjectList && this.props.openObjectList());
     // (this.props.onPropertyClick && this.props.onPropertyClick());
-    (this.props.onClick && this.props.onClick());
+    this.props.onClick && this.props.onClick();
   };
 
-  renderIconButton = (iconName) => {
+  renderIconButton = iconName => {
     var icon = this.props[iconName];
     return (
-      icon && (
-        this.state.on
-        ?
-        (<div className="square-button-icon" id={`${iconName}-blue-icon`}/>)
-        :
-        (<div className="square-button-icon" id={`${iconName}-icon`}/>)
-      )
-    )
-  }
-
-  renderText= (text) => {
-    // console.log(this.state.on,text)
-    return (
-      this.state.on
-      ?
-      (
-        <p className="square-button-text blue-text">
-          {text}
-        </p>
-      )
-      :
-      (
-        <p className="square-button-text">
-          {text}
-        </p>
-      )
+      icon &&
+      (this.state.on ? (
+        <div className="square-button-icon" id={`${iconName}-blue-icon`} />
+      ) : (
+        <div className="square-button-icon" id={`${iconName}-icon`} />
+      ))
     );
-  }
+  };
 
-  renderStayCoolIcon= (name) => {
+  renderText = text => {
+    // console.log(this.state.on,text)
+    return this.state.on ? (
+      <p className="square-button-text blue-text">{text}</p>
+    ) : (
+      <p className="square-button-text">{text}</p>
+    );
+  };
+
+  renderStayCoolIcon = name => {
     var icon = this.props[name];
-    return (
-      (icon &&
-        <div className="square-button-icon" id={`${name}-icon`}/>
-      )
-    )
-  }
-
+    return icon && <div className="square-button-icon" id={`${name}-icon`} />;
+  };
 
   render() {
     return (
-      <div className="square-button-container small-padding" onClick={this.onClick}>
+      <div
+        className="square-button-container small-padding"
+        onClick={this.onClick}
+      >
         {this.renderIconButton('info')}
         {this.renderIconButton('rockandroll')}
         {this.renderText(this.props.text)}

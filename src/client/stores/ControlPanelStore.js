@@ -14,44 +14,51 @@ class ControlPanelStore {
     return this.selectedObject;
   }
 
-  @action closeControlPanel = () => {
+  @action
+  closeControlPanel = () => {
     this.selectedObject = null;
     this.controlPanel = false;
     this.layerProperties = false;
     this.objectProperties = false;
-  }
+  };
 
-  @action openControlPanel = (object) => {
+  @action
+  openControlPanel = object => {
     this.closeControlPanel();
     this.selectedObject = object;
     this.controlPanel = true;
-  }
+  };
 
-  @action toggleBrowseObjects = () => {
+  @action
+  toggleBrowseObjects = () => {
     this.browseObjects = !this.browseObjects;
-  }
+  };
 
-  @action toggleObjectaddGroup = () => {
+  @action
+  toggleObjectaddGroup = () => {
     this.objectaddGroup = !this.objectaddGroup;
-  }
+  };
 
-  @action toggleObjectProperties = () => {
+  @action
+  toggleObjectProperties = () => {
     this.objectProperties = !this.objectProperties;
-  }
+  };
 
-  @action toggleLayerProperties = () => {
+  @action
+  toggleLayerProperties = () => {
     this.layerProperties = !this.layerProperties;
-  }
+  };
 
-  @action openControlPanelWithObjects = () => {
+  @action
+  openControlPanelWithObjects = () => {
     this.browseObjects = true;
     this.browseObjectsDropdown = true;
-  }
+  };
 
-  @action toggleBrowseObjectsDropdown = () => {
+  @action
+  toggleBrowseObjectsDropdown = () => {
     this.browseObjectsDropdown = !this.browseObjectsDropdown;
-  }
-
+  };
 }
 
 const controlpanelStore = new ControlPanelStore();

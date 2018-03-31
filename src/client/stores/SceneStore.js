@@ -16,8 +16,8 @@ var mouse = new THREE.Vector2();
 class SceneStore {
   @observable scene = scene;
   @observable camera = camera;
-  // @observable orbitControls = orbitControls;
-  // @observable dragControls = dragControls;
+  @observable orbitControls = orbitControls;
+  @observable dragControls = dragControls;
   @observable sceneObjects = [];
   @observable addingObjectShape = null;
   @observable enterNameBox = false;
@@ -38,15 +38,15 @@ class SceneStore {
     // move orbit and drag controls to SceneConstants
     // and write mobx getters to use scene and camera inside SceneConstsnts
     //
-    // dragControls.addEventListener('dragstart', function(event) {
-    //   orbitControls.enabled = false;
-    // });
+    dragControls.addEventListener('dragstart', function(event) {
+      orbitControls.enabled = false;
+    });
+
+    dragControls.addEventListener('dragend', function(event) {
+      orbitControls.enabled = true;
+    });
     //
-    // dragControls.addEventListener('dragend', function(event) {
-    //   orbitControls.enabled = true;
-    // });
-    //
-    // document.addEventListener('mousedown', this.onObjectClick, false);
+    document.addEventListener('mousedown', this.onObjectClick, false);
   }
 
   @computed
@@ -165,6 +165,18 @@ class SceneStore {
   animate = () => {
     requestAnimationFrame(this.animate);
     this.renderCanvas();
+  };
+
+  @action
+  disableOrbitDragControls = () => {
+    orbitControls.enabled = false;
+    dragControls.enabled = false;
+  };
+
+  @action
+  enableOrbitDragControls = () => {
+    orbitControls.enabled = true;
+    dragControls.enabled = true;
   };
 
   // clicked to return object

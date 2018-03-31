@@ -3,35 +3,10 @@ var mongoose = require('mongoose'),
     passportLocalMongoose = require('passport-local-mongoose'),
     THREE = require('three');
 
-var Account = new Schema({
-
-    local: {
-      email: String,
-      salt: String,
-      hash: String,
-    },
-
-    facebook: {
-      id: String,
-      token: String,
-      name: String,
-      email: String,
-    },
-
-    twitter: {
-      id: String,
-      token: String,
-      displayName: String,
-      username: String,
-    },
-
-    google: {
-      id: String,
-      token: String,
-      email: String,
-      name: String
-    }
-
+var User = new Schema({
+  email: String,
+  salt: String,
+  hash: String
 });
 
 var CanvasSchema = new Schema({
@@ -41,11 +16,9 @@ var CanvasSchema = new Schema({
   owner: String
 });
 
-var Canvas = mongoose.model("Canvas", CanvasSchema);
-
 // Account.plugin(passportLocalMongoose);
 
 module.exports = {
-  Account: mongoose.model('Account', Account),
+  User: mongoose.model('User', User),
   Canvas: mongoose.model("Canvas", CanvasSchema)
 };

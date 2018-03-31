@@ -16,7 +16,7 @@ dragControls.addEventListener('dragstart', function(event) {
 dragControls.addEventListener('dragend', function(event) {
   orbitControls.enabled = true;
 });
-console.log(objects)
+console.log(objects);
 animate();
 function render() {
   scene.traverse(function(object) {

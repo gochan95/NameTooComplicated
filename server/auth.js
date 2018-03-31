@@ -4,7 +4,7 @@ var passport = require('passport')
   , LocalStrategy = require('passport-local').Strategy;
 var passportLocalMongoose = require('passport-local-mongoose');
 
-var Account = require('./models');
+var User = require('./models');
 
 // *** passport *** //
 // passport.use(new LocalStrategy(Account.authenticate()));
@@ -13,7 +13,7 @@ var Account = require('./models');
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    Account.findOne({username: username}, function(err, user){
+    User.findOne({username: username}, function(err, user){
       if (err) return done(err);
       if (!user) {
         return done(null, false, {message: "Incorrect username"});

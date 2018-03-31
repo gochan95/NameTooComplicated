@@ -6,6 +6,7 @@ import Landing from './Landing';
 // files import
 import './styles/App.css';
 import { observer } from 'mobx-react';
+import ControlPanelStore from './stores/ControlPanelStore';
 
 @observer
 export default class App extends Component {
@@ -14,16 +15,15 @@ export default class App extends Component {
   };
 
   renderLoginForm() {
-    // const store = this.props.store;
-
     return (
-      <div className="loginForm">
+      <div
+        className="loginForm"
+        onMouseOver={this.props.SceneStore.disableOrbitDragControls}
+      >
         <div
           id="close"
           onClick={() => {
             this.toggleForm(false);
-            this.props.SceneStore.getDragControls.enabled = true;
-            this.props.SceneStore.getOrbitControls.enabled = true;
           }}
         />
         <Login />
@@ -41,13 +41,7 @@ export default class App extends Component {
             <div
               className="profile-container"
               onClick={() => {
-                console.log('clicked profile container to open login form');
-                console.log(this.props.SceneStore.getDragControls);
-                console.log(this.props.SceneStore.getOrbitControls);
-                this.props.SceneStore.getDragControls.enabled = false;
-                this.props.SceneStore.getOrbitControls.enabled = false;
-                console.log(this.props.SceneStore.getDragControls);
-                console.log(this.props.SceneStore.getOrbitControls);
+                this.props.SceneStore.disableOrbitDragControls;
                 this.toggleForm(true);
               }}
             >
@@ -63,6 +57,7 @@ export default class App extends Component {
         <Landing
           SceneStore={this.props.SceneStore}
           AuthStore={this.props.AuthStore}
+          ControlPanelStore={ControlPanelStore}
         />
       </div>
     );
