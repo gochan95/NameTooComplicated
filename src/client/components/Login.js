@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import SquareButton from './SquareButton';
 import axios from 'axios';
 import '../styles/Login.css';
 import { observer } from 'mobx-react';
@@ -16,11 +17,16 @@ export default class Login extends Component {
       signinPw: '',
       signupPw: '',
       signupPwConfirm: '',
-      switchForm: true
+      switchForm: true,
+      openLogin: true
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  closeLogin = () => {
+    this.props.AuthStore.toggleForm(false);
   }
 
   handleInputChange(e) {
@@ -78,14 +84,10 @@ export default class Login extends Component {
    renderSignup(){
     return (
       <div className="login-container">
-        <div className="sign-up-google margin">
-          <div id="my-signin2" />
+        <div className="login-title-bar">
+          <SquareButton close onClick={this.closeLogin}/>
         </div>
-        <div className="or-form margin">
-          <div className="seperator" />
-          or
-          <div className="seperator" />
-        </div>
+        <div id="logo"/>
         <form id="form" onSubmit={this.handleSubmit} name="signup">
           <input
             id="email"
@@ -123,7 +125,7 @@ export default class Login extends Component {
         </form>
         <div className="seperator large-margin" />
         <div className="bottom mid-margin">
-          <div>Already have a Squad Account?</div>
+          <div className="login-text">Already have a Squad Account?</div>
           <div className="bottom-text" onClick={this.toggleForm.bind(this)}>
             Log in
           </div>
@@ -135,14 +137,10 @@ export default class Login extends Component {
   renderSignin() {
     return (
       <div className="login-container">
-        <div className="sign-up-google margin">
-          <div id="my-signin2" />
+        <div className="login-title-bar">
+          <SquareButton close onClick={this.closeLogin}/>
         </div>
-        <div className="or-form margin">
-          <div className="seperator" />
-          or
-          <div className="seperator" />
-        </div>
+        <div id="logo"/>
         <form id="form" onSubmit={this.handleSubmit} name='signin'>
           <input
             id="email"
@@ -163,13 +161,13 @@ export default class Login extends Component {
             value={this.state.signinPw}
             onChange={this.handleInputChange}
           />
-        <button type="submit" value="submit" name="action">
-            Sign-in
+          <button type="submit" value="submit" name="action">
+              Sign-in
           </button>
         </form>
         <div className="seperator large-margin" />
         <div className="bottom mid-margin">
-          <div>Don't have a Squad Account?</div>
+          <div className="login-text">Don't have a Squad Account?</div>
           <div className="bottom-text" onClick={this.toggleForm.bind(this)}>
             Sign up
           </div>
@@ -180,7 +178,17 @@ export default class Login extends Component {
 
   render() {
     return (
-      <div>{this.state.switchForm ? this.renderSignin() : this.renderSignup()}</div>
+      <div>
+        {
+          this.state.openLogin && (
+            this.state.switchForm
+              ? this.renderSignin()
+              : this.renderSignup()
+
+          )
+        }
+
+      </div>
     );
   }
 }
