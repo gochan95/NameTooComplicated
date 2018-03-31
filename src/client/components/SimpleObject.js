@@ -53,8 +53,7 @@ export default class SimpleObject extends Component {
     return (
       <div
         onMouseOver={() => {
-          this.props.SceneStore.getDragControls.enabled = true;
-          this.props.SceneStore.getOrbitControls.enabled = true;
+          this.props.SceneStore.enableOrbitDragControls();
         }}
         className="object-container"
         ref={mount => {

@@ -139,6 +139,18 @@ class SceneStore {
     this.renderCanvas();
   };
 
+  @action
+  disableOrbitDragControls = () => {
+    orbitControls.enabled = false;
+    dragControls.enabled = false;
+  };
+
+  @action
+  enableOrbitDragControls = () => {
+    orbitControls.enabled = true;
+    dragControls.enabled = true;
+  };
+
   // clicked to return object
   @action
   onObjectClick = event => {
