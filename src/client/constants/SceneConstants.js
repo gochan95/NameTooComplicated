@@ -12,6 +12,7 @@ threeRender.setPixelRatio(window.devicePixelRatio);
 camera.position.z = 100;
 
 var orbitControls = new OrbitControls(camera);
+orbitControls.enableZoom = false;
 const dragControls = new DragControls(
   scene.children,
   camera,
@@ -28,6 +29,7 @@ export {
   scene,
   camera,
   threeRender,
+  onWindowResize,
   orbitControls,
   dragControls,
   loader

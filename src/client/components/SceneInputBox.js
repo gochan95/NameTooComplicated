@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 
 import '../styles/SceneInputBox.css';
 import '../styles/Animation.css';
+
 @observer
 export default class SceneInputBox extends Component {
   constructor(props) {

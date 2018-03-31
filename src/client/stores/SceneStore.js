@@ -6,6 +6,7 @@ import {
   dragControls,
   orbitControls
 } from '../constants/SceneConstants';
+import DAT from 'dat.gui';
 // import DragControls from 'three-dragcontrols';
 import * as THREE from 'three';
 // var OrbitControls = require('three-orbit-controls')(THREE);
@@ -45,7 +46,7 @@ class SceneStore {
       orbitControls.enabled = true;
     });
 
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', function() {
       threeRender.setSize(window.innerWidth, window.innerHeight, true);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
@@ -83,9 +84,10 @@ class SceneStore {
   addObjectWithName = name => {
     this.sceneObjects.push({ name: name, shape: this.addingObjectShape });
     var material = new THREE.MeshNormalMaterial({ color: 0xffff00 });
-    var geo, object;
+    var geo, object, mesh;
+
     if (this.addingObjectShape === 'sphere')
-      geo = new THREE.SphereGeometry(10, 3, 2);
+      geo = new THREE.SphereGeometry(5, 32, 32);
     if (this.addingObjectShape === 'cube') geo = new THREE.BoxGeometry(1, 1, 1);
     if (this.addingObjectShape === 'cylinder')
       geo = new THREE.CylinderGeometry(5, 5, 20, 32);
@@ -99,8 +101,8 @@ class SceneStore {
       geo = new THREE.OctahedronGeometry(5);
     if (this.addingObjectShape === 'tetrahedron')
       geo = new THREE.TetrahedronGeometry(5);
-
     if (geo) object = new THREE.Mesh(geo, material);
+    // console.log(object);
     if (object) {
       object.name = name;
       object.geometry.morphTargets = true;
@@ -156,8 +158,6 @@ class SceneStore {
       if (object.isMesh === true) {
         object.rotation.x += 0.01;
         object.rotation.y += 0.01;
-        object.rotation.z += 0.01;
-        object.position.z -= 0.01;
         // object.scale.set(1, 2, 1);
       }
     });
@@ -171,7 +171,7 @@ class SceneStore {
     this.camera.updateProjectionMatrix();
 
     threeRender.setSize(window.innerWidth, window.innerHeight);
-  }
+  };
 
   // function to animate movement and add future rotational animation
   animate = () => {
@@ -195,16 +195,14 @@ class SceneStore {
   // clicked to return object
   @action
   onObjectClick = event => {
-    console.log('checking object click');
     mouse.x = event.clientX / window.innerWidth * 2 - 1;
     mouse.y = event.clientY / window.innerHeight * 2 - 1;
 
     var intersects = raycaster.intersectObjects(this.scene.children);
-    console.log('intersects');
-    console.log(intersects);
+
     if (intersects.length > 0) {
-      console.log('Hit @' + toString(intersects[0].point + '\n'));
-      console.log(intersects[0]);
+      // console.log('Hit @' + toString(intersects[0].point + '\n'));
+      // console.log(intersects[0]);
       return intersects[0];
     }
   };

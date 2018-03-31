@@ -26,6 +26,7 @@ export default class SceneObjectItemGroup extends Component {
         <SceneObjectItem
           object={object}
           ControlPanelStore={this.props.ControlPanelStore}
+          SceneStore={this.props.SceneStore}
         />
         <SquareButton close onClick={this.deleteObject.bind(this, object)} />
       </div>
