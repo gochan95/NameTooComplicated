@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 import SimpleObject from './components/SimpleObject';
-import SceneToolbar from './components/SceneToolbar';
-import ControlPanel from './components/ControlPanel';
 import SceneGlobalControl from './components/SceneGlobalControl';
 import { observer } from 'mobx-react';
 import * as THREE from 'three';
-import ControlPanelStore from './stores/ControlPanelStore';
-import SceneStore from './stores/SceneStore';
+// import ControlPanelStore from './stores/ControlPanelStore';
+// import SceneStore from './stores/SceneStore';
 
 // import Scene2 from './components/Scene2';
 
@@ -115,7 +113,10 @@ class Landing extends Component {
     return (
       <div className="landing-container">
         {this.renderChildren()}
-        <SceneGlobalControl SceneStore={SceneStore} ControlPanelStore={ControlPanelStore} />
+        <SceneGlobalControl
+          SceneStore={this.props.SceneStore}
+          ControlPanelStore={this.props.ControlPanelStore}
+        />
       </div>
     );
   }

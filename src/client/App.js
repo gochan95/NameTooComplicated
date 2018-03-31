@@ -6,6 +6,7 @@ import Landing from './Landing';
 // files import
 import './styles/App.css';
 import { observer } from 'mobx-react';
+import ControlPanelStore from './stores/ControlPanelStore';
 
 @observer
 export default class App extends Component {
@@ -59,6 +60,7 @@ export default class App extends Component {
         <Landing
           SceneStore={this.props.SceneStore}
           AuthStore={this.props.AuthStore}
+          ControlPanelStore={ControlPanelStore}
         />
       </div>
     );

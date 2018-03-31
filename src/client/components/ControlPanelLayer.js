@@ -1,18 +1,15 @@
-import React, {
-  Component
-} from 'react';
-import SquareButton from './SquareButton';
+import React, { Component } from 'react';
 
 import '../styles/ControlPanelLayer.css';
 
 import image from '../images/earthmap1k.jpg';
 
 export default class ControlPanelLayer extends Component {
-  render(){
+  render() {
     return (
       <div className="control-panel-layer-container small-padding">
-        <img className="layer-image" src={image}/>
+        <img className="layer-image" src={image} />
       </div>
-    )
+    );
   }
 }

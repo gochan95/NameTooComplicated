@@ -1,0 +1,23 @@
+.underline-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 20px 2px 20px;
+  margin: 0 2px 0 2px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.underline-button-text {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.underline-button-active {
+  border-bottom: 2px solid rgb(0, 109, 240);
+}
+
+.underline-button-container:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+}

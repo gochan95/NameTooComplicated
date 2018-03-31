@@ -1,20 +1,26 @@
 .bottom-right {
   position: absolute;
   right: 50px;
-  bottom: 50px;
+  bottom: 25px;
   display: flex;
 }
 
 .scene-input-box {
   position: absolute;
   right: 60px;
-  bottom: 80px;
+  bottom: 55px;
 }
 
 .mid-right {
   position: absolute;
   right: 50px;
-  bottom: 100px;
+  bottom: 70px;
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.bottom-left {
+  position: absolute;
+  left: 50px;
+  bottom: 25px;
 }

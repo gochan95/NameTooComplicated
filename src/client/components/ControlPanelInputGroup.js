@@ -4,49 +4,23 @@ import SimpleObjectButton from './SimpleObjectButton';
 import ControlPanelInput from './ControlPanelInput';
 import ControlPanelLayer from './ControlPanelLayer';
 import { observer } from 'mobx-react';
+import Shapes from '../constants/Shapes';
 
 import '../styles/ControlPanelInputGroup.css';
 import '../styles/Animation.css';
 
 @observer
 export default class ControlPanelInputGroup extends Component {
-  renderSphereInput = () => {
-    var sphereprops = [
-      'radius',
-      'widthSegments',
-      'heightSegments',
-      'phiStart',
-      'phiLength',
-      'thetaStart',
-      'thetaLength'
-    ];
-    // const cubeprops = ["width","height", "depth", "widthSegments","heightSegments","depthSegments"];
-    // const coneprops = ["radius", "height", "radialSegments", "heightSegments", "openEnded", "thetaStart", "thetaLength
-    // "];
-    // const pyramidprops = []
+  renderShapeInput = () => {
+    var shape = this.props.ControlPanelStore.getSelectedObject.shape;
     return (
-      <div
-        onMouseOver={() => {
-          this.props.SceneStore.getOrbitControls.enabled = false;
-          this.props.SceneStore.getDragControls.enabled = false;
-        }}
-        className="fadeInRight"
-      >
-        {sphereprops.map(i => (
+      <div className="fadeInRight">
+        {Shapes[shape].map(i => (
           <ControlPanelInput key={`${i}`} property={`${i}`} />
         ))}
       </div>
     );
   };
-
-  // renderCubeInput = () => {
-  //   const cubeprops = ["width","height", "depth", "widthSegments","heightSegments","depthSegments"];
-  //   return (
-  //     <div>
-  //       {cubeprops.map(i => return (<ControlPanelInput property={`${i}`}))}
-  //     </div>
-  //   )
-  // }
 
   renderLayerInput = name => {
     return (
@@ -77,12 +51,12 @@ export default class ControlPanelInputGroup extends Component {
 
   getCurrentObject = () => {
     if (this.props.ControlPanelStore) {
-      console.log(this.props.ControlPanelStore.getSelectedObject);
       return this.props.ControlPanelStore.getSelectedObject;
     }
   };
 
   render() {
+    const { objectProperties, layerProperties } = this.props.ControlPanelStore;
     return (
       <div>
         <div className="top-right fadeInRight">
@@ -91,17 +65,24 @@ export default class ControlPanelInputGroup extends Component {
             object={`${this.getCurrentObject().shape}`}
             onClick={this.layerClick}
           />
-          <SquareButton
-            text={`${this.getCurrentObject().name}`}
-            onClick={this.propertyClick}
-          />
+          {objectProperties && (
+            <SquareButton
+              on
+              text={`${this.getCurrentObject().name}`}
+              onClick={this.propertyClick}
+            />
+          )}
+          {!objectProperties && (
+            <SquareButton
+              text={`${this.getCurrentObject().name}`}
+              onClick={this.propertyClick}
+            />
+          )}
           <SquareButton close onClick={this.closeClick} />
         </div>
         <div className="top-right-drop-down fadeInDown">
-          {this.props.ControlPanelStore.objectProperties &&
-            this.renderSphereInput()}
-          {this.props.ControlPanelStore.layerProperties &&
-            this.renderLayerInput('layer name')}
+          {objectProperties && this.renderShapeInput()}
+          {layerProperties && this.renderLayerInput('layer name')}
         </div>
       </div>
     );

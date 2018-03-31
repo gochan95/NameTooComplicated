@@ -4,6 +4,7 @@ class ControlPanelStore {
   @observable selectedObject = null;
   @observable controlPanel = false;
   @observable browseObjects = false;
+  @observable browseObjectsDropdown = false;
   @observable objectaddGroup = false;
   @observable objectProperties = false;
   @observable layerProperties = false;
@@ -13,33 +14,51 @@ class ControlPanelStore {
     return this.selectedObject;
   }
 
-  @action closeControlPanel = () => {
+  @action
+  closeControlPanel = () => {
     this.selectedObject = null;
     this.controlPanel = false;
-  }
+    this.layerProperties = false;
+    this.objectProperties = false;
+  };
 
-  @action openControlPanel = (object) => {
+  @action
+  openControlPanel = object => {
     this.closeControlPanel();
     this.selectedObject = object;
     this.controlPanel = true;
-  }
+  };
 
-  @action toggleBrowseObjects = () => {
+  @action
+  toggleBrowseObjects = () => {
     this.browseObjects = !this.browseObjects;
-  }
+  };
 
-  @action toggleObjectaddGroup = () => {
+  @action
+  toggleObjectaddGroup = () => {
     this.objectaddGroup = !this.objectaddGroup;
-  }
+  };
 
-  @action toggleObjectProperties = () => {
+  @action
+  toggleObjectProperties = () => {
     this.objectProperties = !this.objectProperties;
-  }
+  };
 
-  @action toggleLayerProperties = () => {
+  @action
+  toggleLayerProperties = () => {
     this.layerProperties = !this.layerProperties;
-  }
+  };
 
+  @action
+  openControlPanelWithObjects = () => {
+    this.browseObjects = true;
+    this.browseObjectsDropdown = true;
+  };
+
+  @action
+  toggleBrowseObjectsDropdown = () => {
+    this.browseObjectsDropdown = !this.browseObjectsDropdown;
+  };
 }
 
 const controlpanelStore = new ControlPanelStore();
