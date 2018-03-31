@@ -5,12 +5,20 @@ import Landing from './Landing';
 import ControlPanelStore from './stores/ControlPanelStore';
 
 import { observer } from 'mobx-react';
+import axios from 'axios';
 
 import './styles/App2.css';
 import './styles/Animation.css';
 
 @observer
 export default class App2 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
+      doestheusehasscene: false,
+    }
+  }
   exploreClick = () => {
     this.props.AuthStore.toggleForm(true);
   };
@@ -28,6 +36,46 @@ export default class App2 extends Component {
       </div>
     );
   };
+
+  handleNewUserScene = (e) => {
+    this.setState({ value: e.target.value});
+  }
+
+  handleNewUserSceneSubmit = (e) => {
+    this.props.SceneStore.addScene(this.state.value);
+    this.setState({
+      value: '',
+      doestheusehasscene: true
+    });
+  }
+
+  renderUserLanding = () => {
+    var username = this.props.AuthStore.username;
+
+    //need to check
+    var doestheusehasscene = this.state.doestheusehasscene;
+
+    if (!doestheusehasscene) {
+      return (
+        <div className="new-user-input-scene">
+          <form onSubmit={this.handleNewUserSceneSubmit}>
+            <input
+              className="new-user-input"
+              onChange={this.handleNewUserScene}
+              value={this.state.value}
+              placeholder="Enter a name for your first scene"/>
+          </form>
+        </div>
+      )} else {
+        return (
+          <Landing
+            SceneStore={this.props.SceneStore}
+            AuthStore={this.props.AuthStore}
+            ControlPanelStore={ControlPanelStore}
+          />
+        )
+      }
+  }
 
   render() {
     const { openLogin, username } = this.props.AuthStore;
@@ -48,11 +96,7 @@ export default class App2 extends Component {
             </p>
           ))}
           {openLogin && this.renderLogin()}
-          {username && <Landing
-            SceneStore={this.props.SceneStore}
-            AuthStore={this.props.AuthStore}
-            ControlPanelStore={ControlPanelStore}
-          />}
+          {username && this.renderUserLanding()}
           {!username &&
             (
             <div className="footer-container">

@@ -101,6 +101,17 @@
   padding: 17px;
 }
 
+.new-user-input-scene {
+  background: rgba(255,255,255,0.2);
+  padding: 20px;
+  display: flex;
+}
+
+.new-user-input {
+  font-size: 15px;
+  width: 20vw;
+}
+
 #roy {
   background-image: url('../images/roy.jpg');
 }
