@@ -11,12 +11,12 @@ threeRender.setPixelRatio(window.devicePixelRatio);
 
 camera.position.z = 100;
 
-// var orbitControls = new OrbitControls(camera);
-// const dragControls = new DragControls(
-//   scene.children,
-//   camera,
-//   threeRender.domElement
-// );
+var orbitControls = new OrbitControls(camera);
+const dragControls = new DragControls(
+  scene.children,
+  camera,
+  threeRender.domElement
+);
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -29,7 +29,7 @@ export {
   camera,
   threeRender,
   onWindowResize,
-  // orbitControls,
-  // dragControls,
+  orbitControls,
+  dragControls,
   loader
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Login from './components/Login';
 import Landing from './Landing';
-// import Avatar from './components/Avatar';
+
 import ControlPanelStore from './stores/ControlPanelStore';
 
 import { observer } from 'mobx-react';
@@ -17,8 +17,10 @@ export default class App2 extends Component {
 
   renderLogin = () => {
     return (
-      <div className="login">
-        <Login AuthStore={this.props.AuthStore} />
+      <div
+        className="login"
+        onMouseOver={this.props.SceneStore.disableOrbitDragControls}>
+        <Login AuthStore={this.props.AuthStore}/>
       </div>
     );
   };

@@ -9,12 +9,13 @@ class AuthStore {
   }
 
   @action
-  toggleForm = set => {
+  toggleForm = (set) => {
     this.openLogin = set;
   };
 
   @action
   setUsername = name => {
+    console.log(name)
     this.username = name;
   };
 

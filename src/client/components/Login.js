@@ -38,7 +38,7 @@ export default class Login extends Component {
     })
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     e.preventDefault();
     var name = e.target.name;
     var submit = true;
@@ -51,17 +51,19 @@ export default class Login extends Component {
        submit = false;
     }
 
+    var AuthStore = this.props.AuthStore;
+
     (submit && axios
       .post(`/auth/${name}`, params)
-      .then(function(response) {
+      .then(function(res) {
         // success POST
         // close form through global store
+        console.log('post success');
         AuthStore.toggleForm(false);
-        AuthStore.setUsername(response.data);
-        console.log(response.data);
-      })
-      .catch(function(err) {
-        console.log('err');
+        AuthStore.setUsername(res.data);
+        // this.props.AuthStore.setUsername(res.name);
+      }, function(err) {
+        console.log('error!!!!!!!');
         console.log(err);
       }));
 

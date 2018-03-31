@@ -25,7 +25,7 @@ module.exports = function(passport) {
       console.log('trying to do local signup');
       console.log(username, password);
       console.log('checking user schema');
-      User.findOne({'local.email' : username}, function(err, user) {
+      User.findOne({'email' : username}, function(err, user) {
         if (err) return done(err);
         // console.log(user);
         if (user) {
@@ -43,9 +43,12 @@ module.exports = function(passport) {
 
           newAccount.save().then(function(result) {
             console.log('saved newAccount');
+            console.log(result);
+            return done(null, result);
           }, function(err) {
             console.log('error saving new Account');
             console.log(err);
+            return done(err);
           });
           // newAccount.save(function(err) {
           //   if (err) done(err);
