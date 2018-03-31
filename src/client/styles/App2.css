@@ -23,7 +23,13 @@
 }
 
 .title-bar-buttons {
-  align-self: flex-end;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 20px;
 }
 
 .landing-container {

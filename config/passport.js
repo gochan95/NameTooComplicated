@@ -62,12 +62,12 @@ module.exports = function(passport) {
 
   passport.use('local-signin', new LocalStrategy(
     function(username, password, done) {
-      User.findOne({'local.email' : username}, function(err, user) {
+      User.findOne({'email' : username}, function(err, user) {
         if (err) return done(err);
 
         if (!user) return done(null, false, {'message' : 'Incorrect Username'});
 
-        if (user.local.hash != generateHash(password, user.local.salt)) {
+        if (user.hash != generateHash(password, user.salt)) {
           return done(null, false, {'message' : 'Incorrect Password'});
         }
 

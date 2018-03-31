@@ -15,6 +15,10 @@ export default class App2 extends Component {
     this.props.AuthStore.toggleForm(true);
   };
 
+  signout = () => {
+    this.props.AuthStore.setUsername(null);
+  }
+
   renderLogin = () => {
     return (
       <div
@@ -26,28 +30,40 @@ export default class App2 extends Component {
   };
 
   render() {
-    const { openLogin } = this.props.AuthStore;
+    const { openLogin, username } = this.props.AuthStore;
     return (
       <div className="main-container">
         <div className="title-bar-container">
           <div className="title-bar-logo" />
-          <div className="title-bar-buttons" />
+          {username && (
+            <div className="title-bar-buttons" onClick={this.signout}>
+              logout
+            </div>
+          )}
         </div>
         <div className="landing-container">
-          {!openLogin && (
+          {!username && (!openLogin && (
             <p className="explore-button" onClick={this.exploreClick}>
               Explore
             </p>
-          )}
+          ))}
           {openLogin && this.renderLogin()}
-          <div className="footer-container">
-            <p className="footer-text border-right">The drawsquad © 2018</p>
-            <p className="footer-text border-right">Credits</p>
-            <p className="footer-text">Authors</p>
-            <div className="avatar-icon" id="roy" />
-            <div className="avatar-icon" id="gordan" />
-            <div className="avatar-icon" id="kevin" />
-          </div>
+          {username && <Landing
+            SceneStore={this.props.SceneStore}
+            AuthStore={this.props.AuthStore}
+            ControlPanelStore={ControlPanelStore}
+          />}
+          {!username &&
+            (
+            <div className="footer-container">
+              <p className="footer-text border-right">The drawsquad © 2018</p>
+              <p className="footer-text border-right">Credits</p>
+              <p className="footer-text">Authors</p>
+              <div className="avatar-icon" id="roy" />
+              <div className="avatar-icon" id="gordan" />
+              <div className="avatar-icon" id="kevin" />
+            </div>
+          )}
         </div>
       </div>
     );
