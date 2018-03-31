@@ -3,7 +3,6 @@ import {
   scene,
   camera,
   threeRender,
-  onWindowResize,
   dragControls,
   orbitControls
 } from '../constants/SceneConstants';
@@ -45,7 +44,12 @@ class SceneStore {
     dragControls.addEventListener('dragend', function(event) {
       orbitControls.enabled = true;
     });
-    //
+
+    window.addEventListener('resize', function () {
+      threeRender.setSize(window.innerWidth, window.innerHeight, true);
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+    });
     document.addEventListener('mousedown', this.onObjectClick, false);
   }
 
@@ -72,7 +76,7 @@ class SceneStore {
   @action
   addObject = object => {
     this.scene.add(object);
-    onWindowResize();
+    this.onWindowResize();
   };
 
   @action
@@ -161,9 +165,18 @@ class SceneStore {
 
     threeRender.render(this.scene, this.camera);
   };
+
+  onWindowResize = () => {
+    this.camera.aspect = window.innerWidth / window.innerHeight;
+    this.camera.updateProjectionMatrix();
+
+    threeRender.setSize(window.innerWidth, window.innerHeight);
+  }
+
   // function to animate movement and add future rotational animation
   animate = () => {
     requestAnimationFrame(this.animate);
+    // this.onWindowResize();
     this.renderCanvas();
   };
 

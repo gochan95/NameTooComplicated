@@ -18,17 +18,16 @@ const dragControls = new DragControls(
   threeRender.domElement
 );
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  threeRender.setSize(window.innerWidth, window.innerHeight);
-}
+// function onWindowResize() {
+//   camera.aspect = window.innerWidth / window.innerHeight;
+//   camera.updateProjectionMatrix();
+//   threeRender.setSize(window.innerWidth, window.innerHeight);
+// }
 
 export {
   scene,
   camera,
   threeRender,
-  onWindowResize,
   orbitControls,
   dragControls,
   loader

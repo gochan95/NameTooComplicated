@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import * as THREE from 'three';
 import { threeRender } from '../constants/SceneConstants';
+import '../styles/SimpleObject.css';
 
 export default class SimpleObject extends Component {
   componentDidMount() {
