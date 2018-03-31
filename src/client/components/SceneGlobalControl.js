@@ -44,12 +44,6 @@ export default class SceneGlobalControl extends Component {
     this.props.SceneStore && this.props.SceneStore.openNameBox();
   };
 
-  disableUIOnMouseover = () => {
-    console.log('disabling controls');
-    this.props.SceneStore.getDragControls.enabled = false;
-    this.props.SceneStore.getOrbitControls.enabled = false;
-  };
-
   renderSimpleObjectButton = shape => {
     return (
       <SimpleObjectButton
