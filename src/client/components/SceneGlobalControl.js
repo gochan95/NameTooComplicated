@@ -66,7 +66,7 @@ export default class SceneGlobalControl extends Component {
       <div>
         <div
           className="bottom-right"
-          onMouseOver={this.props.SceneStore.disableOrbitDragControls()}
+          onMouseOver={this.props.SceneStore.disableOrbitDragControls}
         >
           {this.props.SceneStore.enterNameBox && (
             <SceneInputBox
@@ -86,7 +86,7 @@ export default class SceneGlobalControl extends Component {
         {objectaddGroup && (
           <div
             className="mid-right fadeInUp"
-            onMouseOver={this.props.SceneStore.disableOrbitDragControls()}
+            onMouseOver={this.props.SceneStore.disableOrbitDragControls}
           >
             {Shapes.allshapes.map(shape =>
               this.renderSimpleObjectButton(shape)
@@ -102,7 +102,7 @@ export default class SceneGlobalControl extends Component {
         )}
         <div
           className="bottom-left"
-          onMouseOver={this.props.SceneStore.disableOrbitDragControls()}
+          onMouseOver={this.props.SceneStore.disableOrbitDragControls}
         >
           <SceneButtonGroup SceneStore={this.props.SceneStore} />
         </div>

@@ -15,16 +15,15 @@ export default class App extends Component {
   };
 
   renderLoginForm() {
-    // const store = this.props.store;
-
     return (
-      <div className="loginForm">
+      <div
+        className="loginForm"
+        onMouseOver={this.props.SceneStore.disableOrbitDragControls}
+      >
         <div
           id="close"
           onClick={() => {
             this.toggleForm(false);
-            this.props.SceneStore.getDragControls.enabled = true;
-            this.props.SceneStore.getOrbitControls.enabled = true;
           }}
         />
         <Login />
@@ -42,9 +41,7 @@ export default class App extends Component {
             <div
               className="profile-container"
               onClick={() => {
-                console.log('clicked profile container to open login form');
-                this.props.SceneStore.getDragControls.enabled = false;
-                this.props.SceneStore.getOrbitControls.enabled = false;
+                this.props.SceneStore.disableOrbitDragControls;
                 this.toggleForm(true);
               }}
             >

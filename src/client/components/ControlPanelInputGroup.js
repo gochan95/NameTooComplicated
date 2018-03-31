@@ -16,7 +16,7 @@ export default class ControlPanelInputGroup extends Component {
     return (
       <div
         className="fadeInRight"
-        onMouseOver={this.props.SceneStore.disableOrbitDragControls()}
+        onMouseOver={this.props.SceneStore.disableOrbitDragControls}
       >
         {Shapes[shape].map(i => (
           <ControlPanelInput key={`${i}`} property={`${i}`} />

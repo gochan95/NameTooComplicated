@@ -1,6 +1,6 @@
 var LocalStrategy = require('passport-local').Strategy;
 var crypto = require('crypto');
-var Account = require('../server/models');
+var { User } = require('../server/models');
 
 module.exports = function(passport) {
 
@@ -14,7 +14,7 @@ module.exports = function(passport) {
   });
 
   passport.deserializeUser(function(id, done) {
-    Account.findById(id, function(err, user){
+    User.findById(id, function(err, user){
       done(err, user);
     });
   });
@@ -22,8 +22,10 @@ module.exports = function(passport) {
   // use named strategies
   passport.use('local-signup', new LocalStrategy(
     function(username, password, done) {
+      console.log('trying to do local signup');
       console.log(username, password);
-      Account.findOne({'local.email' : username}, function(err, user) {
+      console.log('checking user schema');
+      User.findOne({'local.email' : username}, function(err, user) {
         if (err) return done(err);
         // console.log(user);
         if (user) {
@@ -31,19 +33,19 @@ module.exports = function(passport) {
         }
         else {
           console.log('new user')
-          var newAccount = new Account();
           var salt = generateSalt();
-          var hash = generateHash(password, salt);
+          var newAccount = new User({ email: username, salt: salt, hash: generateHash(password, salt)});
+          // var salt = generateSalt();
+          // var hash = generateHash(password, salt);
           // newAccount.local.email = username;
           // newAccount.local.salt = generateSalt();
           // newAccount.local.hash = generateHash(password, newAccount.local.salt);
 
-          newAccount.init({'local': {'email': username, 'salt': salt, 'hash': hash}}, function(err) {
-            if (err) done(err);
-            // return done(null, newAccount);
-          }).save(function(err, res) {
-            if (err) done(err);
-            return done(null, newAccount);
+          newAccount.save().then(function(result) {
+            console.log('saved newAccount');
+          }, function(err) {
+            console.log('error saving new Account');
+            console.log(err);
           });
           // newAccount.save(function(err) {
           //   if (err) done(err);
@@ -57,7 +59,7 @@ module.exports = function(passport) {
 
   passport.use('local-signin', new LocalStrategy(
     function(username, password, done) {
-      Account.findOne({'local.email' : username}, function(err, user) {
+      User.findOne({'local.email' : username}, function(err, user) {
         if (err) return done(err);
 
         if (!user) return done(null, false, {'message' : 'Incorrect Username'});
