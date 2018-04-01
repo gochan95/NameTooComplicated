@@ -2,7 +2,7 @@
   "name": "draw-squad",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://ec2-18-219-119-149.us-east-2.compute.amazonaws.com:3001",
+  "proxy": "http://127.0.0.1:3001",
   "main": "./server/server.js",
   "dependencies": {
     "axios": "^0.18.0",
