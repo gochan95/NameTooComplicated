@@ -77,6 +77,10 @@ export default class SceneGlobalControl extends Component {
     this.props.SceneStore && this.props.SceneStore.openNameBox();
   };
 
+  controlAnimate = () => {
+    this.props.SceneStore.doAnimate = !this.props.SceneStore.doAnimate;
+  };
+
   renderSimpleObjectButton = shape => {
     return (
       <SimpleObjectButton
@@ -106,8 +110,8 @@ export default class SceneGlobalControl extends Component {
           {!browseObjects && <SquareButton info onClick={this.infoClick} />}
 
           <SquareButton text="2D/3D" />
-          <SquareButton text="Animate" />
           <SquareButton off text="Save" onClick={this.saveScene} />
+          <SquareButton text="Animate" onClick={this.controlAnimate} />
           <SquareButton add onClick={this.addClick} />
         </div>
         {objectaddGroup && (

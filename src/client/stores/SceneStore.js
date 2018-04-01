@@ -4,7 +4,8 @@ import {
   camera,
   threeRender,
   dragControls,
-  orbitControls
+  orbitControls,
+  loader
 } from '../constants/SceneConstants';
 import * as THREE from 'three';
 var raycaster = new THREE.Raycaster();
@@ -21,14 +22,14 @@ class SceneStore {
   @observable sceneNames = [];
   @observable currentScene = null;
   @observable isObject = false;
-
+  @observable doAnimate = true;
   constructor() {
     // Need to get scenes array based on ownership via username
     // Axios.get();
     autorun(() => console.log('SceneStore'));
     //use animate to animate moving the object and future rotation animation
     //KEVIN EXPLAIN THIS FURTHER PLZ
-    this.animate();
+    this.animate(true);
     // allow camera and object movement for scene children
     //===========TO DO==========================
     // move orbit and drag controls to SceneConstants
@@ -79,7 +80,13 @@ class SceneStore {
   @action
   addObjectWithName = name => {
     this.sceneObjects.push({ name: name, shape: this.addingObjectShape });
-    var material = new THREE.MeshNormalMaterial({ color: 0xffff00 });
+    var material = new THREE.MeshBasicMaterial();
+    var map = loader.load(
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/NGC_2467_and_Surroundings.jpg/1024px-NGC_2467_and_Surroundings.jpg'
+    );
+    map.wrapS = THREE.RepeatWrapping;
+    map.wrapT = THREE.RepeatWrapping;
+    material.map = map;
     var geo, object, mesh;
 
     if (this.addingObjectShape === 'sphere')
@@ -109,6 +116,7 @@ class SceneStore {
   @action
   deleteObject = object => {
     var index = this.sceneObjects.indexOf(object);
+    console.log('wtf?!!!!!!!');
     this.sceneObjects.splice(index, 1);
   };
 
@@ -145,12 +153,14 @@ class SceneStore {
   @action
   renderCanvas = () => {
     // animation to spin object
-    this.scene.traverse(function(object) {
-      if (object.isMesh === true) {
-        object.rotation.x += 0.01;
-        object.rotation.y += 0.01;
-      }
-    });
+    if (this.doAnimate) {
+      this.scene.traverse(function(object) {
+        if (object.isMesh === true) {
+          object.rotation.x += 0.01;
+          object.rotation.y += 0.01;
+        }
+      });
+    }
     raycaster.setFromCamera(mouse, camera);
 
     threeRender.render(this.scene, this.camera);

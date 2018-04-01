@@ -4,8 +4,7 @@ import '../styles/SceneObjectItem.css';
 import '../styles/Shapes.css';
 import * as THREE from 'three';
 import CONTROL_OBJECT from '../constants/createGuiData.js';
-// console.log(CONTROL_OBJECT.gui.domElement.class);
-
+import { scene } from '../constants/SceneConstants';
 export default class SceneObjectItem extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,8 @@ export default class SceneObjectItem extends Component {
     var objectName = object.name;
 
     this.props.SceneStore.getScene.traverse(function(object) {
-      if (object.name === objectName) {
+      var curr_folder = Object.keys(CONTROL_OBJECT.gui.__folders);
+      if (object.name === objectName && !curr_folder.includes(object.name)) {
         var update_func;
         var type = Object.getPrototypeOf(object.geometry);
         if (type === Object.getPrototypeOf(new THREE.SphereGeometry()))

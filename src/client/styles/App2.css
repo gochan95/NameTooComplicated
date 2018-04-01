@@ -8,7 +8,7 @@
 .title-bar-container {
   display: grid;
   grid-template-columns: auto 8fr;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .title-bar-logo {
@@ -66,8 +66,10 @@
   color: #fff;
   font-size: 20px;
   font-weight: 800;
-  font-family: Gotham Medium,"M Hei PRC W45","M Hei HK W42","M Hei HK W40","HelveticaNeue-Regular","Helvetica Neue Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
-  background: rgba(255,255,255,0.2);
+  font-family: Gotham Medium, 'M Hei PRC W45', 'M Hei HK W42', 'M Hei HK W40',
+    'HelveticaNeue-Regular', 'Helvetica Neue Regular', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+  background: rgba(255, 255, 255, 0.2);
   padding: 7px;
   padding-left: 50px;
   padding-right: 50px;
@@ -77,8 +79,10 @@
   color: #fff;
   font-size: 20px;
   font-weight: 800;
-  font-family: Gotham Medium,"M Hei PRC W45","M Hei HK W42","M Hei HK W40","HelveticaNeue-Regular","Helvetica Neue Regular","Helvetica Neue",Helvetica,Arial,sans-serif;
-  background: rgba(255,255,255,0.4);
+  font-family: Gotham Medium, 'M Hei PRC W45', 'M Hei HK W42', 'M Hei HK W40',
+    'HelveticaNeue-Regular', 'Helvetica Neue Regular', 'Helvetica Neue',
+    Helvetica, Arial, sans-serif;
+  background: rgba(255, 255, 255, 0.4);
   padding: 7px;
   padding-left: 50px;
   padding-right: 50px;
@@ -92,17 +96,16 @@
   border-radius: 50%;
   margin-right: 1px;
   margin-bottom: 7px;
-  border: 1px solid rgba(255,255,255,0.4);
-
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 .login {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   padding: 17px;
 }
 
 .new-user-input-scene {
-  background: rgba(255,255,255,0.2);
+  background: rgba(255, 255, 255, 0.2);
   padding: 20px;
   display: flex;
 }
@@ -110,6 +113,9 @@
 .new-user-input {
   font-size: 15px;
   width: 20vw;
+}
+#gui {
+  margin-top: 10vh;
 }
 
 #roy {

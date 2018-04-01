@@ -28,7 +28,12 @@ export default class SceneObjectItemGroup extends Component {
           ControlPanelStore={this.props.ControlPanelStore}
           SceneStore={this.props.SceneStore}
         />
-        <SquareButton close onClick={this.deleteObject.bind(this, object)} />
+        <SquareButton
+          object={object}
+          close
+          SceneStore={this.props.SceneStore}
+          onClick={this.deleteObject.bind(this, object)}
+        />
       </div>
     );
   };
@@ -47,11 +52,15 @@ export default class SceneObjectItemGroup extends Component {
               on
               text="Browse your objects"
               onClick={this.openObjectList.bind(this)}
+              SceneStore={this.props.SceneStore}
+              ControlPanelStore={this.props.ControlPanelStore}
             />
           ) : (
             <SquareButton
               text="Browse your objects"
               onClick={this.openObjectList.bind(this)}
+              SceneStore={this.props.SceneStore}
+              ControlPanelStore={this.props.ControlPanelStore}
             />
           )}
         </div>
@@ -64,6 +73,8 @@ export default class SceneObjectItemGroup extends Component {
                 off
                 rockandroll
                 text="Sorry, you haven't add anything yet."
+                SceneStore={this.props.SceneStore}
+                ControlPanelStore={this.props.ControlPanelStore}
               />
             )}
           </div>

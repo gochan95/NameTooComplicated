@@ -1,14 +1,21 @@
 import dat from 'dat.gui';
 import OBJECTS from './Objects.js';
 import * as THREE from 'three';
-import '../styles/SceneObjectItem.css';
+import '../styles/App2.css';
 var gui = new dat.GUI();
 gui.domElement.id = 'gui';
-// gui.domElement.className = 'main-container';
-console.log(gui);
+
 function updateGroupGeometry(mesh, geometry) {
   mesh.geometry.dispose();
   mesh.geometry = geometry;
+}
+
+function removeFolder(folderName) {
+  var f = gui.__folders[folderName];
+  if (!f) return;
+  f.close();
+  gui.__ul.removeChild(f.domElement.parentNode);
+  delete gui.__folders[folderName];
 }
 
 function create_sphere_gui(object) {
@@ -260,5 +267,6 @@ export default {
   create_tet_gui,
   create_ico_gui,
   create_oct_gui,
-  gui
+  gui,
+  removeFolder
 };

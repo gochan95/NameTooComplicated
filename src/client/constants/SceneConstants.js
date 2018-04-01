@@ -3,6 +3,8 @@ import DragControls from 'three-dragcontrols';
 var OrbitControls = require('three-orbit-controls')(THREE);
 
 var scene = new THREE.Scene();
+var ambientLight = new THREE.AmbientLight(0x000000);
+scene.add(ambientLight);
 var camera = new THREE.PerspectiveCamera(50, 1000 / 400, 0.1, 1000);
 var threeRender = new THREE.WebGLRenderer({ antialias: true });
 var loader = new THREE.TextureLoader();
