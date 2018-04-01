@@ -15,9 +15,34 @@ export default class App2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: "",
-      doestheusehasscene: false,
-    }
+      value: '',
+      userHasCanvas: false
+    };
+  }
+
+  componentWillMount() {
+    axios.get('/checklogin').then(
+      res => {
+        this.props.AuthStore.setUsername(res.data.user);
+        axios.get(`/scenes/${res.data.user}`).then(
+          res => {
+            console.log('got scenes under username');
+            if (res.data.length > 0) this.setState({ userHasCanvas: true });
+            res.data.forEach(canvas => {
+              console.log(canvas);
+            });
+          },
+          err => {
+            console.log('error finding scenes under username');
+            console.log(err);
+          }
+        );
+      },
+      err => {
+        console.log('error logging in via cookie');
+        console.log(err);
+      }
+    );
   }
   exploreClick = () => {
     this.props.AuthStore.toggleForm(true);
@@ -25,37 +50,41 @@ export default class App2 extends Component {
 
   signout = () => {
     this.props.AuthStore.setUsername(null);
-  }
+    axios.get('/signout').then(res => {
+      console.log('successfully signed out');
+    });
+  };
 
   renderLogin = () => {
     return (
       <div
         className="login"
-        onMouseOver={this.props.SceneStore.disableOrbitDragControls}>
-        <Login AuthStore={this.props.AuthStore}/>
+        onMouseOver={this.props.SceneStore.disableOrbitDragControls}
+      >
+        <Login AuthStore={this.props.AuthStore} />
       </div>
     );
   };
 
-  handleNewUserScene = (e) => {
-    this.setState({ value: e.target.value});
-  }
+  handleNewUserScene = e => {
+    this.setState({ value: e.target.value });
+  };
 
-  handleNewUserSceneSubmit = (e) => {
+  handleNewUserSceneSubmit = e => {
     this.props.SceneStore.addScene(this.state.value);
     this.setState({
       value: '',
-      doestheusehasscene: true
+      userHasCanvas: true
     });
-  }
+  };
 
   renderUserLanding = () => {
     var username = this.props.AuthStore.username;
 
     //need to check
-    var doestheusehasscene = this.state.doestheusehasscene;
+    var userHasCanvas = this.state.userHasCanvas;
 
-    if (!doestheusehasscene) {
+    if (!userHasCanvas) {
       return (
         <div className="new-user-input-scene">
           <form onSubmit={this.handleNewUserSceneSubmit}>
@@ -63,19 +92,21 @@ export default class App2 extends Component {
               className="new-user-input"
               onChange={this.handleNewUserScene}
               value={this.state.value}
-              placeholder="Enter a name for your first scene"/>
+              placeholder="Enter a name for your first scene"
+            />
           </form>
         </div>
-      )} else {
-        return (
-          <Landing
-            SceneStore={this.props.SceneStore}
-            AuthStore={this.props.AuthStore}
-            ControlPanelStore={ControlPanelStore}
-          />
-        )
-      }
-  }
+      );
+    } else {
+      return (
+        <Landing
+          SceneStore={this.props.SceneStore}
+          AuthStore={this.props.AuthStore}
+          ControlPanelStore={ControlPanelStore}
+        />
+      );
+    }
+  };
 
   render() {
     const { openLogin, username } = this.props.AuthStore;
@@ -90,15 +121,15 @@ export default class App2 extends Component {
           )}
         </div>
         <div className="landing-container">
-          {!username && (!openLogin && (
-            <p className="explore-button" onClick={this.exploreClick}>
-              Explore
-            </p>
-          ))}
+          {!username &&
+            (!openLogin && (
+              <p className="explore-button" onClick={this.exploreClick}>
+                Explore
+              </p>
+            ))}
           {openLogin && this.renderLogin()}
           {username && this.renderUserLanding()}
-          {!username &&
-            (
+          {!username && (
             <div className="footer-container">
               <p className="footer-text border-right">The drawsquad © 2018</p>
               <p className="footer-text border-right">Credits</p>

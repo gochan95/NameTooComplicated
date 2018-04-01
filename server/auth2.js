@@ -1,8 +1,15 @@
 module.exports = function(app, passport) {
 
+  var isLoggedIn = function(req,res,next){
+   if(req.user) return next();
+   else return res.status(401).json({error: 'User not authenticated'});
+  }
 
-  app.get('/', function(req, res) {
-    res.json('hah, u got me!');
+  app.get('/checklogin', isLoggedIn, function(req, res, next) {
+    res.status(200).json({
+        user: req.user.email
+    });
+    // next();
   });
 
 
@@ -24,12 +31,4 @@ module.exports = function(app, passport) {
     res.redirect('/');
   });
 
-  function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-
-    res.redirect('/');
-
-  }
 }

@@ -5,8 +5,6 @@ import '../styles/Login.css';
 import { observer } from 'mobx-react';
 import AuthStore from '../stores/AuthStore';
 
-axios.defaults.baseURL = 'http://localhost:3001';
-
 @observer
 export default class Login extends Component {
   constructor(props) {
@@ -27,7 +25,7 @@ export default class Login extends Component {
 
   closeLogin = () => {
     this.props.AuthStore.toggleForm(false);
-  }
+  };
 
   handleInputChange(e) {
     var target = e.target;
@@ -35,10 +33,10 @@ export default class Login extends Component {
     console.log(name);
     this.setState({
       [name]: target.value
-    })
+    });
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = e => {
     e.preventDefault();
     var name = e.target.name;
     var submit = true;
@@ -46,26 +44,30 @@ export default class Login extends Component {
     var params = new URLSearchParams();
     params.append('username', this.state[`${name}Email`]);
     params.append('password', this.state[`${name}Pw`]);
-    if (name === 'signup' &&
-     this.state[`${name}Pw`] !== this.state[`${name}PwConfirm`]) {
-       submit = false;
+    if (
+      name === 'signup' &&
+      this.state[`${name}Pw`] !== this.state[`${name}PwConfirm`]
+    ) {
+      submit = false;
     }
 
     var AuthStore = this.props.AuthStore;
 
-    (submit && axios
-      .post(`/auth/${name}`, params)
-      .then(function(res) {
-        // success POST
-        // close form through global store
-        console.log('post success');
-        AuthStore.toggleForm(false);
-        AuthStore.setUsername(res.data);
-        // this.props.AuthStore.setUsername(res.name);
-      }, function(err) {
-        console.log('error!!!!!!!');
-        console.log(err);
-      }));
+    submit &&
+      axios.post(`/auth/${name}`, params).then(
+        function(res) {
+          // success POST
+          // close form through global store
+          console.log('post success');
+          AuthStore.toggleForm(false);
+          AuthStore.setUsername(res.data);
+          // this.props.AuthStore.setUsername(res.name);
+        },
+        function(err) {
+          console.log('error!!!!!!!');
+          console.log(err);
+        }
+      );
 
     this.setState({
       [`${name}Email`]: '',
@@ -74,8 +76,7 @@ export default class Login extends Component {
     });
 
     document.getElementById('form').reset();
-
-  }
+  };
 
   toggleForm() {
     this.setState({
@@ -83,13 +84,13 @@ export default class Login extends Component {
     });
   }
 
-   renderSignup(){
+  renderSignup() {
     return (
       <div className="login-container">
         <div className="login-title-bar">
-          <SquareButton close onClick={this.closeLogin}/>
+          <SquareButton close onClick={this.closeLogin} />
         </div>
-        <div id="logo"/>
+        <div id="logo" />
         <form id="form" onSubmit={this.handleSubmit} name="signup">
           <input
             id="email"
@@ -140,10 +141,10 @@ export default class Login extends Component {
     return (
       <div className="login-container">
         <div className="login-title-bar">
-          <SquareButton close onClick={this.closeLogin}/>
+          <SquareButton close onClick={this.closeLogin} />
         </div>
-        <div id="logo"/>
-        <form id="form" onSubmit={this.handleSubmit} name='signin'>
+        <div id="logo" />
+        <form id="form" onSubmit={this.handleSubmit} name="signin">
           <input
             id="email"
             className="margin"
@@ -164,7 +165,7 @@ export default class Login extends Component {
             onChange={this.handleInputChange}
           />
           <button type="submit" value="submit" name="action">
-              Sign-in
+            Sign-in
           </button>
         </form>
         <div className="seperator large-margin" />
@@ -181,15 +182,8 @@ export default class Login extends Component {
   render() {
     return (
       <div>
-        {
-          this.state.openLogin && (
-            this.state.switchForm
-              ? this.renderSignin()
-              : this.renderSignup()
-
-          )
-        }
-
+        {this.state.openLogin &&
+          (this.state.switchForm ? this.renderSignin() : this.renderSignup())}
       </div>
     );
   }

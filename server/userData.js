@@ -13,18 +13,19 @@ module.exports = function (app) {
 	app.post('/scenes/', function(req, res) {
     console.log('saving new canvas');
 		console.log(req.body);
-		var newCanvas = new Canvas({
+		var newCanvas = {
 			id: req.body.id,
+      lastSaved: req.body.timestamp,
+      name: req.body.name,
+      owner: req.body.owner,
 			camera: req.body.camera,
-			scene: req.body.scene,
-      owner: req.body.owner
-		});
+			scene: req.body.scene
+		};
     console.log(newCanvas);
-		newCanvas.save().then(function(res) {
-			console.log('successfully saved canvas');
-		}, function(err) {
-			console.log(err);
-		})
+		Canvas.findOneAndUpdate({ owner: req.body.owner, name: req.body.name }, newCanvas, { upsert: true }, function(err, doc) {
+      if(err) console.log(err);
+      console.log('successfully saved scene');
+    });
 	})
 
   // app.post('/scenes/:id/', function(req, res) {

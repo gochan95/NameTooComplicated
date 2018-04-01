@@ -11,9 +11,11 @@ var User = new Schema({
 
 var CanvasSchema = new Schema({
   id: String,
+  lastSaved: Date,
+  name: String,
+  owner: String,
   camera: String,
-  scene: String,
-  owner: String
+  scene: String
 });
 
 // Account.plugin(passportLocalMongoose);

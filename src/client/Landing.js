@@ -61,28 +61,28 @@ class Landing extends Component {
     this.props.SceneStore.renderCanvas();
   }
 
-  saveScene = () => {
-    console.log('saving scene');
-    var scene = this.props.SceneStore.getScene;
-    var camera = this.props.SceneStore.getCamera;
-    var sceneid = scene.uuid;
-    var cameraid = camera.uuid;
-    var uuid = sceneid + '-' + cameraid;
-    var params = new URLSearchParams();
-    params.append('id', uuid);
-    params.append('camera', JSON.stringify(camera));
-    params.append('scene', JSON.stringify(scene));
-    params.append('owner', 'gordon');
-    Axios.post(`/scenes/`, params)
-      .then(function(response) {
-        console.log('added scenes');
-        console.log(response);
-      })
-      .catch(function(err) {
-        console.log('caught an error for saving canvas');
-        console.log(err);
-      });
-  };
+  // saveScene = () => {
+  //   console.log('saving scene');
+  //   var scene = this.props.SceneStore.getScene;
+  //   var camera = this.props.SceneStore.getCamera;
+  //   var sceneid = scene.uuid;
+  //   var cameraid = camera.uuid;
+  //   var uuid = sceneid + '-' + cameraid;
+  //   var params = new URLSearchParams();
+  //   params.append('id', uuid);
+  //   params.append('camera', JSON.stringify(camera));
+  //   params.append('scene', JSON.stringify(scene));
+  //   params.append('owner', 'gordon');
+  //   Axios.post(`/scenes/`, params)
+  //     .then(function(response) {
+  //       console.log('added scenes');
+  //       console.log(response);
+  //     })
+  //     .catch(function(err) {
+  //       console.log('caught an error for saving canvas');
+  //       console.log(err);
+  //     });
+  // };
 
   getAllScenes = () => {
     var ownername = 'gordon';
@@ -114,6 +114,7 @@ class Landing extends Component {
       <div className="landing-container">
         {this.renderChildren()}
         <SceneGlobalControl
+          AuthStore={this.props.AuthStore}
           SceneStore={this.props.SceneStore}
           ControlPanelStore={this.props.ControlPanelStore}
         />

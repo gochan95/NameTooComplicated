@@ -18,7 +18,7 @@ class SceneStore {
   @observable sceneObjects = [];
   @observable addingObjectShape = null;
   @observable enterNameBox = false;
-  @observable scenes = [];
+  @observable sceneNames = [];
   @observable currentScene = null;
   @observable isObject = false;
 
@@ -133,7 +133,7 @@ class SceneStore {
   @action
   addScene = scene => {
     this.currentScene = scene;
-    this.scenes.push(scene);
+    this.sceneNames.push(scene);
   };
 
   @action

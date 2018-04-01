@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import SquareButton from './SquareButton';
 import SimpleObjectButton from './SimpleObjectButton';
 import SceneObjectItemGroup from './SceneObjectItemGroup';
@@ -27,6 +28,38 @@ export default class SceneGlobalControl extends Component {
   infoClick = () => {
     this.props.ControlPanelStore &&
       this.props.ControlPanelStore.toggleBrowseObjects();
+  };
+
+  saveScene = () => {
+    console.log('saving scene');
+    var scene = this.props.SceneStore.getScene;
+    var camera = this.props.SceneStore.getCamera;
+    var sceneid = scene.uuid;
+    var cameraid = camera.uuid;
+    var uuid = sceneid + '-' + cameraid;
+    var params = new URLSearchParams();
+    console.log(scene);
+    console.log(camera);
+    console.log(uuid);
+    console.log(this.props.SceneStore.currentScene);
+    console.log(this.props.AuthStore.usersName);
+    var timestamp = new Date();
+    console.log(timestamp);
+    params.append('id', uuid);
+    params.append('timestamp', timestamp);
+    params.append('name', this.props.SceneStore.currentScene);
+    params.append('camera', JSON.stringify(camera));
+    params.append('scene', JSON.stringify(scene));
+    params.append('owner', this.props.AuthStore.usersName);
+    Axios.post(`/scenes/`, params)
+      .then(function(response) {
+        console.log('added scene');
+        console.log(response);
+      })
+      .catch(function(err) {
+        console.log('caught an error for saving canvas');
+        console.log(err);
+      });
   };
 
   addToScene = object => {
@@ -74,7 +107,7 @@ export default class SceneGlobalControl extends Component {
 
           <SquareButton text="2D/3D" />
           <SquareButton text="Animate" />
-          <SquareButton off text="Save" />
+          <SquareButton off text="Save" onClick={this.saveScene} />
           <SquareButton add onClick={this.addClick} />
         </div>
         {objectaddGroup && (
