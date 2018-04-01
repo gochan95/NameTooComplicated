@@ -14,7 +14,7 @@ var CanvasSchema = new Schema({
   lastSaved: Date,
   name: String,
   owner: String,
-  camera: String,
+  // camera: String,
   scene: String
 });
 

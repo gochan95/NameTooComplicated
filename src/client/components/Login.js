@@ -55,15 +55,16 @@ export default class Login extends Component {
 
     submit &&
       axios.post(`/auth/${name}`, params).then(
-        function(res) {
+        res => {
           // success POST
           // close form through global store
           console.log('post success');
           AuthStore.toggleForm(false);
           AuthStore.setUsername(res.data);
+          this.props.checkForScenes(res.data);
           // this.props.AuthStore.setUsername(res.name);
         },
-        function(err) {
+        err => {
           console.log('error!!!!!!!');
           console.log(err);
         }

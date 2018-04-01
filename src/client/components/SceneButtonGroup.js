@@ -19,7 +19,7 @@ export default class SceneButtonGroup extends Component {
   };
 
   renderSceneButton = () => {
-    var scenes = this.props.SceneStore.scenes;
+    var scenes = this.props.SceneStore.sceneNames;
     var croppedScenes = scenes.filter(
       i => i != this.props.SceneStore.currentScene
     );

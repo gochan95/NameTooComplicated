@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-
+import SceneStore from '../stores/SceneStore';
 import '../styles/SquareButton.css';
-import { scene } from '../constants/SceneConstants';
 import CONTROL_OBJECT from '../constants/createGuiData.js';
 export default class SquareButton extends Component {
   constructor(props) {
@@ -14,15 +13,11 @@ export default class SquareButton extends Component {
   onClick = () => {
     // active icon button
     this.props.off || this.setState({ on: !this.state.on });
-
+    var scene = SceneStore.scene;
     if (this.props['close']) {
       var name = this.props.object.name;
       var object;
-      for (
-        var i = this.props.SceneStore.scene.children.length - 1;
-        i >= 0;
-        i--
-      ) {
+      for (var i = scene.children.length - 1; i >= 0; i--) {
         object = scene.children[i];
         if (object.name === name) {
           CONTROL_OBJECT.removeFolder(name);

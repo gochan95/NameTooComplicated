@@ -1,21 +1,22 @@
 import { observable, action, autorun, computed } from 'mobx';
 import {
-  scene,
   camera,
   threeRender,
-  dragControls,
-  orbitControls,
-  loader
+  // dragControls,
+  orbitControls
+  // loader
 } from '../constants/SceneConstants';
 import * as THREE from 'three';
-var raycaster = new THREE.Raycaster();
-var mouse = new THREE.Vector2();
+import DragControls from 'three-dragcontrols';
+// var OrbitControls = require('three-orbit-controls')(THREE);
+// var raycaster = new THREE.Raycaster();
+// var mouse = new THREE.Vector2();
 
 class SceneStore {
-  @observable scene = scene;
+  @observable scene = null;
   @observable camera = camera;
   @observable orbitControls = orbitControls;
-  @observable dragControls = dragControls;
+  @observable dragControls = null;
   @observable sceneObjects = [];
   @observable addingObjectShape = null;
   @observable enterNameBox = false;
@@ -29,27 +30,43 @@ class SceneStore {
     autorun(() => console.log('SceneStore'));
     //use animate to animate moving the object and future rotation animation
     //KEVIN EXPLAIN THIS FURTHER PLZ
-    this.animate(true);
     // allow camera and object movement for scene children
     //===========TO DO==========================
     // move orbit and drag controls to SceneConstants
     // and write mobx getters to use scene and camera inside SceneConstsnts
-    //
-    dragControls.addEventListener('dragstart', function(event) {
-      orbitControls.enabled = false;
-    });
-
-    dragControls.addEventListener('dragend', function(event) {
-      orbitControls.enabled = true;
-    });
-
     window.addEventListener('resize', function() {
       threeRender.setSize(window.innerWidth, window.innerHeight, true);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
     });
-    document.addEventListener('mousedown', this.onObjectClick, false);
+
+    // document.addEventListener('mousedown', this.onObjectClick, false);
   }
+
+  @action
+  createNewScene = () => {
+    var newScene = new THREE.Scene();
+    this.loadCanvas(newScene);
+  };
+
+  @action
+  loadCanvas = newScene => {
+    this.dragControls = new DragControls(
+      newScene.children,
+      camera,
+      threeRender.domElement
+    );
+    this.scene = newScene;
+    this.dragControls.addEventListener('dragstart', function(event) {
+      orbitControls.enabled = false;
+    });
+    this.dragControls.addEventListener('dragend', function(event) {
+      orbitControls.enabled = true;
+    });
+    var ambientLight = new THREE.AmbientLight(0x000000);
+    this.scene.add(ambientLight);
+    this.animate();
+  };
 
   @computed
   get getScene() {
@@ -58,7 +75,7 @@ class SceneStore {
 
   @computed
   get getCamera() {
-    return this.camera;
+    return camera;
   }
 
   @computed
@@ -81,12 +98,12 @@ class SceneStore {
   addObjectWithName = name => {
     this.sceneObjects.push({ name: name, shape: this.addingObjectShape });
     var material = new THREE.MeshBasicMaterial();
-    var map = loader.load(
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/NGC_2467_and_Surroundings.jpg/1024px-NGC_2467_and_Surroundings.jpg'
-    );
-    map.wrapS = THREE.RepeatWrapping;
-    map.wrapT = THREE.RepeatWrapping;
-    material.map = map;
+    // var map = loader.load(
+    //   'https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/NGC_2467_and_Surroundings.jpg/1024px-NGC_2467_and_Surroundings.jpg'
+    // );
+    // map.wrapS = THREE.RepeatWrapping;
+    // map.wrapT = THREE.RepeatWrapping;
+    // material.map = map;
     var geo, object, mesh;
 
     if (this.addingObjectShape === 'sphere')
@@ -142,6 +159,7 @@ class SceneStore {
   addScene = scene => {
     this.currentScene = scene;
     this.sceneNames.push(scene);
+    this.createNewScene();
   };
 
   @action
@@ -161,20 +179,19 @@ class SceneStore {
         }
       });
     }
-    raycaster.setFromCamera(mouse, camera);
-
-    threeRender.render(this.scene, this.camera);
+    threeRender.render(this.scene, camera);
   };
 
   onWindowResize = () => {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
-    this.camera.updateProjectionMatrix();
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
 
     threeRender.setSize(window.innerWidth, window.innerHeight);
   };
 
   // function to animate movement and add future rotational animation
   animate = () => {
+    this.onWindowResize();
     requestAnimationFrame(this.animate);
     // this.onWindowResize();
     this.renderCanvas();
@@ -183,29 +200,29 @@ class SceneStore {
   @action
   disableOrbitDragControls = () => {
     orbitControls.enabled = false;
-    dragControls.enabled = false;
+    this.dragControls.enabled = false;
   };
 
   @action
   enableOrbitDragControls = () => {
     orbitControls.enabled = true;
-    dragControls.enabled = true;
+    this.dragControls.enabled = true;
   };
 
   // clicked to return object
-  @action
-  onObjectClick = event => {
-    mouse.x = event.clientX / window.innerWidth * 2 - 1;
-    mouse.y = event.clientY / window.innerHeight * 2 - 1;
-
-    var intersects = raycaster.intersectObjects(this.scene.children);
-
-    if (intersects.length > 0) {
-      // console.log('Hit @' + toString(intersects[0].point + '\n'));
-      // console.log(intersects[0]);
-      return intersects[0];
-    }
-  };
+  // @action
+  // onObjectClick = event => {
+  //   mouse.x = event.clientX / window.innerWidth * 2 - 1;
+  //   mouse.y = event.clientY / window.innerHeight * 2 - 1;
+  //
+  //   var intersects = raycaster.intersectObjects(this.scene.children);
+  //
+  //   if (intersects.length > 0) {
+  //     // console.log('Hit @' + toString(intersects[0].point + '\n'));
+  //     // console.log(intersects[0]);
+  //     return intersects[0];
+  //   }
+  // };
 }
 
 const sceneStore = new SceneStore();
