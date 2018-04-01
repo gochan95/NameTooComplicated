@@ -8,20 +8,14 @@ var cookie = require('cookie-parser');
 var morgan = require('morgan');
 var flash = require('connect-flash');
 const fs = require('fs');
-var configDB = require('./config/database.js');
+var configDB = require('../config/database.js');
 
 var app = express();
-
-// get reference to the client build directory
-const staticFiles = express.static(path.join(__dirname, '../../client/build'));
-
-// pass the static files (react app) to the express app.
-app.use(staticFiles);
 
 // *** mongoose *** //
 mongoose.connect(configDB.url);
 
-require('./config/passport')(passport);
+require('../config/passport')(passport);
 
 // *** config middleware *** //
 app.use(morgan('dev'));
@@ -42,8 +36,7 @@ app.use(flash());
 app.use(function (req, res, next) {
   console.log('starting server ..')
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://drawsquad.herokuapp.com');
+  res.setHeader('Access-Control-Allow-Origin', 'https://drawsquad.herokuapp.com');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -77,24 +70,24 @@ require('./userData')(app);
 app.use(function(req, res, next) {
   console.log("HTTP Response", res.statusCode);
 });
-// const https = require('https');
-const http = require('http');
+const https = require('https');
+// const http = require('http');
 // const PORT = 80;
-const PORT = 3001;
+const PORT = 8043;
 
-// var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
-// var certificate = fs.readFileSync( 'drawsquad.herokuapp.crt' );
-// var config = {
-//         key: privateKey,
-//         cert: certificate
-// };
-// https.createServer(config, app).listen(PORT, function (err) {
-//   if (err) console.log(err);
-//   else console.log("The magic happens on port: ", PORT);
-// });
-//
-http.createServer(app).listen(PORT, function(err) {
+var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
+var certificate = fs.readFileSync( 'drawsquad.herokuapp.crt' );
+var config = {
+        key: privateKey,
+        cert: certificate
+};
+https.createServer(config, app).listen(PORT, function (err) {
   if (err) console.log(err);
   else console.log("The magic happens on port: ", PORT);
-  }
-);
+});
+//
+// http.createServer(app).listen(PORT, function(err) {
+//   if (err) console.log(err);
+//   else console.log("The magic happens on port: ", PORT);
+//   }
+// );
