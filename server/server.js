@@ -12,12 +12,6 @@ var configDB = require('./config/database.js');
 
 var app = express();
 
-// get reference to the client build directory
-const staticFiles = express.static(path.join(__dirname, '../../client/build'));
-
-// pass the static files (react app) to the express app.
-app.use(staticFiles);
-
 // *** mongoose *** //
 mongoose.connect(configDB.url);
 
