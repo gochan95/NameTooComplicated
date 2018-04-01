@@ -7,7 +7,7 @@ var session = require('express-session');
 var cookie = require('cookie-parser');
 var morgan = require('morgan');
 var flash = require('connect-flash');
-
+const fs = require('fs');
 var configDB = require('../config/database.js');
 
 var app = express();
@@ -70,12 +70,23 @@ require('./userData')(app);
 app.use(function(req, res, next) {
   console.log("HTTP Response", res.statusCode);
 });
-
+const https = require('https');
 const http = require('http');
 const PORT = 3001;
 
-http.createServer(app).listen(PORT, function(err) {
+var privateKey = fs.readFileSync( 'server.key' );
+var certificate = fs.readFileSync( 'server.crt' );
+var config = {
+        key: privateKey,
+        cert: certificate
+};
+https.createServer(config, app).listen(PORT, function (err) {
   if (err) console.log(err);
   else console.log("The magic happens on port: ", PORT);
-  }
-);
+});
+
+// http.createServer(app).listen(PORT, function(err) {
+//   if (err) console.log(err);
+//   else console.log("The magic happens on port: ", PORT);
+//   }
+// );

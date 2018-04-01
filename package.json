@@ -2,7 +2,7 @@
   "name": "draw-squad",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "https://localhost:3001",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
@@ -13,6 +13,7 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "http": "0.0.0",
+    "https": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
     "material-ui": "^0.20.0",
@@ -49,7 +50,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "start": "react-app-rewired start",
+    "start": "HTTPS=true react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom"
   },
