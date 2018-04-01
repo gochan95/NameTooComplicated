@@ -2,7 +2,7 @@
   "name": "draw-squad",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://drawsquad.herokuapp.com",
+  "proxy": "https://drawsquad.herokuapp.com",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
@@ -50,7 +50,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "start": "react-app-rewired start && node ./server/server.js",
+    "start": "HTTPS=true react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom"
   },
