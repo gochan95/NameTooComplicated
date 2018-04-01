@@ -36,7 +36,7 @@ app.use(flash());
 app.use(function (req, res, next) {
   console.log('starting server ..')
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://drawsquad.herokuapp.com');
+  res.setHeader('Access-Control-Allow-Origin', 'https://drawsquad.herokuapp.com');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -73,7 +73,7 @@ app.use(function(req, res, next) {
 const https = require('https');
 // const http = require('http');
 // const PORT = 80;
-const PORT = 443;
+const PORT = 8043;
 
 var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
 var certificate = fs.readFileSync( 'drawsquad.herokuapp.crt' );

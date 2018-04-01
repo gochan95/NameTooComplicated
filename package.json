@@ -2,7 +2,7 @@
   "name": "draw-squad",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://drawsquad-backend.herokuapp.com",
+  "proxy": "https://drawsquad.herokuapp.com",
   "main": "./server/server.js",
   "dependencies": {
     "axios": "^0.18.0",
