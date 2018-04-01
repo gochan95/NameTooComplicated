@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "https://drawsquad.herokuapp.com",
+  "main": "./server/server.js",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
