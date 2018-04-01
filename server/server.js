@@ -71,11 +71,11 @@ app.use(function(req, res, next) {
   console.log("HTTP Response", res.statusCode);
 });
 const https = require('https');
-const http = require('http');
-const PORT = 3001;
+// const http = require('http');
+const PORT = 443;
 
-var privateKey = fs.readFileSync( 'server.key' );
-var certificate = fs.readFileSync( 'server.crt' );
+var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
+var certificate = fs.readFileSync( 'drawsquad.herokuapp.csr' );
 var config = {
         key: privateKey,
         cert: certificate

@@ -2,7 +2,7 @@
   "name": "draw-squad",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://localhost:3001",
+  "proxy": "https://drawsquad.herokuapp.com",
   "dependencies": {
     "axios": "^0.18.0",
     "body-parser": "^1.18.2",
