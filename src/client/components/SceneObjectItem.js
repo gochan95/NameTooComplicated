@@ -5,6 +5,8 @@ import '../styles/Shapes.css';
 import * as THREE from 'three';
 import CONTROL_OBJECT from '../constants/createGuiData.js';
 import { scene } from '../constants/SceneConstants';
+import Shapes from '../constants/Shapes';
+
 export default class SceneObjectItem extends Component {
   constructor(props) {
     super(props);
@@ -14,8 +16,16 @@ export default class SceneObjectItem extends Component {
   }
   renderShapeIcon = () => {
     const { object } = this.props;
+    var shape;
+    console.log(object);
+    if (object.geometry) {
+      shape = Shapes.mapShapes[object.geometry.type];
+    } else {
+      shape = object.shape;
+    }
+    
     return (
-      <div className="scene-object-item-icon" id={`shape-${object.shape}`} />
+      <div className="scene-object-item-icon" id={`shape-${shape}`} />
     );
   };
 

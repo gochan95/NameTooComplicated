@@ -57,14 +57,15 @@ class SceneStore {
       threeRender.domElement
     );
     this.scene = newScene;
+    this.sceneObjects = this.scene.children;
     this.dragControls.addEventListener('dragstart', function(event) {
       orbitControls.enabled = false;
     });
     this.dragControls.addEventListener('dragend', function(event) {
       orbitControls.enabled = true;
     });
-    var ambientLight = new THREE.AmbientLight(0x000000);
-    this.scene.add(ambientLight);
+    // var ambientLight = new THREE.AmbientLight(0x000000);
+    // this.scene.add(ambientLight);
     this.animate();
   };
 

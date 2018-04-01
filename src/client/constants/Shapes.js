@@ -46,7 +46,16 @@ const Shapes = {
     'tetrahedron',
     'octahedron',
     'icosahedron'
-  ]
+  ],
+  mapShapes: {
+    "SphereGeometry": "sphere",
+    "BoxGeometry": "cube",
+    "CylinderGeometry": "cylinder",
+    "ConeGeometry": "cone",
+    "OctahedronGeometry": "octahedron",
+    "IcosahedronGeometry": "icosahedron",
+    "TetrahedronGeometry": "tetrahedron"
+  }
 };
 
 export default Shapes;
