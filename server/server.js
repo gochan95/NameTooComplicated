@@ -70,23 +70,24 @@ require('./userData')(app);
 app.use(function(req, res, next) {
   console.log("HTTP Response", res.statusCode);
 });
-const https = require('https');
-// const http = require('http');
-const PORT = 443;
+// const https = require('https');
+const http = require('http');
+const PORT = 80;
+// const PORT = 443;
 
-var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
-var certificate = fs.readFileSync( 'drawsquad.herokuapp.csr' );
-var config = {
-        key: privateKey,
-        cert: certificate
-};
-https.createServer(config, app).listen(PORT, function (err) {
-  if (err) console.log(err);
-  else console.log("The magic happens on port: ", PORT);
-});
-
-// http.createServer(app).listen(PORT, function(err) {
+// var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
+// var certificate = fs.readFileSync( 'drawsquad.herokuapp.csr' );
+// var config = {
+//         key: privateKey,
+//         cert: certificate
+// };
+// https.createServer(config, app).listen(PORT, function (err) {
 //   if (err) console.log(err);
 //   else console.log("The magic happens on port: ", PORT);
-//   }
-// );
+// });
+
+http.createServer(app).listen(PORT, function(err) {
+  if (err) console.log(err);
+  else console.log("The magic happens on port: ", PORT);
+  }
+);
