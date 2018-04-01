@@ -50,7 +50,7 @@
   },
   "scripts": {
     "precommit": "lint-staged",
-    "start": "nodemon server.js && react-app-rewired start",
+    "start": "react-app-rewired start && node ./server/server.js",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom"
   },
