@@ -88,7 +88,7 @@ class SceneStore {
 
     if (this.addingObjectShape === 'sphere')
       geo = new THREE.SphereGeometry(5, 32, 32);
-    if (this.addingObjectShape === 'cube') geo = new THREE.BoxGeometry(1, 1, 1);
+    if (this.addingObjectShape === 'cube') geo = new THREE.BoxGeometry(5, 5, 5);
     if (this.addingObjectShape === 'cylinder')
       geo = new THREE.CylinderGeometry(5, 5, 20, 32);
     if (this.addingObjectShape === 'cone')
@@ -105,10 +105,10 @@ class SceneStore {
     // console.log(object);
     if (object) {
       object.name = name;
-      object.geometry.morphTargets = true;
-      object.geometry.verticesNeedUpdate = true;
-      object.geometry.elementsNeedUpdate = true;
-      object.geometry.groupsNeedUpdate = true;
+      // object.geometry.morphTargets = true;
+      // object.geometry.verticesNeedUpdate = true;
+      // object.geometry.elementsNeedUpdate = true;
+      // object.geometry.groupsNeedUpdate = true;
     }
     this.scene.add(object);
 
