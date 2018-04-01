@@ -32,8 +32,9 @@
   padding: 20px;
 }
 
-.landing-container {
+.app-container {
   display: flex;
+  height: 92vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;

@@ -23,10 +23,7 @@ export default class SceneObjectItem extends Component {
     } else {
       shape = object.shape;
     }
-    
-    return (
-      <div className="scene-object-item-icon" id={`shape-${shape}`} />
-    );
+    return <div className="scene-object-item-icon" id={`shape-${shape}`} />;
   };
 
   onClick = () => {

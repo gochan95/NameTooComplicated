@@ -149,7 +149,7 @@ export default class App2 extends Component {
             </div>
           )}
         </div>
-        <div className="landing-container">
+        <div className="app-container">
           {!username &&
             (!openLogin && (
               <p className="explore-button" onClick={this.exploreClick}>
