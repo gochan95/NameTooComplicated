@@ -41,7 +41,7 @@ export default class SceneInputBox extends Component {
     } else {
       //check scenes same name
       if (this.props.SceneStore) {
-        checkname = this.props.SceneStore.scenes.find(
+        checkname = this.props.SceneStore.sceneNames.find(
           object => object === this.state.value
         );
       }

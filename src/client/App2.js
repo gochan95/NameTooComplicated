@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Login from './components/Login';
-import Landing from './Landing';
-
-import ControlPanelStore from './stores/ControlPanelStore';
-
 import { observer } from 'mobx-react';
 import axios from 'axios';
+import Login from './components/Login';
+import Landing from './Landing';
+import ControlPanelStore from './stores/ControlPanelStore';
+import { objectLoader } from './constants/SceneConstants';
 
 import './styles/App2.css';
 import './styles/Animation.css';
@@ -24,19 +23,7 @@ export default class App2 extends Component {
     axios.get('/checklogin').then(
       res => {
         this.props.AuthStore.setUsername(res.data.user);
-        axios.get(`/scenes/${res.data.user}`).then(
-          res => {
-            console.log('got scenes under username');
-            if (res.data.length > 0) this.setState({ userHasCanvas: true });
-            res.data.forEach(canvas => {
-              console.log(canvas);
-            });
-          },
-          err => {
-            console.log('error finding scenes under username');
-            console.log(err);
-          }
-        );
+        this.pullUsersScenes(res.data.user);
       },
       err => {
         console.log('error logging in via cookie');
@@ -44,6 +31,36 @@ export default class App2 extends Component {
       }
     );
   }
+
+  pullUsersScenes = user => {
+    axios.get(`/scenes/names/${user}`).then(
+      res => {
+        if (res.data.length > 0) {
+          this.setState({ userHasCanvas: true });
+          res.data.forEach(canvas => {
+            this.props.SceneStore.addScene(canvas.name);
+          });
+          axios
+            .get(`/scenes/${user}/${this.props.SceneStore.currentScene}`)
+            .then(res => {
+              console.log('got the right scene');
+              console.log(JSON.parse(res.data.scene));
+              objectLoader.parse(JSON.parse(res.data.scene), result => {
+                console.log('done parsing scene');
+                console.log(result);
+                this.props.SceneStore.loadCanvas(result);
+              });
+              // this.props.SceneStore.loadCanvas(JSON.parse(res.data.scene).object);
+            });
+        }
+        // this.loadCanvas()
+      },
+      err => {
+        console.log('error finding scenes under username');
+        console.log(err);
+      }
+    );
+  };
   exploreClick = () => {
     this.props.AuthStore.toggleForm(true);
   };
@@ -59,9 +76,14 @@ export default class App2 extends Component {
     return (
       <div
         className="login"
-        onMouseOver={this.props.SceneStore.disableOrbitDragControls}
+        onMouseOver={() => {
+          this.props.SceneStore.orbitControls.enabled = false;
+        }}
       >
-        <Login AuthStore={this.props.AuthStore} />
+        <Login
+          AuthStore={this.props.AuthStore}
+          checkForScenes={this.pullUsersScenes.bind(this)}
+        />
       </div>
     );
   };
@@ -84,9 +106,16 @@ export default class App2 extends Component {
     //need to check
     var userHasCanvas = this.state.userHasCanvas;
 
+    var sceneToLoad = this.props.SceneStore.currentScene;
+
     if (!userHasCanvas) {
       return (
-        <div className="new-user-input-scene">
+        <div
+          className="new-user-input-scene"
+          onMouseOver={() => {
+            this.props.SceneStore.orbitControls.enabled = false;
+          }}
+        >
           <form onSubmit={this.handleNewUserSceneSubmit}>
             <input
               className="new-user-input"
