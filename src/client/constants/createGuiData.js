@@ -1,7 +1,11 @@
 import dat from 'dat.gui';
 import OBJECTS from './Objects.js';
 import * as THREE from 'three';
+import '../styles/SceneObjectItem.css';
 var gui = new dat.GUI();
+gui.domElement.id = 'gui';
+// gui.domElement.className = 'main-container';
+console.log(gui);
 function updateGroupGeometry(mesh, geometry) {
   mesh.geometry.dispose();
   mesh.geometry = geometry;
@@ -255,5 +259,6 @@ export default {
   create_cylinder_gui,
   create_tet_gui,
   create_ico_gui,
-  create_oct_gui
+  create_oct_gui,
+  gui
 };

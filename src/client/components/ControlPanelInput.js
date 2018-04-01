@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import '../styles/ControlPanelInput.css';
-import dat from 'dat.gui';
 import * as THREE from 'three';
 @observer
 export default class ControlPanelInput extends Component {

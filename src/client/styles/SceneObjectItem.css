@@ -2,7 +2,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: rgba(255,255,255,0.2);
+  background-color: rgba(255, 255, 255, 0.2);
   border: 0.5px solid;
   border-left: 2px solid #6bf;
 }
@@ -14,7 +14,7 @@
 }
 
 .scene-object-item-container:hover {
-  background-color: rgba(255,255,255,0.6);
+  background-color: rgba(255, 255, 255, 0.6);
 }
 
 .scene-object-item-name {
@@ -39,7 +39,11 @@
 .padding-right {
   padding-right: 30px;
 }
-
+#gui {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
 #item-sphere {
   background-image: url('../icons/sphere.svg');
 }

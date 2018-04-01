@@ -6,10 +6,7 @@ import {
   dragControls,
   orbitControls
 } from '../constants/SceneConstants';
-import DAT from 'dat.gui';
-// import DragControls from 'three-dragcontrols';
 import * as THREE from 'three';
-// var OrbitControls = require('three-orbit-controls')(THREE);
 var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 
@@ -29,7 +26,6 @@ class SceneStore {
     // Need to get scenes array based on ownership via username
     // Axios.get();
     autorun(() => console.log('SceneStore'));
-    // var testOrbit = this.orbitControls;
     //use animate to animate moving the object and future rotation animation
     //KEVIN EXPLAIN THIS FURTHER PLZ
     this.animate();
@@ -102,13 +98,8 @@ class SceneStore {
     if (this.addingObjectShape === 'tetrahedron')
       geo = new THREE.TetrahedronGeometry(5);
     if (geo) object = new THREE.Mesh(geo, material);
-    // console.log(object);
     if (object) {
       object.name = name;
-      // object.geometry.morphTargets = true;
-      // object.geometry.verticesNeedUpdate = true;
-      // object.geometry.elementsNeedUpdate = true;
-      // object.geometry.groupsNeedUpdate = true;
     }
     this.scene.add(object);
 
@@ -158,7 +149,6 @@ class SceneStore {
       if (object.isMesh === true) {
         object.rotation.x += 0.01;
         object.rotation.y += 0.01;
-        // object.scale.set(1, 2, 1);
       }
     });
     raycaster.setFromCamera(mouse, camera);

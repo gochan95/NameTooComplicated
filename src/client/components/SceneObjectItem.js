@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import OBJECTS from '../constants/Objects.js';
 import '../styles/SceneObjectItem.css';
 import '../styles/Shapes.css';
-import dat from 'dat.gui';
 import * as THREE from 'three';
 import CONTROL_OBJECT from '../constants/createGuiData.js';
+// console.log(CONTROL_OBJECT.gui.domElement.class);
+
 export default class SceneObjectItem extends Component {
   constructor(props) {
     super(props);
