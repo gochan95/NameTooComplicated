@@ -1,13 +1,15 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-var passport = require('passport')
+var passport = require('passport');
 var mongoose = require('mongoose');
 var session = require('express-session');
 var cookie = require('cookie-parser');
 var morgan = require('morgan');
 var flash = require('connect-flash');
-const fs = require('fs');
+var fs = require('fs');
 var configDB = require('./config/database.js');
 
 var app = express();
@@ -20,12 +22,12 @@ require('./config/passport')(passport);
 // *** config middleware *** //
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(express.static(path.join(__dirname, '../public/')));
 app.use(session({
-    secret: 'draw squad not a squad',
-    resave: true,
-    saveUninitialized: true
+  secret: 'draw squad not a squad',
+  resave: true,
+  saveUninitialized: true
 }));
 
 app.use(passport.initialize());
@@ -34,7 +36,7 @@ app.use(flash());
 
 // Add headers
 app.use(function (req, res, next) {
-  console.log('starting server ..')
+  console.log('starting server ..');
   // Website you wish to allow to connect
   // res.setHeader('Access-Control-Allow-Origin', 'http://ec2-18-219-119-149.us-east-2.compute.amazonaws.com:3000');
   res.setHeader('Access-Control-Allow-Origin', 'http://drawsquad.me');
@@ -54,7 +56,7 @@ app.use(function (req, res, next) {
 });
 
 // get reference to the client build directory
-const staticFiles = express.static(path.join(__dirname, '../../client/build'));
+var staticFiles = express.static(path.join(__dirname, '../../client/build'));
 // pass the static files (react app) to the express app.
 app.use(staticFiles);
 // app.get('/', function(req, res){
@@ -72,12 +74,12 @@ require('./userData')(app);
 // });
 
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   console.log("HTTP Response", res.statusCode);
 });
 // const https = require('https');
-const http = require('http');
-const PORT = 3001;
+var http = require('http');
+var PORT = 3001;
 // const PORT = 3001;
 
 // var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
@@ -91,8 +93,6 @@ const PORT = 3001;
 //   else console.log("The magic happens on port: ", PORT);
 // });
 //
-http.createServer(app).listen(PORT, function(err) {
-  if (err) console.log(err);
-  else console.log("The magic happens on port: ", PORT);
-  }
-);
+http.createServer(app).listen(PORT, function (err) {
+  if (err) console.log(err);else console.log("The magic happens on port: ", PORT);
+});
