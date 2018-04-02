@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
 import UnderlineButton from './UnderlineButton';
 import { observer } from 'mobx-react';
+import { objectLoader } from '../constants/SceneConstants';
 
 import '../styles/SceneButtonGroup.css';
 
@@ -20,8 +22,9 @@ export default class SceneButtonGroup extends Component {
 
   renderSceneButton = () => {
     var scenes = this.props.SceneStore.sceneNames;
+    console.log(scenes);
     var croppedScenes = scenes.filter(
-      i => i != this.props.SceneStore.currentScene
+      i => i !== this.props.SceneStore.currentScene
     );
     return croppedScenes.map(i => (
       <UnderlineButton
@@ -34,6 +37,17 @@ export default class SceneButtonGroup extends Component {
 
   loadScene = thisScene => {
     this.props.SceneStore && this.props.SceneStore.switchScene(thisScene);
+    Axios.get(`/scenes/${this.props.AuthStore.usersName}/${thisScene}`).then(
+      res => {
+        var scene = res.data.scene;
+        objectLoader.parse(JSON.parse(scene), res => {
+          this.props.SceneStore.loadCanvas(res);
+        });
+      },
+      err => {
+        console.log(err);
+      }
+    );
   };
 
   showMore = () => {

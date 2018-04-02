@@ -9,7 +9,6 @@ module.exports = function(app, passport) {
     res.status(200).json({
         user: req.user.email
     });
-    // next();
   });
 
 
@@ -27,7 +26,9 @@ module.exports = function(app, passport) {
 
   app.get('/signout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    req.session.destroy((err) => {
+      res.redirect('/')
+    })
   });
 
 }

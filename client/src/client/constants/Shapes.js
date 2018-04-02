@@ -6,7 +6,10 @@ const Shapes = {
     'phiStart',
     'phiLength',
     'thetaStart',
-    'thetaLength'
+    'thetaLength',
+    'x',
+    'y',
+    'z'
   ],
   cube: [
     'width',
@@ -14,7 +17,10 @@ const Shapes = {
     'depth',
     'widthSegments',
     'heightSegments',
-    'depthSegments'
+    'depthSegments',
+    'x',
+    'y',
+    'z'
   ],
   cylinder: [
     'radiusTop',
@@ -24,7 +30,10 @@ const Shapes = {
     'heightSegments',
     'openEndedBoolean',
     'thetaStart',
-    'thetaLength'
+    'thetaLength',
+    'x',
+    'y',
+    'z'
   ],
   cone: [
     'radius',
@@ -33,11 +42,14 @@ const Shapes = {
     'heightSegments',
     'openEnded',
     'thetaStart',
-    'thetaLength'
+    'thetaLength',
+    'x',
+    'y',
+    'z'
   ],
-  octahedron: ['radius', 'detail'],
-  icosahedron: ['radius', 'detail'],
-  tetrahedron: ['radius', 'detail'],
+  octahedron: ['radius', 'detail', 'x', 'y', 'z'],
+  icosahedron: ['radius', 'detail', 'x', 'y', 'z'],
+  tetrahedron: ['radius', 'detail', 'x', 'y', 'z'],
   allshapes: [
     'sphere',
     'cube',
@@ -48,13 +60,13 @@ const Shapes = {
     'icosahedron'
   ],
   mapShapes: {
-    "SphereGeometry": "sphere",
-    "BoxGeometry": "cube",
-    "CylinderGeometry": "cylinder",
-    "ConeGeometry": "cone",
-    "OctahedronGeometry": "octahedron",
-    "IcosahedronGeometry": "icosahedron",
-    "TetrahedronGeometry": "tetrahedron"
+    SphereGeometry: 'sphere',
+    BoxGeometry: 'cube',
+    CylinderGeometry: 'cylinder',
+    ConeGeometry: 'cone',
+    OctahedronGeometry: 'octahedron',
+    IcosahedronGeometry: 'icosahedron',
+    TetrahedronGeometry: 'tetrahedron'
   }
 };
 

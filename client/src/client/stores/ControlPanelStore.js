@@ -1,4 +1,5 @@
 import { observable, action, computed } from 'mobx';
+import { gui_container } from '../constants/createGuiData';
 
 class ControlPanelStore {
   @observable selectedObject = null;
@@ -8,6 +9,17 @@ class ControlPanelStore {
   @observable objectaddGroup = false;
   @observable objectProperties = false;
   @observable layerProperties = false;
+
+  @action
+  resetControlPanelObservables = () => {
+    this.selectedObject = null;
+    this.controlPanel = false;
+    this.browseObjects = false;
+    this.browseObjectsDropdown = false;
+    this.objectaddGroup = false;
+    this.objectProperties = false;
+    this.layerProperties = false;
+  };
 
   @computed
   get getSelectedObject() {
@@ -20,6 +32,7 @@ class ControlPanelStore {
     this.controlPanel = false;
     this.layerProperties = false;
     this.objectProperties = false;
+    gui_container.style.visibility = 'hidden';
   };
 
   @action
@@ -27,6 +40,7 @@ class ControlPanelStore {
     this.closeControlPanel();
     this.selectedObject = object;
     this.controlPanel = true;
+    gui_container.style.visibility = 'visible';
   };
 
   @action

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SceneStore from '../stores/SceneStore';
 import '../styles/SquareButton.css';
-import CONTROL_OBJECT from '../constants/createGuiData.js';
+import { removeFolder } from '../constants/createGuiData.js';
 export default class SquareButton extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +20,7 @@ export default class SquareButton extends Component {
       for (var i = scene.children.length - 1; i >= 0; i--) {
         object = scene.children[i];
         if (object.name === name) {
-          CONTROL_OBJECT.removeFolder(name);
+          removeFolder(name);
           scene.remove(object);
         }
       }
@@ -41,7 +41,6 @@ export default class SquareButton extends Component {
   };
 
   renderText = text => {
-    // console.log(this.state.on,text)
     return this.state.on ? (
       <p className="square-button-text blue-text">{text}</p>
     ) : (

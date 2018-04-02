@@ -3,7 +3,6 @@ import SquareButton from './SquareButton';
 import axios from 'axios';
 import '../styles/Login.css';
 import { observer } from 'mobx-react';
-import AuthStore from '../stores/AuthStore';
 
 @observer
 export default class Login extends Component {

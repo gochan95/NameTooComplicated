@@ -6,7 +6,6 @@ import SceneObjectItemGroup from './SceneObjectItemGroup';
 import SceneInputBox from './SceneInputBox';
 import SceneButtonGroup from './SceneButtonGroup';
 import { observer } from 'mobx-react';
-import { objectLoader } from '../constants/SceneConstants';
 
 import '../styles/SceneGlobalControl.css';
 import '../styles/Animation.css';
@@ -39,19 +38,13 @@ export default class SceneGlobalControl extends Component {
     var uuid = sceneid + '-' + cameraid;
     var params = new URLSearchParams();
     var timestamp = new Date();
-    console.log(timestamp);
     params.append('id', uuid);
     params.append('timestamp', timestamp);
     params.append('name', this.props.SceneStore.currentScene);
     params.append('scene', JSON.stringify(scene));
     params.append('owner', this.props.AuthStore.usersName);
-    objectLoader.parse(scene.toJSON(), res => {
-      // console.log(res);
-    });
     Axios.post(`/scenes/`, params)
-      .then(function(response) {
-        // console.log(response);
-      })
+      .then(function(response) {})
       .catch(function(err) {
         console.log(err);
       });
@@ -129,7 +122,10 @@ export default class SceneGlobalControl extends Component {
           className="bottom-left"
           onMouseOver={this.props.SceneStore.disableOrbitDragControls}
         >
-          <SceneButtonGroup SceneStore={this.props.SceneStore} />
+          <SceneButtonGroup
+            AuthStore={this.props.AuthStore}
+            SceneStore={this.props.SceneStore}
+          />
         </div>
       </div>
     );

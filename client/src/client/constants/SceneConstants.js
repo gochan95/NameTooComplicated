@@ -12,4 +12,4 @@ threeRender.setPixelRatio(window.devicePixelRatio);
 var orbitControls = new OrbitControls(camera);
 objLoader(THREE);
 var objectLoader = new THREE.ObjectLoader();
-export { camera, threeRender, objectLoader, orbitControls };
+export { camera, threeRender, objectLoader, orbitControls, loader };

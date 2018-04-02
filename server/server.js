@@ -74,8 +74,8 @@ app.use(function(req, res, next) {
 });
 // const https = require('https');
 const http = require('http');
-// const PORT = 80;
-const PORT = 3000;
+const PORT = 80;
+// const PORT = 3000;
 
 // var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
 // var certificate = fs.readFileSync( 'drawsquad.herokuapp.crt' );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import '../styles/ControlPanelInput.css';
-import * as THREE from 'three';
+
 @observer
 export default class ControlPanelInput extends Component {
   constructor(props) {
@@ -13,6 +13,10 @@ export default class ControlPanelInput extends Component {
 
   handleChange = e => {
     this.setState({ value: e.target.value });
+    //pass the data to the actual gui changing
+    var prop = this.props.property;
+    if (prop === 'radius') {
+    }
   };
 
   render() {
@@ -24,6 +28,7 @@ export default class ControlPanelInput extends Component {
         <input
           onChange={this.handleChange}
           value={this.state.value}
+          placeholder={this.props.placeholder}
           type="number"
         />
       </div>
