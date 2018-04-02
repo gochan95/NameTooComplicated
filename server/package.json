@@ -25,6 +25,6 @@
     "nodemon": "^1.17.3"
   },
   "scripts": {
-    "start": "nodemon -r babel-register server.js"
+    "start": "node -r babel-register server.js"
   }
 }
