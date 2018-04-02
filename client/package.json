@@ -2,7 +2,7 @@
   "name": "draw-squad",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://18.219.119.149:3001",
+  "proxy": "http://drawsquad.me:3001",
   "main": "./server/server.js",
   "dependencies": {
     "axios": "^0.18.0",
