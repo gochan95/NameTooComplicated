@@ -17,7 +17,6 @@ export default class SceneObjectItem extends Component {
   renderShapeIcon = () => {
     const { object } = this.props;
     var shape;
-    console.log(object);
     if (object.geometry) {
       shape = Shapes.mapShapes[object.geometry.type];
     } else {

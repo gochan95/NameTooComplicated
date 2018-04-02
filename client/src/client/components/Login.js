@@ -30,7 +30,6 @@ export default class Login extends Component {
   handleInputChange(e) {
     var target = e.target;
     var name = target.name;
-    console.log(name);
     this.setState({
       [name]: target.value
     });
@@ -58,14 +57,12 @@ export default class Login extends Component {
         res => {
           // success POST
           // close form through global store
-          console.log('post success');
           AuthStore.toggleForm(false);
           AuthStore.setUsername(res.data);
           this.props.checkForScenes(res.data);
           // this.props.AuthStore.setUsername(res.name);
         },
         err => {
-          console.log('error!!!!!!!');
           console.log(err);
         }
       );

@@ -31,19 +31,6 @@ export default class SimpleObject extends Component {
     // new object using above given geometry
     var object = new THREE.Mesh(objectGeometry, mesh);
 
-    //cloud mesh for earth
-    // var cloudmetry   = new THREE.SphereGeometry(0.51, 32, 32)
-    // var cloudterial  = new THREE.MeshPhongMaterial({
-    //   map         : new THREE.Texture(canvasCloud),
-    //   side        : THREE.DoubleSide,
-    //   opacity     : 0.8,
-    //   transparent : true,
-    //   depthWrite  : false,
-    // })
-    // var cloudMesh = new THREE.Mesh(cloudmetry, cloudterial)
-    //
-    // object.add(cloudMesh);
-    // console.log(earthMesh)
     this.props.SceneStore.addObject(object);
     // buildSceneFunctions.objects.push(sphere);
     this.mount.appendChild(threeRender.domElement);

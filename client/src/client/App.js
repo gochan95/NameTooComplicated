@@ -53,7 +53,6 @@ export default class App extends Component {
           </div>
         </div>
         {this.props.AuthStore.closeForm ? this.renderLoginForm() : <div />}
-        {/* {console.log(this.props.AuthStore)} */}
         <Landing
           SceneStore={this.props.SceneStore}
           AuthStore={this.props.AuthStore}

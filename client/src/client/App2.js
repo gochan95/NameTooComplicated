@@ -43,11 +43,7 @@ export default class App2 extends Component {
           axios
             .get(`/scenes/${user}/${this.props.SceneStore.currentScene}`)
             .then(res => {
-              console.log('got the right scene');
-              console.log(JSON.parse(res.data.scene));
               objectLoader.parse(JSON.parse(res.data.scene), result => {
-                console.log('done parsing scene');
-                console.log(result);
                 this.props.SceneStore.loadCanvas(result);
               });
               // this.props.SceneStore.loadCanvas(JSON.parse(res.data.scene).object);
@@ -56,7 +52,6 @@ export default class App2 extends Component {
         // this.loadCanvas()
       },
       err => {
-        console.log('error finding scenes under username');
         console.log(err);
       }
     );

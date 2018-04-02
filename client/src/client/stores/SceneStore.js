@@ -27,7 +27,6 @@ class SceneStore {
   constructor() {
     // Need to get scenes array based on ownership via username
     // Axios.get();
-    autorun(() => console.log('SceneStore'));
     //use animate to animate moving the object and future rotation animation
     //KEVIN EXPLAIN THIS FURTHER PLZ
     // allow camera and object movement for scene children
@@ -134,7 +133,6 @@ class SceneStore {
   @action
   deleteObject = object => {
     var index = this.sceneObjects.indexOf(object);
-    console.log('wtf?!!!!!!!');
     this.sceneObjects.splice(index, 1);
   };
 
@@ -210,20 +208,6 @@ class SceneStore {
     this.dragControls.enabled = true;
   };
 
-  // clicked to return object
-  // @action
-  // onObjectClick = event => {
-  //   mouse.x = event.clientX / window.innerWidth * 2 - 1;
-  //   mouse.y = event.clientY / window.innerHeight * 2 - 1;
-  //
-  //   var intersects = raycaster.intersectObjects(this.scene.children);
-  //
-  //   if (intersects.length > 0) {
-  //     // console.log('Hit @' + toString(intersects[0].point + '\n'));
-  //     // console.log(intersects[0]);
-  //     return intersects[0];
-  //   }
-  // };
 }
 
 const sceneStore = new SceneStore();

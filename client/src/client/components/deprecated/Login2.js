@@ -24,8 +24,6 @@ export default observer(
     handleSubmit = e => {
       e.preventDefault();
       const { email, password } = this;
-      console.log(email);
-      console.log(password);
     };
 
     render() {

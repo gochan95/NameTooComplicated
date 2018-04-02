@@ -4,10 +4,6 @@ class AuthStore {
   @observable openLogin = false;
   @observable username = null;
 
-  constructor() {
-    autorun(() => console.log('AuthStore'));
-  }
-
   @action
   toggleForm = (set) => {
     this.openLogin = set;
@@ -15,7 +11,6 @@ class AuthStore {
 
   @action
   setUsername = name => {
-    console.log(name)
     this.username = name;
   };
 

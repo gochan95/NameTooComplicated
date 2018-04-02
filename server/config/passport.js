@@ -4,7 +4,6 @@ var { User } = require('../models');
 
 module.exports = function(passport) {
 
-  console.log(passport);
   // passport session setup
   // required for persistent login sessions
   // passport needs a way to serializeUser and deserializeUser
@@ -22,9 +21,6 @@ module.exports = function(passport) {
   // use named strategies
   passport.use('local-signup', new LocalStrategy(
     function(username, password, done) {
-      console.log('trying to do local signup');
-      console.log(username, password);
-      console.log('checking user schema');
       User.findOne({'email' : username}, function(err, user) {
         if (err) return done(err);
         // console.log(user);
@@ -32,7 +28,6 @@ module.exports = function(passport) {
           return done(null, false, {'message': 'Email already exists'});
         }
         else {
-          console.log('new user')
           var salt = generateSalt();
           var newAccount = new User({ email: username, salt: salt, hash: generateHash(password, salt)});
           // var salt = generateSalt();
@@ -42,22 +37,13 @@ module.exports = function(passport) {
           // newAccount.local.hash = generateHash(password, newAccount.local.salt);
 
           newAccount.save().then(function(result) {
-            console.log('saved newAccount');
-            console.log(result);
             return done(null, result);
           }, function(err) {
-            console.log('error saving new Account');
             console.log(err);
             return done(err);
           });
-          // newAccount.save(function(err) {
-          //   if (err) done(err);
-          //   return done(null, newAccount);
-          // });
-          console.log(newAccount);
         }
       });
-      // console.log(username, password)
 }));
 
   passport.use('local-signin', new LocalStrategy(
