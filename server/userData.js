@@ -7,18 +7,27 @@ module.exports = function (app) {
   }
 
   app.get('/scenes/names/:owner', isLoggedIn, function(req, res) {
+    if (req.user.email !== req.params.owner) {
+      return res.status(401).json("Uesr not authorized");
+    }
     Canvas.find({ owner: req.params.owner }, 'name -_id', function(err, result) {
       res.json(result);
     })
   });
 
   app.get('/scenes/:owner/:name', isLoggedIn, function(req, res) {
+    if (req.user.email !== req.params.owner) {
+      return res.status(401).json("Uesr not authorized");
+    }
     Canvas.findOne({ owner: req.params.owner, name: req.params.name }, function(err, result) {
       res.json(result);
     })
   })
 
   app.get('/scenes/:owner', isLoggedIn, function(req, res) {
+    if (req.user.email !== req.params.owner) {
+      return res.status(401).json("Uesr not authorized");
+    }
     Canvas.find({ 'owner': req.params.owner }, function(err, result) {
       res.json(result);
     });
