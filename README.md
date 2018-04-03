@@ -1,5 +1,5 @@
-# DrawSquad   [ourApp](ec2-18-219-253-53.us-east-2.compute.amazonaws.com)
-(http://ec2-18-188-121-65.us-east-2.compute.amazonaws.com:3000/)
+# DrawSquad   [ourApp](http://drawsquad.me)
+(http://drawsquad.me/)
 
 ## Useful sources
 ```
