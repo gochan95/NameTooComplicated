@@ -16,7 +16,7 @@ Weibin Luo (Roy)
 
 ## Description of the project
 ```
-DrawSquad is a website that allows people to draw in 3D in real time.
+DrawSquad is a website that allows people to draw in 3D.
 ```
 
 ## Description of the key features in Beta version
@@ -34,6 +34,13 @@ User is able to select the object and drag it onto the 3D canvas from the toolbo
 Two users are able to collaborate on creating 3D objects on the same 3D canvas.
 User is able to draw with mouse or trackpad.
 User is able to animate the 3D canvas in a way that it rotates automatically.
+User is able to stop the animation
+User is able to resize or change the properties of the object
+User is able to manual rotate the object
+User is able to delete the 3D object
+User is able to save the scene
+User is able to create new scene
+User is able to switch between different scenes.
 ```
 
 ## Technology we will use
@@ -42,6 +49,10 @@ React
 Express
 Mongo
 Threejs
+Axios
+Dat.gui
+Passport
+Material-ui-icons
 (More to add when we are going along)
 ```
 
@@ -50,6 +61,6 @@ Threejs
 1 - To allow user to draw with mouse on a 3D canvas
 2 - Real time collaboration so that 2 or more users can draw on the same 3D canvas
 3 - Synchronization for saving 3D canvas state in the backend
-4 - Integrating APIs such as Threejs, WebRTC and Firebase
-5 - Security management for Firebase
+4 - Integrating APIs such as Threejs
+5 - Complex user interactions
 ```
