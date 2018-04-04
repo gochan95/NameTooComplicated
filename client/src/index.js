@@ -1,11 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App2 from './client/App2';
+import App from './client/App';
 import AuthStore from './client/stores/AuthStore';
 import SceneStore from './client/stores/SceneStore';
+import ControlPanelStore from './client/stores/ControlPanelStore';
 
 ReactDOM.render(
-  <App2 SceneStore={SceneStore} AuthStore={AuthStore} />,
+  <App
+    SceneStore={SceneStore}
+    AuthStore={AuthStore}
+    ControlPanelStore={ControlPanelStore}
+  />,
   document.getElementById('root')
 );

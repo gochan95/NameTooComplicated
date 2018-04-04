@@ -9,12 +9,10 @@ module.exports = function(app, passport) {
     res.status(200).json({
         user: req.user.email
     });
-    // next();
   });
 
 
   app.post('/auth/signup', passport.authenticate('local-signup'), function(req, res) {
-    console.log('signup');
     res.json(req.body.username);
   });
 
@@ -28,7 +26,9 @@ module.exports = function(app, passport) {
 
   app.get('/signout', function(req, res) {
     req.logout();
-    res.redirect('/');
+    req.session.destroy((err) => {
+      res.redirect('/')
+    })
   });
 
 }

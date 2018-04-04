@@ -6,7 +6,6 @@ import SceneObjectItemGroup from './SceneObjectItemGroup';
 import SceneInputBox from './SceneInputBox';
 import SceneButtonGroup from './SceneButtonGroup';
 import { observer } from 'mobx-react';
-import { objectLoader } from '../constants/SceneConstants';
 
 import '../styles/SceneGlobalControl.css';
 import '../styles/Animation.css';
@@ -32,41 +31,26 @@ export default class SceneGlobalControl extends Component {
   };
 
   saveScene = () => {
-    console.log('saving scene');
     var scene = this.props.SceneStore.getScene;
     var camera = this.props.SceneStore.getCamera;
     var sceneid = scene.uuid;
     var cameraid = camera.uuid;
     var uuid = sceneid + '-' + cameraid;
     var params = new URLSearchParams();
-    console.log(scene);
-    console.log(camera);
-    console.log(uuid);
-    console.log(this.props.SceneStore.currentScene);
-    console.log(this.props.AuthStore.usersName);
     var timestamp = new Date();
-    console.log(timestamp);
     params.append('id', uuid);
     params.append('timestamp', timestamp);
     params.append('name', this.props.SceneStore.currentScene);
     params.append('scene', JSON.stringify(scene));
     params.append('owner', this.props.AuthStore.usersName);
-    objectLoader.parse(scene.toJSON(), res => {
-      console.log(res);
-    });
     Axios.post(`/scenes/`, params)
-      .then(function(response) {
-        console.log('added scene');
-        console.log(response);
-      })
+      .then(function(response) {})
       .catch(function(err) {
-        console.log('caught an error for saving canvas');
         console.log(err);
       });
   };
 
   addToScene = object => {
-    console.log(object);
     this.setState({ nameBoxPlaceholder: `Enter ${object} object name` });
     this.props.SceneStore && this.props.SceneStore.openNameBox();
     this.props.SceneStore && this.props.SceneStore.setIsObject(true);
@@ -138,7 +122,10 @@ export default class SceneGlobalControl extends Component {
           className="bottom-left"
           onMouseOver={this.props.SceneStore.disableOrbitDragControls}
         >
-          <SceneButtonGroup SceneStore={this.props.SceneStore} />
+          <SceneButtonGroup
+            AuthStore={this.props.AuthStore}
+            SceneStore={this.props.SceneStore}
+          />
         </div>
       </div>
     );

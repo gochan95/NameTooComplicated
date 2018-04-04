@@ -38,8 +38,8 @@ app.use(flash());
 app.use(function (req, res, next) {
   console.log('starting server ..');
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  // res.setHeader('Access-Control-Allow-Origin', 'https://drawsquad.herokuapp.com');
+  // res.setHeader('Access-Control-Allow-Origin', 'http://ec2-18-219-119-149.us-east-2.compute.amazonaws.com:3000');
+  res.setHeader('Access-Control-Allow-Origin', 'http://drawsquad.me');
 
   // Request methods you wish to allow
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -55,6 +55,10 @@ app.use(function (req, res, next) {
   next();
 });
 
+// get reference to the client build directory
+var staticFiles = express.static(path.join(__dirname, '../../client/build'));
+// pass the static files (react app) to the express app.
+app.use(staticFiles);
 // app.get('/', function(req, res){
 //   console.log('auth..')
 // })
@@ -75,8 +79,8 @@ app.use(function (req, res, next) {
 });
 // const https = require('https');
 var http = require('http');
-// const PORT = 80;
 var PORT = 3001;
+// const PORT = 3001;
 
 // var privateKey = fs.readFileSync( 'drawsquad.herokuapp.key' );
 // var certificate = fs.readFileSync( 'drawsquad.herokuapp.crt' );

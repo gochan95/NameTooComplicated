@@ -5,7 +5,11 @@ const sphere_data = {
   phiStart: 0,
   phiLength: 6.3,
   thetaStart: 0,
-  thetaLength: 6.3
+  thetaLength: 6.3,
+  wireframe: true,
+  x: 0,
+  y: 0,
+  z: 0
 };
 
 const cube_data = {
@@ -14,7 +18,11 @@ const cube_data = {
   depth: 5,
   widthSegments: 20,
   heightSegments: 20,
-  depthSegments: 20
+  depthSegments: 20,
+  wireframe: true,
+  x: 0,
+  y: 0,
+  z: 0
 };
 
 const cylinder_data = {
@@ -25,7 +33,11 @@ const cylinder_data = {
   heightSegments: 20,
   openEndedBoolean: false,
   thetaStart: 0,
-  thetaLength: 6.3
+  thetaLength: 6.3,
+  wireframe: true,
+  x: 0,
+  y: 0,
+  z: 0
 };
 
 const cone_data = {
@@ -35,22 +47,48 @@ const cone_data = {
   heightSegments: 20,
   openEnded: false,
   thetaStart: 0,
-  thetaLength: 6.3
+  thetaLength: 6.3,
+  wireframe: true,
+  x: 0,
+  y: 0,
+  z: 0
 };
 
 const octahedron_data = {
   radius: 5,
-  detail: 0
+  detail: 0,
+  wireframe: true,
+  x: 0,
+  y: 0,
+  z: 0
 };
 
 const icosahedron_data = {
   radius: 5,
-  detail: 0
+  detail: 0,
+  wireframe: true,
+  x: 0,
+  y: 0,
+  z: 0
 };
 
 const tetrahedron_data = {
   radius: 5,
-  detail: 0
+  detail: 0,
+  wireframe: true,
+  x: 0,
+  y: 0,
+  z: 0
+};
+
+const objectGeometry = {
+  sphere: 'SphereGeometry',
+  cube: 'BoxGeometry',
+  cylinder: 'CylinderGeometry',
+  cone: 'ConeGeometry',
+  octahedron: 'OctahedronGeometry',
+  icosahedron: 'IcosahedronGeometry',
+  tetrahedron: 'TetrahedronGeometry'
 };
 
 export default {
@@ -60,5 +98,6 @@ export default {
   cone_data,
   octahedron_data,
   icosahedron_data,
-  tetrahedron_data
+  tetrahedron_data,
+  objectGeometry
 };

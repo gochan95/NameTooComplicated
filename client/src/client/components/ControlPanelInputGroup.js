@@ -12,7 +12,14 @@ import '../styles/Animation.css';
 @observer
 export default class ControlPanelInputGroup extends Component {
   renderShapeInput = () => {
-    var shape = this.props.ControlPanelStore.getSelectedObject.shape;
+    var object = this.props.ControlPanelStore.getSelectedObject;
+    var shape;
+    if (object.geometry) {
+      shape = Shapes.mapShapes[object.geometry.type];
+    } else {
+      shape = object.shape;
+    }
+
     return (
       <div
         className="fadeInRight"
@@ -20,6 +27,7 @@ export default class ControlPanelInputGroup extends Component {
       >
         {Shapes[shape].map(i => (
           <ControlPanelInput
+            object={object}
             key={`${i}`}
             property={`${i}`}
             SceneStore={this.props.SceneStore}
@@ -63,6 +71,19 @@ export default class ControlPanelInputGroup extends Component {
     }
   };
 
+  getCurrentObjectShape = () => {
+    if (this.props.ControlPanelStore) {
+      var object = this.props.ControlPanelStore.getSelectedObject;
+      var shape;
+      if (object.geometry) {
+        shape = Shapes.mapShapes[object.geometry.type];
+      } else {
+        shape = object.shape;
+      }
+      return shape;
+    }
+  };
+
   render() {
     const { objectProperties, layerProperties } = this.props.ControlPanelStore;
     return (
@@ -70,8 +91,7 @@ export default class ControlPanelInputGroup extends Component {
         <div className="top-right fadeInRight">
           <SimpleObjectButton
             raised
-            object={`${this.getCurrentObject().shape}`}
-            onClick={this.layerClick}
+            object={`${this.getCurrentObjectShape()}`}
           />
           {objectProperties && (
             <SquareButton

@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import OBJECTS from '../constants/Objects.js';
 import '../styles/SceneObjectItem.css';
 import '../styles/Shapes.css';
 import * as THREE from 'three';
-import CONTROL_OBJECT from '../constants/createGuiData.js';
-import { scene } from '../constants/SceneConstants';
+import {
+  create_sphere_gui,
+  create_cube_gui,
+  create_cone_gui,
+  create_cylinder_gui,
+  create_tet_gui,
+  create_ico_gui,
+  create_oct_gui,
+  gui,
+  removeFolder,
+  gui_container
+} from '../constants/createGuiData.js';
 import Shapes from '../constants/Shapes';
 
 export default class SceneObjectItem extends Component {
-  constructor(props) {
-    super(props);
-    // this.state = {
-    //   value: this.props.value || ''
-    // };
-  }
   renderShapeIcon = () => {
     const { object } = this.props;
     var shape;
-    console.log(object);
     if (object.geometry) {
       shape = Shapes.mapShapes[object.geometry.type];
     } else {
@@ -28,28 +30,40 @@ export default class SceneObjectItem extends Component {
 
   onClick = () => {
     const { object } = this.props;
-
+    gui_container.style.visibility = 'visible';
     var objectName = object.name;
 
     this.props.SceneStore.getScene.traverse(function(object) {
-      var curr_folder = Object.keys(CONTROL_OBJECT.gui.__folders);
+      var curr_folder = Object.keys(gui.__folders);
+
       if (object.name === objectName && !curr_folder.includes(object.name)) {
         var update_func;
         var type = Object.getPrototypeOf(object.geometry);
+
         if (type === Object.getPrototypeOf(new THREE.SphereGeometry()))
-          update_func = CONTROL_OBJECT.create_sphere_gui;
+          update_func = create_sphere_gui;
+
         if (type === Object.getPrototypeOf(new THREE.BoxGeometry()))
-          update_func = CONTROL_OBJECT.create_cube_gui;
+          update_func = create_cube_gui;
+
         if (type === Object.getPrototypeOf(new THREE.CylinderGeometry()))
-          update_func = CONTROL_OBJECT.create_cylinder_gui;
+          update_func = create_cylinder_gui;
+
         if (type === Object.getPrototypeOf(new THREE.ConeGeometry()))
-          update_func = CONTROL_OBJECT.create_cone_gui;
+          update_func = create_cone_gui;
+
         if (type === Object.getPrototypeOf(new THREE.OctahedronGeometry()))
-          update_func = CONTROL_OBJECT.create_oct_gui;
+          update_func = create_oct_gui;
+
         if (type === Object.getPrototypeOf(new THREE.IcosahedronGeometry()))
-          update_func = CONTROL_OBJECT.create_ico_gui;
+          update_func = create_ico_gui;
+
         if (type === Object.getPrototypeOf(new THREE.TetrahedronGeometry()))
-          update_func = CONTROL_OBJECT.create_tet_gui;
+          update_func = create_tet_gui;
+
+        for (var folder in gui.__folders) {
+          removeFolder(folder);
+        }
         update_func(object);
       }
     });

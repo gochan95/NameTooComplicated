@@ -1,21 +1,21 @@
-import { observable, autorun, action, computed } from 'mobx';
+import { observable, action, computed } from 'mobx';
 
 class AuthStore {
   @observable openLogin = false;
   @observable username = null;
 
-  constructor() {
-    autorun(() => console.log('AuthStore'));
-  }
+  @action
+  resetAuthObservables = () => {
+    this.username = null;
+  };
 
   @action
-  toggleForm = (set) => {
+  toggleForm = set => {
     this.openLogin = set;
   };
 
   @action
   setUsername = name => {
-    console.log(name)
     this.username = name;
   };
 
