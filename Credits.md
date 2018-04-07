@@ -2,7 +2,7 @@
 
 ## Icons
 ```
-https://www.flaticon.com/packs/mathbert-mathematics for geometrical icons
+[https://www.flaticon.com/packs/mathbert-mathematics](https://www.flaticon.com/packs/mathbert-mathematics) for geometrical icons
 https://www.flaticon.com/free-icon/info_151776 for info icon (object list button icon)
 https://www.flaticon.com/free-icon/cancel-music_70460 for cancel button icon
 https://www.flaticon.com/free-icon/add_109526 for add icon
