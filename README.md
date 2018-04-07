@@ -4,6 +4,7 @@ Here is the Demo Video [DEMO](https://www.youtube.com/watch?v=mE4glwL0qII)
 If link doesn't work, please go to https://www.youtube.com/watch?v=mE4glwL0qII
 
 API documentation can be found [here](https://github.com/UTSCC09/NameTooComplicated/blob/master/API.md)
+Credits can be found [here](https://github.com/UTSCC09/NameTooComplicated/blob/master/Credits.md)
 ## Useful sources
 ```
 https://mlab.com/ -> sever hosting
