@@ -3,15 +3,15 @@
 ```
 Description: check if there is a user logged in (persistent logged in counts)
 Request: GET /checklogin/
-Response: 
-	200 
+Response:
+	200
 	content-type: application/json
 	body: message of logged in
-	
+
 	401
 	content-type: application/json
 	body: message of not authenticated
-Example: curl -b cookie.txt http://localhost:3000/checklogin/
+Example: curl -b cookie.txt http://drawsquad.me:3000/checklogin/
 ```
 
 ```
@@ -21,15 +21,15 @@ Response:
 	200
 	content-type: application/json
 	body: list of object {"name": "scene's name"} for scene’s name
-	
+
 	401 (if not logged in)
 	content-type: application/json
 	body: user not authenticated
-	
+
 	401 (if not the same user)
 	content-type: application/json
 	body: user not authorized
-Example: curl -b cookie.txt http://localhost:3000/scenes/names/alice/
+Example: curl -b cookie.txt http://drawsquad.me:3000/scenes/names/alice/
 ```
 
 ```
@@ -39,15 +39,15 @@ Response:
 	200
 	content-type: application/json
 	body: (object) scene object
-	
+
 	401 (if not logged in)
 	content-type: application/json
 	body: user not authenticated
-	
+
 	401 (if not the same user)
 	content-type: application/json
 	body: user not authorized
-Example: curl -b cookie.txt http://localhost:3000/scenes/alice/scene1/
+Example: curl -b cookie.txt http://drawsquad.me:3000/scenes/alice/scene1/
 ```
 
 ```
@@ -57,15 +57,15 @@ Response:
 	200
 	content-type: application/json
 	body: list of (Object) scene object (e.g. {"id": "123123123", "lastSaved": "2013-06-01", "name": "scene1", "owner": "alice", "camera": "scenecamera", "scene": "thescene"})
-	
+
 	401 (if not logged in)
 	content-type: application/json
 	body: user not authenticated
-	
+
 	401 (if not the same user)
 	content-type: application/json
 	body: user not authorized
-Example: curl -b cookie.txt http://localhost:3000/scenes/alice/
+Example: curl -b cookie.txt http://drawsquad.me:3000/scenes/alice/
 ```
 
 ```
@@ -75,7 +75,7 @@ Response:
 	200
 	content-type: application/json
 	body: (string) message of success signing out
-Example: curl http://localhost:3000/signout/
+Example: curl http://drawsquad.me:3000/signout/
 ```
 
 # POST
@@ -94,7 +94,7 @@ Response:
 	401
 	content-type: application/json
 	body: error Unauthorized
-Example: curl -H "Content-Type: application/json" -X POST -d '{"username":"alice","password":"alicealice"}' -c cookie.txt localhost:3000/auth/signup/
+Example: curl -H "Content-Type: application/json" -X POST -d '{"username":"alice","password":"alicealice"}' -c cookie.txt drawsquad.me:3000/auth/signup/
 ```
 
 ```
@@ -112,7 +112,7 @@ Response:
 	content-type: application/json
 	body: error Unauthorized
 Example:
-curl -H "Content-Type: application/json" -X POST -d '{"username":"alice","password":"alicealice"}' -c cookie.txt localhost:3000/auth/signin/
+curl -H "Content-Type: application/json" -X POST -d '{"username":"alice","password":"alicealice"}' -c cookie.txt drawsquad.me:3000/auth/signin/
 ```
 
 ```
@@ -133,6 +133,5 @@ Response:
 	401
 	content-type: application/json
 	body: User not authenticated
-Example: curl -b cookie.txt -X POST -H 'Content-Type: application/json' -d '{"id": "123123123", "lastSaved": "2013-06-01", "name": "scene1", "owner": "alice", "camera": "scenecamera", "scene": "thescene"}' http://localhost:3000/scenes/
+Example: curl -b cookie.txt -X POST -H 'Content-Type: application/json' -d '{"id": "123123123", "lastSaved": "2013-06-01", "name": "scene1", "owner": "alice", "camera": "scenecamera", "scene": "thescene"}' http://drawsquad.me:3000/scenes/
 ```
-
